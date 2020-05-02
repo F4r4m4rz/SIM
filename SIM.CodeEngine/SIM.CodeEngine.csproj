@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assembly\AssemblyGenerator.cs" />
+    <Compile Include="Assembly\CSharpCodeGenerator.cs" />
     <Compile Include="Dynamic\DynamicNode.cs" />
     <Compile Include="Dynamic\DynamicObject.cs" />
     <Compile Include="Dynamic\DynamicProperty.cs" />
@@ -54,8 +56,6 @@
       <Name>SIM.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assembly\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
