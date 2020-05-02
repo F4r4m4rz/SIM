@@ -49,6 +49,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dynamic\DynamicCategory.cs" />
+    <Compile Include="Dynamic\DynamicNode_Should.cs" />
+    <Compile Include="Dynamic\DynamicRelation_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +61,10 @@
     <ProjectReference Include="..\SIM.CodeEngine\SIM.CodeEngine.csproj">
       <Project>{8f0b11e8-eec5-4976-bd70-e1f22d126ae8}</Project>
       <Name>SIM.CodeEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SIM.Core\SIM.Core.csproj">
+      <Project>{B2D5F104-0D7B-4E15-B819-843FDE082FDD}</Project>
+      <Name>SIM.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

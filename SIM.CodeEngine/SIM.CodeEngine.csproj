@@ -41,6 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dynamic\DynamicNode.cs" />
+    <Compile Include="Dynamic\DynamicObject.cs" />
+    <Compile Include="Dynamic\DynamicProperty.cs" />
+    <Compile Include="Dynamic\DynamicPropertyType.cs" />
+    <Compile Include="Dynamic\DynamicRelation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +53,9 @@
       <Project>{b2d5f104-0d7b-4e15-b819-843fde082fdd}</Project>
       <Name>SIM.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assembly\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
