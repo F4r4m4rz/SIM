@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIM.CodeEngine.Tests", "SIM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4913A840-C063-4DCA-87D3-8341A6DCE445}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTester", "ConsoleTester\ConsoleTester.csproj", "{A7F61DA3-9C7B-4194-BEFB-88FB6B3E27A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{B55069B8-6212-4E2B-8FD0-F7F979CE76CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B55069B8-6212-4E2B-8FD0-F7F979CE76CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B55069B8-6212-4E2B-8FD0-F7F979CE76CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7F61DA3-9C7B-4194-BEFB-88FB6B3E27A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7F61DA3-9C7B-4194-BEFB-88FB6B3E27A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7F61DA3-9C7B-4194-BEFB-88FB6B3E27A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7F61DA3-9C7B-4194-BEFB-88FB6B3E27A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

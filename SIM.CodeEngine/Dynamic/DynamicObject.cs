@@ -8,6 +8,11 @@ namespace SIM.CodeEngine.Dynamic
 {
     public abstract class DynamicObject
     {
+        protected DynamicObject()
+        {
+            Properties = new List<DynamicProperty>();
+        }
+
         public abstract Type DerivedFrom { get; }
 
         /// <summary>
