@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 using SIM.CodeEngine.Assembly;
-using SIM.Aibel;
 
 namespace ConsoleTester
 {
@@ -15,38 +14,113 @@ namespace ConsoleTester
     {
         static void Main(string[] args)
         {
+            DynamicObject sdi = MakeSDI();
+            DynamicObject co = MakeCO();
+            Create2DirectionalRelation(sdi as DynamicNode, co as DynamicNode, out DynamicObject sdiToCo, out DynamicObject CotoSdi);
+
+            CodeFactory codeFactory = new CodeFactory(sdi, co, sdiToCo, CotoSdi);
+            var x = codeFactory.BuildAssembly();
+
+            Console.Read();
+        }
+
+        static void Test()
+        {
+            SIM.Aibel.JSB.
+        }
+
+        private static void Create2DirectionalRelation(DynamicNode sdi, DynamicNode co,
+            out DynamicObject sdiToCo, out DynamicObject cotoSdi)
+        {
+            sdiToCo = new DynamicRelation()
+            {
+                Name = "HasControlObject",
+                Namespace = "SIM.Aibel.JSB"
+            };
+
+            var prop1 = new DynamicProperty()
+            {
+                IsNullable = true,
+                PropertyName = "DateEstablished",
+                PropertyType = DynamicPropertyType.DateTime
+            };
+
+            sdiToCo.Properties.Add(prop1);
+
+            sdi.Relations.Add(sdiToCo as DynamicRelation);
+
+            cotoSdi = new DynamicRelation()
+            {
+                Name = "HasSdi",
+                Namespace = "SIM.Aibel.JSB"
+            };
+
+            var prop2 = new DynamicProperty()
+            {
+                IsNullable = true,
+                PropertyName = "DateEstablished",
+                PropertyType = DynamicPropertyType.DateTime
+            };
+
+            cotoSdi.Properties.Add(prop2);
+
+            co.Relations.Add(cotoSdi as DynamicRelation);
+        }
+
+        static DynamicObject MakeSDI()
+        {
             var dynamicNode = new DynamicNode()
             {
                 Name = "SDI",
-                Namespace = "SIM.Aibel"
+                Namespace = "SIM.Aibel.JSB"
             };
 
-            var dynamicProperty = new DynamicProperty()
+            var dynamicProperty1 = new DynamicProperty()
             {
                 IsNullable = true,
                 PropertyName = "DataCode",
                 PropertyType = DynamicPropertyType.String
             };
 
-            dynamicNode.Properties.Add(dynamicProperty);
+            var dynamicProperty2 = new DynamicProperty()
+            {
+                IsNullable = true,
+                PropertyName = "StartDate",
+                PropertyType = DynamicPropertyType.DateTime
+            };
 
-            // json serializerr
-            //JsonSerializer serializer = new JsonSerializer();
-            //using (StreamWriter sw = new StreamWriter(@"c:\test\test.json"))
-            //{
-            //    serializer.Serialize(sw, dynamicNode);
-            //}
+            dynamicNode.Properties.Add(dynamicProperty1);
+            dynamicNode.Properties.Add(dynamicProperty2);
 
-            //CSharpCodeGenerator code = new CSharpCodeGenerator(dynamicNode);
-            //Console.WriteLine(code.GenerateCode(false));
+            return dynamicNode;
+        }
 
-            //AssemblyGenerator ag = new AssemblyGenerator("Test", code.GenerateCode(false));
-            //var x = ag.Complie();
+        static DynamicObject MakeCO()
+        {
+            var dynamicNode = new DynamicNode()
+            {
+                Name = "ControlObject",
+                Namespace = "SIM.Aibel.JSB"
+            };
 
-            SDI sdi = new SDI();
-            sdi.DataCode = "Hello world!";
+            var dynamicProperty1 = new DynamicProperty()
+            {
+                IsNullable = true,
+                PropertyName = "COnumber",
+                PropertyType = DynamicPropertyType.String
+            };
 
-            Console.Read();
+            var dynamicProperty2 = new DynamicProperty()
+            {
+                IsNullable = true,
+                PropertyName = "status",
+                PropertyType = DynamicPropertyType.String
+            };
+
+            dynamicNode.Properties.Add(dynamicProperty1);
+            dynamicNode.Properties.Add(dynamicProperty2);
+
+            return dynamicNode;
         }
     }
 }

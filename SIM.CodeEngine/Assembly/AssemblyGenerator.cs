@@ -10,28 +10,37 @@ using System.Threading.Tasks;
 
 namespace SIM.CodeEngine.Assembly
 {
-    public class AssemblyGenerator
+    internal class AssemblyGenerator
     {
         private readonly string assemblyName;
-        private readonly string[] sourceFiles;
-        private readonly CodeCompileUnit[] compileUnits;
+        private readonly string outputPath;
+        private readonly IEnumerable<string> sourceFiles;
+        private readonly IEnumerable<CodeCompileUnit> compileUnits;
 
-        private AssemblyGenerator(string assemblyName)
+        private AssemblyGenerator(string assemblyName, string outputPath)
         {
             if (string.IsNullOrWhiteSpace(assemblyName))
             {
                 throw new ArgumentException("Name of target assembly is not defined", nameof(assemblyName));
             }
 
+            if (string.IsNullOrWhiteSpace(outputPath))
+            {
+                throw new ArgumentException("Output path is not defined", nameof(outputPath));
+            }
+
             this.assemblyName = assemblyName;
+            this.outputPath = outputPath;
         }
 
-        public AssemblyGenerator(string assemblyName, params string[] csFiles) : this(assemblyName)
+        public AssemblyGenerator(string assemblyName, string outputPath, IEnumerable<string> csFiles) 
+            : this(outputPath, assemblyName)
         {
             this.sourceFiles = csFiles;
         }
 
-        public AssemblyGenerator(string assemblyName, params CodeCompileUnit[] compileUnits) : this(assemblyName)
+        public AssemblyGenerator(string assemblyName, string outputPath, IEnumerable<CodeCompileUnit> compileUnits) 
+            : this(assemblyName, outputPath)
         {
             this.compileUnits = compileUnits;
         }
@@ -46,33 +55,22 @@ namespace SIM.CodeEngine.Assembly
         private CompilerResults Compile(CSharpCodeProvider provider, CompilerParameters cp)
         {
             if (sourceFiles != null)
-                return provider.CompileAssemblyFromFile(cp, sourceFiles);
+                return provider.CompileAssemblyFromFile(cp, sourceFiles.ToArray());
 
-            return provider.CompileAssemblyFromDom(cp, compileUnits);
+            return provider.CompileAssemblyFromDom(cp, compileUnits.ToArray());
         }
 
         private CompilerParameters BuildCompilerParameters()
         {
             // Build compile parameterrs
             CompilerParameters cp = new CompilerParameters();
-            cp.OutputAssembly = GenerateOutputAssembly();
+            cp.OutputAssembly = Path.Combine(outputPath, assemblyName + ".dll");
             cp.GenerateExecutable = false;
             cp.GenerateInMemory = false;
             cp.ReferencedAssemblies.Add("System.dll");
             cp.ReferencedAssemblies.Add("SIM.Core.dll");
 
             return cp;
-        }
-
-        private string GenerateOutputAssembly()
-        {
-            var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            var outputDir = Path.Combine(appData, "SIM", "Auto generated asseblies");
-
-            if (!Directory.Exists(outputDir))
-                Directory.CreateDirectory(outputDir);
-
-            return Path.Combine(outputDir, assemblyName + ".dll");
         }
     }
 }

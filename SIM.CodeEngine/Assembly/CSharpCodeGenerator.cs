@@ -15,9 +15,10 @@ namespace SIM.CodeEngine.Assembly
     /// <summary>
     /// This class generates .cs files for dynamic objects
     /// </summary>
-    public class CSharpCodeGenerator
+    internal class CSharpCodeGenerator
     {
         private readonly DynamicObject dynamicObject;
+        private readonly string outputFolder;
         private CodeCompileUnit compileUnit;
 
         private CSharpCodeGenerator()
@@ -25,10 +26,37 @@ namespace SIM.CodeEngine.Assembly
             compileUnit = new CodeCompileUnit();
         }
 
+        /// <summary>
+        /// Class to generate .CS file
+        /// </summary>
+        /// <param name="dynamicObject"></param>
         public CSharpCodeGenerator(DynamicObject dynamicObject) : this()
         {
-            this.dynamicObject = dynamicObject ?? 
+            this.dynamicObject = dynamicObject ??
                 throw new ArgumentNullException(nameof(dynamicObject));
+        }
+
+        /// <summary>
+        /// Class to generate .CS file
+        /// </summary>
+        /// <param name="dynamicObject"></param>
+        /// <param name="outputFolder">Folder where the files should be stored</param>
+        public CSharpCodeGenerator(DynamicObject dynamicObject, string outputFolder) : this(dynamicObject)
+        {
+            if (string.IsNullOrWhiteSpace(outputFolder))
+            {
+                throw new ArgumentException("Output folder is not defined", nameof(outputFolder));
+            }
+
+            
+            this.outputFolder = outputFolder;
+            ValidateOutputFolder();
+        }
+
+        private void ValidateOutputFolder()
+        {
+            if (!Directory.Exists(outputFolder))
+                Directory.CreateDirectory(outputFolder);
         }
 
         /// <summary>
