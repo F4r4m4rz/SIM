@@ -14,7 +14,7 @@ namespace SIM.CodeEngine.Dynamic
             Relations = new List<DynamicRelation>();
         }
 
-        public override Type DerivedFrom => typeof(Node);
+        public override object DerivedFrom => typeof(Node);
 
         public ICollection<DynamicRelation> Relations { get; set; }
     }

@@ -173,7 +173,17 @@ namespace SIM.CodeEngine.Assembly
         private CodeTypeDeclaration GenerateClass(CodeNamespace ns)
         {
             CodeTypeDeclaration cs = new CodeTypeDeclaration(dynamicObject.Name);
-            cs.BaseTypes.Add(new CodeTypeReference(dynamicObject.DerivedFrom));
+
+            // Define base class
+            if (dynamicObject.DerivedFrom is string)
+            {
+                cs.BaseTypes.Add(new CodeTypeReference(dynamicObject.DerivedFrom as string));
+            }
+            else if (dynamicObject.DerivedFrom is Type)
+            {
+                cs.BaseTypes.Add(new CodeTypeReference(dynamicObject.DerivedFrom as Type));
+            }
+            
 
             // Add type to namespace
             ns.Types.Add(cs);
@@ -187,7 +197,7 @@ namespace SIM.CodeEngine.Assembly
 
             // import system and SIM.Core
             CodeNamespaceImport system = new CodeNamespaceImport("System");
-            CodeNamespaceImport simCore = new CodeNamespaceImport("SIM.Core");
+            CodeNamespaceImport simCore = new CodeNamespaceImport("SIM.Core.Abstractions");
             ns.Imports.Add(system);
             ns.Imports.Add(simCore);
 

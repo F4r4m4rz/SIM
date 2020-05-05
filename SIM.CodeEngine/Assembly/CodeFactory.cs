@@ -122,7 +122,7 @@ namespace SIM.CodeEngine.Assembly
         private string BuildAssemblyFromFiles(string assemblyName, string outputPath)
         {
             AssemblyGenerator generator = new AssemblyGenerator(assemblyName, outputPath, csFiles);
-            generator.Complie();
+            var result = generator.Complie();
             return Path.Combine(outputPath, assemblyName + ".dll");
         }
 

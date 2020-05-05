@@ -34,7 +34,7 @@ namespace SIM.CodeEngine.Assembly
         }
 
         public AssemblyGenerator(string assemblyName, string outputPath, IEnumerable<string> csFiles) 
-            : this(outputPath, assemblyName)
+            : this(assemblyName, outputPath)
         {
             this.sourceFiles = csFiles;
         }

@@ -13,7 +13,7 @@ namespace SIM.CodeEngine.Dynamic
             Properties = new List<DynamicProperty>();
         }
 
-        public abstract Type DerivedFrom { get; }
+        public abstract object DerivedFrom { get; }
 
         /// <summary>
         /// Namespace for the class which will be generated

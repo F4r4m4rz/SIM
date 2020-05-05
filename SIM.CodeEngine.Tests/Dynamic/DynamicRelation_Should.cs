@@ -18,7 +18,7 @@ namespace SIM.CodeEngine.Tests.Dynamic
         [ClassInitialize]
         public static void Initialization(TestContext testContext)
         {
-            sur = new DynamicRelation();
+            sur = new DynamicRelation("Relation");
         }
 
         [TestMethod]

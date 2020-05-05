@@ -19,6 +19,7 @@ namespace ConsoleTester
             Create2DirectionalRelation(sdi as DynamicNode, co as DynamicNode, out DynamicObject sdiToCo, out DynamicObject CotoSdi);
 
             CodeFactory codeFactory = new CodeFactory(sdi, co, sdiToCo, CotoSdi);
+            var y = codeFactory.GenerateCSharpCode();
             var x = codeFactory.BuildAssembly();
 
             Console.Read();
@@ -26,13 +27,13 @@ namespace ConsoleTester
 
         static void Test()
         {
-            SIM.Aibel.JSB.
+            
         }
 
         private static void Create2DirectionalRelation(DynamicNode sdi, DynamicNode co,
             out DynamicObject sdiToCo, out DynamicObject cotoSdi)
         {
-            sdiToCo = new DynamicRelation()
+            sdiToCo = new DynamicRelation("Relation<SDI, ControlObject>")
             {
                 Name = "HasControlObject",
                 Namespace = "SIM.Aibel.JSB"
@@ -49,7 +50,7 @@ namespace ConsoleTester
 
             sdi.Relations.Add(sdiToCo as DynamicRelation);
 
-            cotoSdi = new DynamicRelation()
+            cotoSdi = new DynamicRelation("Relation<ControlObject, SDI>")
             {
                 Name = "HasSdi",
                 Namespace = "SIM.Aibel.JSB"

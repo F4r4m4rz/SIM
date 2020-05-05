@@ -1,13 +1,16 @@
 ﻿using SIM.Core.Abstraction;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SIM.Core.Abstractions
 {
-    public abstract class Relation<TOrigin, TTarget> : Relation where TOrigin: Node where TTarget: Node
+    public abstract class Relation<TOrigin, TTarget> 
+        : Relation where TOrigin: Node where TTarget: Node
     {
         /// <summary>
         /// The Node which lays at the start of the relation arrow
