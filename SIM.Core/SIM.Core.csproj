@@ -45,14 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\ISimObject.cs" />
     <Compile Include="Abstractions\Node.cs" />
     <Compile Include="Abstractions\GenericRelation.cs" />
     <Compile Include="Abstractions\Relation.cs" />
+    <Compile Include="Commands\CurrentTimeCommand.cs" />
+    <Compile Include="Commands\ISimPropertySetCommand.cs" />
+    <Compile Include="Exceptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Specifications\" />
+    <Folder Include="Attributes\" />
+    <Folder Include="States\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
