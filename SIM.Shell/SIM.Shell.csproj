@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B2D5F104-0D7B-4E15-B819-843FDE082FDD}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SIM.Core</RootNamespace>
-    <AssemblyName>SIM.Core</AssemblyName>
+    <ProjectGuid>{BCA97519-EF3D-428C-8141-4B30F2FD1BCF}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SIM.Shell</RootNamespace>
+    <AssemblyName>SIM.Shell</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,10 +34,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,23 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\ISimObject.cs" />
-    <Compile Include="Abstractions\Node.cs" />
-    <Compile Include="Abstractions\GenericRelation.cs" />
-    <Compile Include="Abstractions\Relation.cs" />
-    <Compile Include="Attributes\StringPatternAttribute.cs" />
-    <Compile Include="Attributes\UserInputAttribute.cs" />
-    <Compile Include="Commands\CurrentTimeCommand.cs" />
-    <Compile Include="Commands\ISimPropertySetCommand.cs" />
-    <Compile Include="Commands\PropertySetCommand.cs" />
-    <Compile Include="Exceptions.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="States\" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\SIM.Core\SIM.Core.csproj">
+      <Project>{b2d5f104-0d7b-4e15-b819-843fde082fdd}</Project>
+      <Name>SIM.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SIM.Shell.Core\SIM.Shell.Core.csproj">
+      <Project>{7681428c-a2b0-494e-863a-07a6ac9ec6a5}</Project>
+      <Name>SIM.Shell.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

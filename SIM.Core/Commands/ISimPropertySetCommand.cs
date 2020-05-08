@@ -10,7 +10,7 @@ namespace SIM.Core.Commands
 {
     public interface ISimPropertySetCommand
     {
-        bool CanExecute(ISimObject obj, PropertyInfo prop);
-        void Execute(ISimObject obj, PropertyInfo prop);
+        bool CanExecute(ISimObject obj, PropertyInfo prop, object value);
+        void Execute(ISimObject obj, PropertyInfo prop, object value);
     }
 }

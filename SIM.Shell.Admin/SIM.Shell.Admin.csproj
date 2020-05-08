@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A7F61DA3-9C7B-4194-BEFB-88FB6B3E27A8}</ProjectGuid>
+    <ProjectGuid>{4204A497-D22B-466A-B329-2A72F23375DE}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ConsoleTester</RootNamespace>
-    <AssemblyName>ConsoleTester</AssemblyName>
+    <RootNamespace>SIM.Shell.Admin</RootNamespace>
+    <AssemblyName>SIM.Shell.Admin</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,13 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="SIM.Aibel.JSB, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\AppData\Roaming\SIM\Auto generated assemblies\SIM.Aibel.JSB.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -55,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SIM.CodeEngine\SIM.CodeEngine.csproj">
@@ -65,6 +57,10 @@
     <ProjectReference Include="..\SIM.Core\SIM.Core.csproj">
       <Project>{b2d5f104-0d7b-4e15-b819-843fde082fdd}</Project>
       <Name>SIM.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SIM.Shell.Core\SIM.Shell.Core.csproj">
+      <Project>{7681428c-a2b0-494e-863a-07a6ac9ec6a5}</Project>
+      <Name>SIM.Shell.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

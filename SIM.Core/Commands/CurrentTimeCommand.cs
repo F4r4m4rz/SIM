@@ -10,19 +10,12 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Commands
 {
-    public class CurrentTimeCommand : ISimPropertySetCommand
+    public class CurrentTimeCommand : PropertySetCommand
     {
-        public bool CanExecute(ISimObject obj, PropertyInfo prop)
+        public override void Execute(ISimObject obj, PropertyInfo prop, object value)
         {
-            return true;
-        }
-
-        public void Execute(ISimObject obj, PropertyInfo prop)
-        {
-            if (CanExecute(obj, prop))
-                prop.SetValue(obj, DateTime.Now);
-
-            throw new OperationCanceledException($"{prop.Name} cannot be set on {obj}", new CancellationToken(true));
+            if (base.CanExecute(obj, prop, DateTime.Now))
+                base.Execute(obj, prop, DateTime.Now);
         }
     }
 }
