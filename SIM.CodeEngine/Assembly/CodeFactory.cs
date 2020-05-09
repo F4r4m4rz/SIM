@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SIM.CodeEngine.Assembly
 {
-    public enum outputPathOptions { CustomPath, DefaultPath}
+    public enum OutputPathOptions { CustomPath, DefaultPath}
 
     public class CodeFactory
     {
