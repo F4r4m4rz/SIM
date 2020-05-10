@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SIM.Core.Abstractions;
+using SIM.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SIM.CodeEngine.Dynamic
 {
-    public class DynamicProperty : IValidatableObject
+    public class DynamicProperty : ISimObject
     {
         /// <summary>
         /// Name of the property

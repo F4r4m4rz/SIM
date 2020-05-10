@@ -1,4 +1,4 @@
-﻿using SIM.Core.Abstraction;
+﻿using SIM.Core.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +9,14 @@ namespace SIM.CodeEngine.Dynamic
 {
     public class DynamicNode : DynamicObject
     {
-        public DynamicNode()
+        private DynamicNode()
         {
             Relations = new List<DynamicRelation>();
+        }
+
+        public DynamicNode(string nameSpace, string name) : base(nameSpace, name)
+        {
+
         }
 
         public override object DerivedFrom => typeof(Node);

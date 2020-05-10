@@ -1,4 +1,6 @@
 ﻿using SIM.Core.Abstractions;
+using SIM.Core.Attributes;
+using SIM.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,12 +12,19 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Commands
 {
+    [CommandString("curtime")]
     public class CurrentTimeCommand : PropertySetCommand
     {
-        public override void Execute(ISimObject obj, PropertyInfo prop, object value)
+        public CurrentTimeCommand(ISimObject obj, PropertyInfo prop, DateTime value) 
+            : base(obj, prop, value)
         {
-            if (base.CanExecute(obj, prop, DateTime.Now))
-                base.Execute(obj, prop, DateTime.Now);
+
+        }
+
+        public override void Execute()
+        {
+            if (base.CanExecute())
+                base.Execute();
         }
     }
 }

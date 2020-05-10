@@ -1,4 +1,6 @@
 ﻿using SIM.Core.Abstractions;
+using SIM.Core.Attributes;
+using SIM.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +11,34 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Commands
 {
-    public class PropertySetCommand : ISimPropertySetCommand
+    [CommandString("propset")]
+    public class PropertySetCommand : ISimCommand
     {
-        public virtual bool CanExecute(ISimObject obj, PropertyInfo prop, object value)
+        private readonly ISimObject obj;
+        private readonly PropertyInfo prop;
+        private readonly object value;
+
+        public object Result { get; private set; }
+
+        public PropertySetCommand(ISimObject obj, PropertyInfo prop, object value)
+        {
+            this.obj = obj ?? throw new ArgumentNullException(nameof(obj));
+            this.prop = prop ?? throw new ArgumentNullException(nameof(prop));
+            this.value = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
+        public virtual bool CanExecute()
         {
             return true;
         }
 
-        public virtual void Execute(ISimObject obj, PropertyInfo prop, object value)
+        public virtual void Execute()
         {
-            if (CanExecute(obj, prop, value))
+            if (CanExecute())
+            {
                 prop.SetValue(obj, value);
+                Result = "Success";
+            }
 
             throw new OperationCanceledException($"{prop.Name} cannot be set on {obj}\nRequested value is {value}",
                                                  new CancellationToken(true));

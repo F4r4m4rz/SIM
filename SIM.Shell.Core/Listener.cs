@@ -9,7 +9,7 @@ namespace SIM.Shell.Core
     public class Listener
     {
         public event ListenerListenedEvent Listened;
-        public static bool ContinueListening { get; set; }
+        public bool ContinueListening { get; set; }
         public void Listen()
         {
             Console.Write("SIM > ");

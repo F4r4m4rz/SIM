@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SIM.Core.Abstractions
+namespace SIM.Core.Interfaces
 {
     public interface ISimObject : IValidatableObject
     {

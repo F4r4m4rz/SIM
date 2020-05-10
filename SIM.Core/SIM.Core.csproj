@@ -45,14 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\ISimObject.cs" />
+    <Compile Include="Attributes\AdminCommandAttribute.cs" />
+    <Compile Include="Attributes\CommandStringAttribute.cs" />
+    <Compile Include="Interfaces\ICommandManager.cs" />
+    <Compile Include="Interfaces\ISimCommand.cs" />
+    <Compile Include="Interfaces\ISimObject.cs" />
     <Compile Include="Abstractions\Node.cs" />
     <Compile Include="Abstractions\GenericRelation.cs" />
     <Compile Include="Abstractions\Relation.cs" />
     <Compile Include="Attributes\StringPatternAttribute.cs" />
     <Compile Include="Attributes\UserInputAttribute.cs" />
     <Compile Include="Commands\CurrentTimeCommand.cs" />
-    <Compile Include="Commands\ISimPropertySetCommand.cs" />
     <Compile Include="Commands\PropertySetCommand.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

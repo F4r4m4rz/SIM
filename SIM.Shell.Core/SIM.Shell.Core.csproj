@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,10 +42,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandAnalyser.cs" />
+    <Compile Include="Commands\NewDynamicNodeCommand.cs" />
     <Compile Include="EventHandlers.cs" />
     <Compile Include="Help.cs" />
     <Compile Include="Listener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Responder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SIM.CodeEngine\SIM.CodeEngine.csproj">
+      <Project>{8F0B11E8-EEC5-4976-BD70-E1F22D126AE8}</Project>
+      <Name>SIM.CodeEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SIM.Core\SIM.Core.csproj">
+      <Project>{B2D5F104-0D7B-4E15-B819-843FDE082FDD}</Project>
+      <Name>SIM.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
