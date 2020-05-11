@@ -1,4 +1,5 @@
 ﻿using SIM.Core.Abstractions;
+using SIM.Core.Extensions;
 using SIM.Core.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,18 +19,15 @@ namespace SIM.CodeEngine.Dynamic
 
         protected DynamicObject(string nameSpace, string name)
         {
-            if (string.IsNullOrWhiteSpace(nameSpace))
+            try
             {
-                throw new ArgumentException("message", nameof(nameSpace));
+                Namespace = nameSpace.ValidateNullOrWhitespace(nameof(nameSpace));
+                Name = name.ValidateNullOrWhitespace(nameof(name));
             }
-
-            if (string.IsNullOrWhiteSpace(name))
+            catch (ArgumentException ex)
             {
-                throw new ArgumentException("message", nameof(name));
+                throw ex;
             }
-
-            Namespace = nameSpace;
-            Name = name;
         }
 
         public abstract object DerivedFrom { get; }

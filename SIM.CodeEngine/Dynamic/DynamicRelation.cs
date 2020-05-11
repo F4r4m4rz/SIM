@@ -1,4 +1,5 @@
 ﻿using SIM.Core.Abstractions;
+using SIM.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,19 @@ namespace SIM.CodeEngine.Dynamic
     {
         private readonly string derivedFrom;
 
-        public DynamicRelation(string derivedFrom)
+        public DynamicRelation(string nameSpace, string name, string originType, string targetType)
+            : base(nameSpace, name)
         {
-            if (string.IsNullOrEmpty(derivedFrom))
+            try
             {
-                throw new ArgumentException("Cannot accept null or white space", nameof(derivedFrom));
+                this.derivedFrom = string.Format("Relation<{0},{1}>",
+                    originType.ValidateNullOrWhitespace(nameof(originType)),
+                    targetType.ValidateNullOrWhitespace(nameof(targetType)));
             }
-
-            this.derivedFrom = derivedFrom;
+            catch (ArgumentException ex)
+            {
+                throw ex;
+            }
         }
 
         public override object DerivedFrom => derivedFrom;

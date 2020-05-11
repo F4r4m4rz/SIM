@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Attributes\AdminCommandAttribute.cs" />
     <Compile Include="Attributes\CommandStringAttribute.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Interfaces\ICommandManager.cs" />
     <Compile Include="Interfaces\ISimCommand.cs" />
     <Compile Include="Interfaces\ISimObject.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Commands\CurrentTimeCommand.cs" />
     <Compile Include="Commands\PropertySetCommand.cs" />
     <Compile Include="Exceptions.cs" />
+    <Compile Include="Interfaces\ISimRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

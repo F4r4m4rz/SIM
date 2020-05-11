@@ -1,4 +1,5 @@
 ﻿//using SIM.Shell.Core;
+using SIM.Core.Interfaces;
 using SIM.Shell.Core;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,8 @@ namespace SIM.Shell.Admin
                 arguments = PrintArguments(parameters);
 
             var x = analyser.Execute(arguments);
+            var repository = new AdminRepository();
+            repository.Add(x as ISimObject);
         }
 
         private static object[] PrintArguments(IDictionary<string, Type> parameters)
@@ -43,6 +46,13 @@ namespace SIM.Shell.Admin
             List<object> result = new List<object>();
             for (int i = 0; i < parameters.Count; i++)
             {
+                // Check if repository is required
+                if (parameters.Values.ElementAt(i) == typeof(ISimRepository))
+                {
+                    result.Add(new AdminRepository());
+                    continue;
+                }                    
+
                 var response = $"Arg[{i}]:\nName of argument: {parameters.Keys.ElementAt(i)}\n" +
                     $"Type of data: {parameters.Values.ElementAt(i)}";
                 Responder.Respond(response);

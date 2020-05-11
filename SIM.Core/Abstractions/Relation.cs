@@ -8,6 +8,11 @@ namespace SIM.Core.Abstractions
 {
     public abstract class Relation
     {
+        internal Relation()
+        {
+
+        }
+
         /// <summary>
         /// If the origin Node can have only one of this relation
         /// </summary>
