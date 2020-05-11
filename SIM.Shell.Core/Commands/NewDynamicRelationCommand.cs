@@ -13,6 +13,7 @@ namespace SIM.Shell.Core.Commands
     [CommandString("drel")]
     public class NewDynamicRelationCommand : ISimCommand
     {
+        private readonly ISimRepository repository;
         private readonly string nameSpace;
         private readonly string name;
         private readonly string originType;
@@ -20,8 +21,10 @@ namespace SIM.Shell.Core.Commands
 
         public object Result { get; set; }
 
-        public NewDynamicRelationCommand(string nameSpace, string name, string originType, string targetType)
+        public NewDynamicRelationCommand(ISimRepository repository, string nameSpace, string name,
+                                         string originType, string targetType)
         {
+            this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
             this.nameSpace = nameSpace;
             this.name = name;
             this.originType = originType;
@@ -30,6 +33,11 @@ namespace SIM.Shell.Core.Commands
 
         public bool CanExecute()
         {
+            // Check if origin and target types exist in the repository
+            if (repository.Get(a => (a as DynamicNode).Name == originType) == null ||
+                repository.Get(a => (a as DynamicNode).Name == targetType) == null)
+                return false;
+
             return true;
         }
 

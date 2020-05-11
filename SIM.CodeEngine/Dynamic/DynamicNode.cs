@@ -9,18 +9,11 @@ namespace SIM.CodeEngine.Dynamic
 {
     public class DynamicNode : DynamicObject
     {
-        private DynamicNode()
-        {
-            Relations = new List<DynamicRelation>();
-        }
-
         public DynamicNode(string nameSpace, string name) : base(nameSpace, name)
         {
 
         }
 
         public override object DerivedFrom => typeof(Node);
-
-        public ICollection<DynamicRelation> Relations { get; set; }
     }
 }

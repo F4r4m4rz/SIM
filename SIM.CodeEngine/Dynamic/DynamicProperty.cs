@@ -1,5 +1,6 @@
 ﻿using SIM.Core.Abstractions;
 using SIM.Core.Interfaces;
+using SIM.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,6 +12,19 @@ namespace SIM.CodeEngine.Dynamic
 {
     public class DynamicProperty : ISimObject
     {
+        public DynamicProperty(string propertyName, string properyType)
+        {
+            try
+            {
+                PropertyName = propertyName.ValidateNullOrWhitespace(nameof(propertyName));
+                PropertyType = properyType.ValidateNullOrWhitespace(nameof(properyType));
+            }
+            catch (ArgumentException ex)
+            {
+                throw ex;
+            }
+        }
+
         /// <summary>
         /// Name of the property
         /// </summary>

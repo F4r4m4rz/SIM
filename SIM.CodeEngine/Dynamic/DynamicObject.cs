@@ -17,7 +17,7 @@ namespace SIM.CodeEngine.Dynamic
             Properties = new List<DynamicProperty>();
         }
 
-        protected DynamicObject(string nameSpace, string name)
+        protected DynamicObject(string nameSpace, string name) : this()
         {
             try
             {

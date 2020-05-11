@@ -1,4 +1,5 @@
 ﻿//using SIM.Shell.Core;
+using SIM.CodeEngine.Dynamic;
 using SIM.Core.Interfaces;
 using SIM.Shell.Core;
 using System;
@@ -38,7 +39,10 @@ namespace SIM.Shell.Admin
 
             var x = analyser.Execute(arguments);
             var repository = new AdminRepository();
-            repository.Add(x as ISimObject);
+            if (repository.Get(a => (a as DynamicObject).Name == (x as DynamicObject).Name) == null)
+                repository.Add(x as ISimObject);
+            //else
+            //    repository.Update(x as ISimObject);
         }
 
         private static object[] PrintArguments(IDictionary<string, Type> parameters)

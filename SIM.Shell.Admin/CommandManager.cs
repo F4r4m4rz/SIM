@@ -15,10 +15,10 @@ namespace SIM.Shell.Admin
 
         public CommandManager()
         {
-            Commands = RegisterCommands();
+            Commands = CollectAllCommands();
         }
 
-        private ICollection<Type> RegisterCommands()
+        private ICollection<Type> CollectAllCommands()
         {
             List<Type> commands = new List<Type>();
             commands.AddRange(GetAllCommands());

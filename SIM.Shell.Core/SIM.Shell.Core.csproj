@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="CommandAnalyser.cs" />
     <Compile Include="Commands\NewDynamicNodeCommand.cs" />
+    <Compile Include="Commands\NewDynamicPropertyCommand.cs" />
     <Compile Include="Commands\NewDynamicRelationCommand.cs" />
     <Compile Include="EventHandlers.cs" />
     <Compile Include="Help.cs" />
