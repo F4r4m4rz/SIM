@@ -1,2 +1,3 @@
 # SIM
-System Interconnection monitoring
+System      Interconnection Monitoring
+Simplicity  Is              Must
