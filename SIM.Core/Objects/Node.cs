@@ -1,6 +1,4 @@
-﻿using SIM.Core.Abstractions;
-using SIM.Core.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace SIM.Core.Abstractions
+namespace SIM.Core.Objects
 {
     public abstract class Node : ISimObject
     {

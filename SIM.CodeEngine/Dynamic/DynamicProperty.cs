@@ -1,5 +1,4 @@
-﻿using SIM.Core.Abstractions;
-using SIM.Core.Interfaces;
+﻿using SIM.Core.Objects;
 using SIM.Core.Extensions;
 using System;
 using System.Collections.Generic;
@@ -12,6 +11,11 @@ namespace SIM.CodeEngine.Dynamic
 {
     public class DynamicProperty : ISimObject
     {
+        public DynamicProperty()
+        {
+
+        }
+
         public DynamicProperty(string propertyName, string properyType)
         {
             try

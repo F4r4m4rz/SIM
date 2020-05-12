@@ -1,4 +1,5 @@
 ﻿using SIM.CodeEngine.Dynamic;
+using SIM.Core.Interfaces;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -28,6 +29,11 @@ namespace SIM.CodeEngine.Assembly
         }
 
         public CodeFactory(params DynamicObject[] dynamicObjects) : this(dynamicObjects.AsEnumerable())
+        {
+
+        }
+
+        public CodeFactory(ISimRepository repository) : this(repository.GetAll().Select(c=>c as DynamicObject))
         {
 
         }

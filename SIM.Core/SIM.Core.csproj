@@ -44,13 +44,15 @@
   <ItemGroup>
     <Compile Include="Attributes\AdminCommandAttribute.cs" />
     <Compile Include="Attributes\CommandStringAttribute.cs" />
+    <Compile Include="Commands\CommandAnalyser.cs" />
+    <Compile Include="Commands\EventHandlers.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Interfaces\ICommandManager.cs" />
-    <Compile Include="Interfaces\ISimCommand.cs" />
-    <Compile Include="Interfaces\ISimObject.cs" />
-    <Compile Include="Abstractions\Node.cs" />
-    <Compile Include="Abstractions\GenericRelation.cs" />
-    <Compile Include="Abstractions\Relation.cs" />
+    <Compile Include="Commands\ICommandManager.cs" />
+    <Compile Include="Commands\ISimCommand.cs" />
+    <Compile Include="Objects\ISimObject.cs" />
+    <Compile Include="Objects\Node.cs" />
+    <Compile Include="Objects\GenericRelation.cs" />
+    <Compile Include="Objects\Relation.cs" />
     <Compile Include="Attributes\StringPatternAttribute.cs" />
     <Compile Include="Attributes\UserInputAttribute.cs" />
     <Compile Include="Commands\CurrentTimeCommand.cs" />

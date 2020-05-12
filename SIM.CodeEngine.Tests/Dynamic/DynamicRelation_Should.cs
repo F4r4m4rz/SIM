@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SIM.CodeEngine.Dynamic;
-using SIM.Core.Abstractions;
+using SIM.Core.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace SIM.CodeEngine.Tests.Dynamic
         [ClassInitialize]
         public static void Initialization(TestContext testContext)
         {
-            sur = new DynamicRelation("Relation");
+            //sur = new DynamicRelation("Relation");
         }
 
         [TestMethod]

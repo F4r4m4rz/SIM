@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SIM.Core.Abstractions
+namespace SIM.Core.Objects
 {
     public abstract class Relation
     {

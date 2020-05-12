@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SIM.CodeEngine.Dynamic;
-using SIM.Core.Abstraction;
+using SIM.Core.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace SIM.CodeEngine.Tests.Dynamic
         [ClassInitialize]
         public static void Initialization(TestContext testContext)
         {
-            sur = new DynamicNode();
+            //sur = new DynamicNode();
         }
 
         [TestMethod]

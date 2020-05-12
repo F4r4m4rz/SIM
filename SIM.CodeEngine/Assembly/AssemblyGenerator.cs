@@ -69,6 +69,7 @@ namespace SIM.CodeEngine.Assembly
             cp.GenerateInMemory = false;
             cp.ReferencedAssemblies.Add("System.dll");
             cp.ReferencedAssemblies.Add("SIM.Core.dll");
+            cp.ReferencedAssemblies.Add("System.ComponentModel.DataAnnotations.dll");
 
             return cp;
         }

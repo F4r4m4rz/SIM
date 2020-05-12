@@ -1,5 +1,5 @@
-﻿using SIM.Core.Abstractions;
-using SIM.Core.Extensions;
+﻿using SIM.Core.Extensions;
+using SIM.Core.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +11,13 @@ namespace SIM.CodeEngine.Dynamic
 {
     public class DynamicRelation : DynamicObject
     {
-        private readonly string derivedFrom;
-
         public DynamicRelation(string nameSpace, string name, string originType, string targetType)
             : base(nameSpace, name)
         {
             try
             {
-                this.derivedFrom = string.Format("Relation<{0},{1}>",
-                    originType.ValidateNullOrWhitespace(nameof(originType)),
-                    targetType.ValidateNullOrWhitespace(nameof(targetType)));
+                OriginType = originType.ValidateNullOrWhitespace(nameof(originType));
+                TargetType = targetType.ValidateNullOrWhitespace(nameof(targetType));
             }
             catch (ArgumentException ex)
             {
@@ -28,6 +25,8 @@ namespace SIM.CodeEngine.Dynamic
             }
         }
 
-        public override object DerivedFrom => derivedFrom;
+        public override object DerivedFrom => $"{typeof(Relation).Name}<{OriginType},{TargetType}>";
+        public string OriginType { get; private set; }
+        public string TargetType { get; private set; }
     }
 }

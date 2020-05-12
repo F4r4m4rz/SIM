@@ -45,6 +45,12 @@
     <Compile Include="Assembly\AssemblyGenerator.cs" />
     <Compile Include="Assembly\CodeFactory.cs" />
     <Compile Include="Assembly\CSharpCodeGenerator.cs" />
+    <Compile Include="Commands\CompileRepositoryCommand.cs" />
+    <Compile Include="Commands\LoadRepositoryAsJson.cs" />
+    <Compile Include="Commands\NewDynamicNodeCommand.cs" />
+    <Compile Include="Commands\NewDynamicPropertyCommand.cs" />
+    <Compile Include="Commands\NewDynamicRelationCommand.cs" />
+    <Compile Include="Commands\RepositoryAsJsonCommand.cs" />
     <Compile Include="Dynamic\DynamicNode.cs" />
     <Compile Include="Dynamic\DynamicObject.cs" />
     <Compile Include="Dynamic\DynamicProperty.cs" />
@@ -58,6 +64,10 @@
       <Name>SIM.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

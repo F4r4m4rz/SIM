@@ -1,6 +1,6 @@
 ﻿using SIM.CodeEngine.Dynamic;
-using SIM.Core.Abstractions;
 using SIM.Core.Attributes;
+using SIM.Core.Commands;
 using SIM.Core.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SIM.Shell.Core.Commands
+namespace SIM.CodeEngine.Commands
 {
     [AdminCommand]
     [CommandString("dnode")]

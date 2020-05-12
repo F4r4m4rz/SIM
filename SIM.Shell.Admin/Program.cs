@@ -1,6 +1,8 @@
 ﻿//using SIM.Shell.Core;
 using SIM.CodeEngine.Dynamic;
+using SIM.Core.Commands;
 using SIM.Core.Interfaces;
+using SIM.Core.Objects;
 using SIM.Shell.Core;
 using System;
 using System.Collections.Generic;
@@ -39,7 +41,7 @@ namespace SIM.Shell.Admin
 
             var x = analyser.Execute(arguments);
             var repository = new AdminRepository();
-            if (repository.Get(a => (a as DynamicObject).Name == (x as DynamicObject).Name) == null)
+            if (x != null && repository.Get(a => (a as DynamicObject).Name == (x as DynamicObject).Name) == null)
                 repository.Add(x as ISimObject);
             //else
             //    repository.Update(x as ISimObject);

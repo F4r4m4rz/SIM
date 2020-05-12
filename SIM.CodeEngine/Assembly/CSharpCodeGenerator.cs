@@ -197,9 +197,11 @@ namespace SIM.CodeEngine.Assembly
 
             // import system and SIM.Core
             CodeNamespaceImport system = new CodeNamespaceImport("System");
-            CodeNamespaceImport simCore = new CodeNamespaceImport("SIM.Core.Abstractions");
+            CodeNamespaceImport simCore = new CodeNamespaceImport("SIM.Core.Objects");
+            CodeNamespaceImport dataAnnotation = new CodeNamespaceImport("System.ComponentModel.DataAnnotations");
             ns.Imports.Add(system);
             ns.Imports.Add(simCore);
+            ns.Imports.Add(dataAnnotation);
 
             // Add new namespace
             compileUnit.Namespaces.Add(ns);
