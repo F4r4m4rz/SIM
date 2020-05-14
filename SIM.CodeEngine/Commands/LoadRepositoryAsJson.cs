@@ -10,6 +10,7 @@ using System.IO;
 using SIM.CodeEngine.Dynamic;
 using SIM.Core.Attributes;
 using SIM.Core.Objects;
+using System.Collections;
 
 namespace SIM.CodeEngine.Commands
 {
@@ -40,12 +41,8 @@ namespace SIM.CodeEngine.Commands
 
             JsonSerializer serializer = new JsonSerializer();
             StreamReader reader = new StreamReader($@"C:\Users\ofsfabo1\AppData\Roaming\SIM\Json\{nameSpace}.json");
-            JsonTextReader x = new JsonTextReader(reader);
-            while (x.Read())
-            {
-                var y = x.Value;
-            }
             Result = serializer.Deserialize(reader, typeof(IEnumerable<DynamicObject>));
+            reader.Close();
         }
     }
 }

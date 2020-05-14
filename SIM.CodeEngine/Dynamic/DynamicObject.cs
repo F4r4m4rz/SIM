@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace SIM.CodeEngine.Dynamic
 {
-    public abstract class DynamicObject : ISimObject
+    public class DynamicObject : ISimObject
     {
         protected DynamicObject()
         {
             Properties = new List<DynamicProperty>();
+            Attributes = new List<KeyValuePair<Type, object[]>>();
         }
 
         protected DynamicObject(string nameSpace, string name) : this()
@@ -29,19 +30,21 @@ namespace SIM.CodeEngine.Dynamic
             }
         }
 
-        public abstract object DerivedFrom { get; }
+        public virtual Type DerivedFrom { get; set; }
 
         /// <summary>
         /// Namespace for the class which will be generated
         /// </summary>
-        public string Namespace { get; }
+        public string Namespace { get; set; }
 
         /// <summary>
         /// Name of type which will be created
         /// </summary>
-        public string Name { get; }
+        public string Name { get; set; }
 
         public ICollection<DynamicProperty> Properties { get; set; }
+
+        public ICollection<KeyValuePair<Type, object[]>> Attributes { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

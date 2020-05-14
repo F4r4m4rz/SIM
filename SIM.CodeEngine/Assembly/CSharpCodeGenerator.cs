@@ -69,12 +69,39 @@ namespace SIM.CodeEngine.Assembly
             // Build code hierarchy
             var @namespace = GenerateNamespace();
             var @class = GenerateClass(@namespace);
+            GenerateClassAttributes(@class);
             GenerateProperties(@class);
 
             // Build C# code
             if (!asFile) return compileUnit;
 
             return GenerateFileCode();
+        }
+
+        private void GenerateClassAttributes(CodeTypeDeclaration @class)
+        {
+            for (int i = 0; i < dynamicObject.Attributes.Count; i++)
+            {
+                var dynamicAtt = dynamicObject.Attributes.ElementAt(i);
+                var attribute = GenerateAttribute(dynamicAtt);
+                @class.CustomAttributes.Add(attribute);
+            }
+        }
+
+        private CodeAttributeDeclaration GenerateAttribute(KeyValuePair<Type, object[]> dynamicAtt)
+        {
+            var attribute = new CodeAttributeDeclaration(new CodeTypeReference(dynamicAtt.Key));
+
+            // Collect parameters of constructor
+            var parameters = dynamicAtt.Key.GetConstructors()[0].GetParameters();
+
+            // For each parameter generate a CodeAttributeArgument and add to attribute
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                attribute.Arguments.Add(new CodeAttributeArgument(new CodePrimitiveExpression(dynamicAtt.Value[i])));
+            }
+
+            return attribute;
         }
 
         private string GenerateFileCode()
@@ -175,16 +202,8 @@ namespace SIM.CodeEngine.Assembly
             CodeTypeDeclaration cs = new CodeTypeDeclaration(dynamicObject.Name);
 
             // Define base class
-            if (dynamicObject.DerivedFrom is string)
-            {
-                cs.BaseTypes.Add(new CodeTypeReference(dynamicObject.DerivedFrom as string));
-            }
-            else if (dynamicObject.DerivedFrom is Type)
-            {
-                cs.BaseTypes.Add(new CodeTypeReference(dynamicObject.DerivedFrom as Type));
-            }
+            cs.BaseTypes.Add(new CodeTypeReference(dynamicObject.DerivedFrom));
             
-
             // Add type to namespace
             ns.Types.Add(cs);
 

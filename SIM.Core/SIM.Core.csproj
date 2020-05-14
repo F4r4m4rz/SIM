@@ -44,8 +44,11 @@
   <ItemGroup>
     <Compile Include="Attributes\AdminCommandAttribute.cs" />
     <Compile Include="Attributes\CommandStringAttribute.cs" />
+    <Compile Include="Attributes\RelationEndTypeAttribute.cs" />
+    <Compile Include="Attributes\SoloRelationAttribute.cs" />
     <Compile Include="Commands\CommandAnalyser.cs" />
     <Compile Include="Commands\EventHandlers.cs" />
+    <Compile Include="Commands\NewNodeCommand.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Commands\ICommandManager.cs" />
     <Compile Include="Commands\ISimCommand.cs" />
@@ -61,9 +64,7 @@
     <Compile Include="Interfaces\ISimRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="States\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations">
       <Version>4.7.0</Version>

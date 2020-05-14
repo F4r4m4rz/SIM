@@ -46,6 +46,7 @@
     <Compile Include="Assembly\CodeFactory.cs" />
     <Compile Include="Assembly\CSharpCodeGenerator.cs" />
     <Compile Include="Commands\CompileRepositoryCommand.cs" />
+    <Compile Include="Commands\GenerateCSharpCodeCommand.cs" />
     <Compile Include="Commands\LoadRepositoryAsJson.cs" />
     <Compile Include="Commands\NewDynamicNodeCommand.cs" />
     <Compile Include="Commands\NewDynamicPropertyCommand.cs" />

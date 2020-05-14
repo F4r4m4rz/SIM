@@ -8,7 +8,7 @@ namespace SIM.Core.Objects
 {
     public abstract class Relation
     {
-        internal Relation()
+        protected Relation()
         {
 
         }
@@ -22,5 +22,15 @@ namespace SIM.Core.Objects
         /// If the destination Node can accept only one of this relation
         /// </summary>
         internal bool IsDestinationSolo { get; set; }
+
+        /// <summary>
+        /// The Node which lays at the start of the relation arrow
+        /// </summary>
+        public Node Origin { get; set; }
+
+        /// <summary>
+        /// The Node which lays at the end of the relation arrow
+        /// </summary>
+        public Node Target { get; set; }
     }
 }

@@ -17,27 +17,27 @@ namespace SIM.CodeEngine.Commands
         private readonly ISimRepository repository;
         private readonly string nameSpace;
         private readonly string name;
-        private readonly string originType;
-        private readonly string targetType;
+        private readonly string[] originTypes;
+        private readonly string[] targetTypes;
 
         public object Result { get; set; }
 
         public NewDynamicRelationCommand(ISimRepository repository, string nameSpace, string name,
-                                         string originType, string targetType)
+                                         string[] originTypes, string[] targetTypes)
         {
             this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
             this.nameSpace = nameSpace;
             this.name = name;
-            this.originType = originType;
-            this.targetType = targetType;
+            this.originTypes = originTypes;
+            this.targetTypes = targetTypes;
         }
 
         public bool CanExecute()
         {
             // Check if origin and target types exist in the repository
-            if (repository.Get(a => (a as DynamicNode).Name == originType) == null ||
-                repository.Get(a => (a as DynamicNode).Name == targetType) == null)
-                return false;
+            //if (repository.Get(a => (a as DynamicObject).Name == originType) == null ||
+            //    repository.Get(a => (a as DynamicNode).Name == targetType) == null)
+            //    return false;
 
             return true;
         }
@@ -47,7 +47,7 @@ namespace SIM.CodeEngine.Commands
             if (!CanExecute())
                 throw new OperationCanceledException($"{typeof(NewDynamicRelationCommand).Name} cannot be excuted");
 
-            Result = new DynamicRelation(nameSpace, name, originType, targetType);
+            Result = new DynamicRelation(nameSpace, name, originTypes, targetTypes);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace SIM.Core.Objects
         /// </summary>
         public ICollection<Relation> Relations { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             throw new NotImplementedException();
         }

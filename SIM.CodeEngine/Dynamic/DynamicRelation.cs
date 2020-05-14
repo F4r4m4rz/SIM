@@ -1,4 +1,5 @@
-﻿using SIM.Core.Extensions;
+﻿using SIM.Core.Attributes;
+using SIM.Core.Extensions;
 using SIM.Core.Objects;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,13 @@ namespace SIM.CodeEngine.Dynamic
 {
     public class DynamicRelation : DynamicObject
     {
-        public DynamicRelation(string nameSpace, string name, string originType, string targetType)
+        public DynamicRelation(string nameSpace, string name, string[] originTypes, string[] targetTypes)
             : base(nameSpace, name)
         {
             try
             {
-                OriginType = originType.ValidateNullOrWhitespace(nameof(originType));
-                TargetType = targetType.ValidateNullOrWhitespace(nameof(targetType));
+                AssignApplicableTypes(originTypes, "Origin");
+                AssignApplicableTypes(targetTypes, "Target");
             }
             catch (ArgumentException ex)
             {
@@ -25,8 +26,15 @@ namespace SIM.CodeEngine.Dynamic
             }
         }
 
-        public override object DerivedFrom => $"{typeof(Relation).Name}<{OriginType},{TargetType}>";
-        public string OriginType { get; private set; }
-        public string TargetType { get; private set; }
+        private void AssignApplicableTypes(string[] types, string end)
+        {
+            for (int i = 0; i < types.Length; i++)
+            {
+                Attributes.Add(new KeyValuePair<Type, object[]>(typeof(RelationEndTypeAttribute),
+                    new object[] { types[i], end }));
+            }
+        }
+
+        public override Type DerivedFrom => typeof(Relation);
     }
 }

@@ -6,6 +6,7 @@ using SIM.Core.Objects;
 using SIM.Shell.Core;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -40,6 +41,11 @@ namespace SIM.Shell.Admin
                 arguments = PrintArguments(parameters);
 
             var x = analyser.Execute(arguments);
+            if (x is IEnumerable<DynamicObject>)
+            {
+                var jsonRepos = new AdminRepository(x as IEnumerable<DynamicObject>);
+                return;
+            }
             var repository = new AdminRepository();
             if (x != null && repository.Get(a => (a as DynamicObject).Name == (x as DynamicObject).Name) == null)
                 repository.Add(x as ISimObject);
@@ -57,13 +63,17 @@ namespace SIM.Shell.Admin
                 {
                     result.Add(new AdminRepository());
                     continue;
-                }                    
-
+                }
+                var paramType = parameters.Values.ElementAt(i);
                 var response = $"Arg[{i}]:\nName of argument: {parameters.Keys.ElementAt(i)}\n" +
-                    $"Type of data: {parameters.Values.ElementAt(i)}";
+                    $"Type of data: {paramType}";
                 Responder.Respond(response);
                 var listener = new Listener();
-                listener.Listened += a => result.Add(a);
+                if (paramType.GetInterface(typeof(IEnumerable).Name) == null || paramType == typeof(string))
+                    listener.Listened += a => result.Add(a);
+                else
+                    listener.Listened += a => result.Add((a as string).Split(' '));
+
                 listener.Listen();
             }
             return result.ToArray();

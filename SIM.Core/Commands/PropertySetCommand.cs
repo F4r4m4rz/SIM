@@ -33,14 +33,12 @@ namespace SIM.Core.Commands
 
         public virtual void Execute()
         {
-            if (CanExecute())
-            {
-                prop.SetValue(obj, value);
-                Result = "Success";
-            }
-
-            throw new OperationCanceledException($"{prop.Name} cannot be set on {obj}\nRequested value is {value}",
+            if (!CanExecute())
+                throw new OperationCanceledException($"{prop.Name} cannot be set on {obj}\nRequested value is {value}",
                                                  new CancellationToken(true));
+
+            prop.SetValue(obj, value);
+            Result = "Success";
         }
     }
 }

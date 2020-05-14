@@ -14,6 +14,6 @@ namespace SIM.CodeEngine.Dynamic
 
         }
 
-        public override object DerivedFrom => typeof(Node);
+        public override Type DerivedFrom => typeof(Node);
     }
 }

@@ -30,7 +30,7 @@ namespace SIM.CodeEngine.Commands
         public bool CanExecute()
         {
             // Check if repository contains any node with the passed name
-            if (repository.Get(a => (a as DynamicNode).Name == name) != null)
+            if (repository.Get(a => (a as DynamicObject).Name == name) != null)
                 return false;
 
             return true;

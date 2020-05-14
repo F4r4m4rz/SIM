@@ -1,4 +1,5 @@
-﻿using SIM.Core.Interfaces;
+﻿using SIM.CodeEngine.Dynamic;
+using SIM.Core.Interfaces;
 using SIM.Core.Objects;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,16 @@ namespace SIM.Shell.Admin
         static AdminRepository()
         {
             _objects = new List<ISimObject>();
+        }
+
+        public AdminRepository()
+        {
+
+        }
+
+        public AdminRepository(IEnumerable<DynamicObject> objects)
+        {
+            (_objects as List<ISimObject>).AddRange(objects);
         }
 
         public void Add(ISimObject simObject)
