@@ -13,7 +13,6 @@ namespace SIM.CodeEngine.Dynamic
     {
         protected DynamicObject()
         {
-            Properties = new List<DynamicProperty>();
             Attributes = new List<KeyValuePair<Type, object[]>>();
         }
 
@@ -41,8 +40,6 @@ namespace SIM.CodeEngine.Dynamic
         /// Name of type which will be created
         /// </summary>
         public string Name { get; set; }
-
-        public ICollection<DynamicProperty> Properties { get; set; }
 
         public ICollection<KeyValuePair<Type, object[]>> Attributes { get; set; }
 

@@ -10,7 +10,7 @@ namespace SIM.Core.Objects
     public abstract class ProperyNode : ISimObject
     {
         protected object _value;
-        
+
         public virtual void SetValue(object value)
         {
             _value = value;

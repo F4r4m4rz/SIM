@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SIM.Core.Objects;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace SIM.CodeEngine.Dynamic
 {
     public static class DynamicPropertyType
     {
-        public static string String => typeof(string).FullName;
+        public static string String => typeof(StringPropertyNode).FullName;
         public static string Integer => typeof(int).FullName;
         public static string Real => typeof(double).FullName;
-        public static string Boolean => typeof(bool).FullName;
+        public static string Boolean => typeof(BooleanPropertyNode).FullName;
         public static string Collection => typeof(IList).FullName;
-        public static string DateTime => typeof(DateTime).FullName;
+        public static string DateTime => typeof(DateTimePropertyNode).FullName;
     }
 }

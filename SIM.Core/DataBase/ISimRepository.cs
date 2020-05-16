@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SIM.Core.Interfaces
+namespace SIM.DataBase
 {
     public interface ISimRepository
     {

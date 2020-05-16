@@ -9,19 +9,18 @@ using System.Threading.Tasks;
 
 namespace SIM.CodeEngine.Dynamic
 {
-    public class DynamicProperty : ISimObject
+    public class DynamicProperty : DynamicObject
     {
         public DynamicProperty()
         {
 
         }
 
-        public DynamicProperty(string propertyName, string properyType)
+        public DynamicProperty(string nameSpace, string propertyName)
         {
             try
             {
-                PropertyName = propertyName.ValidateNullOrWhitespace(nameof(propertyName));
-                PropertyType = properyType.ValidateNullOrWhitespace(nameof(properyType));
+                Name = propertyName.ValidateNullOrWhitespace(nameof(propertyName));
             }
             catch (ArgumentException ex)
             {
@@ -29,15 +28,7 @@ namespace SIM.CodeEngine.Dynamic
             }
         }
 
-        /// <summary>
-        /// Name of the property
-        /// </summary>
-        public string PropertyName { get; set; }
-
-        /// <summary>
-        /// Type of the property (To be defined from DynamicPropertyType class)
-        /// </summary>
-        public string PropertyType { get; set; }
+        public override Type DerivedFrom { get => typeof(PropertyRelation); }
 
         /// <summary>
         /// If the propery can be null

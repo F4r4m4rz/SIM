@@ -49,7 +49,9 @@
     <Compile Include="Commands\CommandAnalyser.cs" />
     <Compile Include="Commands\EventHandlers.cs" />
     <Compile Include="Commands\NewNodeCommand.cs" />
+    <Compile Include="Commands\NewPropertyNodeCommand.cs" />
     <Compile Include="Commands\NewRelationCommand.cs" />
+    <Compile Include="DataBase\ISimRepository.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Commands\ICommandManager.cs" />
     <Compile Include="Commands\ISimCommand.cs" />
@@ -67,7 +69,6 @@
     <Compile Include="Commands\CurrentTimeCommand.cs" />
     <Compile Include="Commands\PropertySetCommand.cs" />
     <Compile Include="Exceptions.cs" />
-    <Compile Include="Interfaces\ISimRepository.cs" />
     <Compile Include="Objects\StringPropertyNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -70,7 +70,9 @@ namespace SIM.CodeEngine.Assembly
             var @namespace = GenerateNamespace();
             var @class = GenerateClass(@namespace);
             GenerateClassAttributes(@class);
-            GenerateProperties(@class);
+
+            if (dynamicObject is DynamicNode)
+                GenerateProperties(@class);
 
             // Build C# code
             if (!asFile) return compileUnit;
@@ -137,9 +139,9 @@ namespace SIM.CodeEngine.Assembly
 
         private void GenerateProperties(CodeTypeDeclaration @class)
         {
-            for (int i = 0; i < dynamicObject.Properties.Count; i++)
+            for (int i = 0; i < (dynamicObject as DynamicNode).Properties.Count; i++)
             {
-                var dynamicProp = dynamicObject.Properties.ElementAt(i);
+                var dynamicProp = (dynamicObject as DynamicNode).Properties.ElementAt(i);
                 var field = GeenerateField(dynamicProp);
                 @class.Members.Add(field);
 

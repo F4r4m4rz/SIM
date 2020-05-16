@@ -11,9 +11,10 @@ namespace SIM.CodeEngine.Dynamic
     {
         public DynamicNode(string nameSpace, string name) : base(nameSpace, name)
         {
-
+            Properties = new List<DynamicProperty>();
         }
 
         public override Type DerivedFrom => typeof(Node);
+        public ICollection<DynamicProperty> Properties { get; set; }
     }
 }
