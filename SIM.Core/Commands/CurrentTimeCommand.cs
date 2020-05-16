@@ -14,16 +14,10 @@ namespace SIM.Core.Commands
     [CommandString("curtime")]
     public class CurrentTimeCommand : PropertySetCommand
     {
-        public CurrentTimeCommand(ISimObject obj, PropertyInfo prop, DateTime value) 
-            : base(obj, prop, value)
+        public CurrentTimeCommand(DateTimePropertyNode node) 
+            : base(node, DateTime.Now)
         {
 
-        }
-
-        public override void Execute()
-        {
-            if (base.CanExecute())
-                base.Execute();
         }
     }
 }

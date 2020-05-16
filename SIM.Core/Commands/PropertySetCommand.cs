@@ -13,16 +13,14 @@ namespace SIM.Core.Commands
     [CommandString("propset")]
     public class PropertySetCommand : ISimCommand
     {
-        private readonly ISimObject obj;
-        private readonly PropertyInfo prop;
-        private readonly object value;
+        protected readonly ProperyNode node;
+        protected readonly object value;
 
         public object Result { get; private set; }
 
-        public PropertySetCommand(ISimObject obj, PropertyInfo prop, object value)
+        public PropertySetCommand(ProperyNode node, object value)
         {
-            this.obj = obj ?? throw new ArgumentNullException(nameof(obj));
-            this.prop = prop ?? throw new ArgumentNullException(nameof(prop));
+            this.node = node ?? throw new ArgumentNullException(nameof(node));
             this.value = value ?? throw new ArgumentNullException(nameof(value));
         }
 
@@ -34,10 +32,10 @@ namespace SIM.Core.Commands
         public virtual void Execute()
         {
             if (!CanExecute())
-                throw new OperationCanceledException($"{prop.Name} cannot be set on {obj}\nRequested value is {value}",
+                throw new OperationCanceledException($"Cannot set value on {node}\nRequested value is {value}",
                                                  new CancellationToken(true));
 
-            prop.SetValue(obj, value);
+            node.SetValue(value);
             Result = "Success";
         }
     }

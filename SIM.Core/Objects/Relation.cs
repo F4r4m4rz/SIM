@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SIM.Core.Objects
 {
-    public abstract class Relation
+    public abstract class Relation : IGenericRelation<Node, Node>
     {
         protected Relation()
         {
@@ -22,5 +23,10 @@ namespace SIM.Core.Objects
         /// The Node which lays at the end of the relation arrow
         /// </summary>
         public Node Target { get; set; }
+
+        public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

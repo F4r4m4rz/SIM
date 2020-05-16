@@ -2,24 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SIM.Core.Objects
 {
-    public abstract class Node : ISimObject
+    public abstract class ProperyNode : ISimObject
     {
-        protected Node()
+        protected object _value;
+        
+        public virtual void SetValue(object value)
         {
-            Relations = new List<Relation>();
+            _value = value;
         }
-
-        /// <summary>
-        /// Collection of applicable outwards relations on the Node
-        /// </summary>
-        public ICollection<Relation> Relations { get; set; }
 
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

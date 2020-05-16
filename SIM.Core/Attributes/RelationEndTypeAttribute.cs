@@ -8,7 +8,7 @@ namespace SIM.Core.Attributes
 {
     public enum RelationNode { Origin, Target }
 
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public class RelationEndTypeAttribute : Attribute
     {
         public RelationEndTypeAttribute(string type, string node)

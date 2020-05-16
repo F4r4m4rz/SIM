@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Commands
 {
-    [AdminCommand]
     [CommandString("new node")]
     public class NewNodeCommand<T> : ISimCommand where T : Node, new()
     {
@@ -34,7 +33,9 @@ namespace SIM.Core.Commands
                 throw new OperationCanceledException($"Cannot create new instance of{typeof(T)}",
                                                  new CancellationToken(true));
 
-            Result = new T();
+            var newNode = new T();
+            repository.Add(newNode);
+            Result = newNode;
         }
     }
 }

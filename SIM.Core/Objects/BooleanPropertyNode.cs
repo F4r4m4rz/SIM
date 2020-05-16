@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Objects
 {
-    class PropertyNode
+    public class BooleanPropertyNode : GenericPropertyNode<bool>
     {
     }
 }

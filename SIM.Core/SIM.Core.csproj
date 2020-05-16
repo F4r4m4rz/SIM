@@ -49,12 +49,18 @@
     <Compile Include="Commands\CommandAnalyser.cs" />
     <Compile Include="Commands\EventHandlers.cs" />
     <Compile Include="Commands\NewNodeCommand.cs" />
+    <Compile Include="Commands\NewRelationCommand.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Commands\ICommandManager.cs" />
     <Compile Include="Commands\ISimCommand.cs" />
+    <Compile Include="Objects\BooleanPropertyNode.cs" />
+    <Compile Include="Objects\DateTimePropertyNode.cs" />
+    <Compile Include="Objects\IGenericRelation.cs" />
     <Compile Include="Objects\ISimObject.cs" />
     <Compile Include="Objects\Node.cs" />
-    <Compile Include="Objects\PropertyNode.cs" />
+    <Compile Include="Objects\GenericPropertyNode.cs" />
+    <Compile Include="Objects\PropertyRelation.cs" />
+    <Compile Include="Objects\ProperyNode.cs" />
     <Compile Include="Objects\Relation.cs" />
     <Compile Include="Attributes\StringPatternAttribute.cs" />
     <Compile Include="Attributes\UserInputAttribute.cs" />
@@ -62,6 +68,7 @@
     <Compile Include="Commands\PropertySetCommand.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Interfaces\ISimRepository.cs" />
+    <Compile Include="Objects\StringPropertyNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

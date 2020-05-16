@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public class SoloRelationAttribute : Attribute
     {
         /// <summary>
