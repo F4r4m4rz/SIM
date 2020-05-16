@@ -54,7 +54,7 @@
     <Compile Include="Commands\ISimCommand.cs" />
     <Compile Include="Objects\ISimObject.cs" />
     <Compile Include="Objects\Node.cs" />
-    <Compile Include="Objects\GenericRelation.cs" />
+    <Compile Include="Objects\PropertyNode.cs" />
     <Compile Include="Objects\Relation.cs" />
     <Compile Include="Attributes\StringPatternAttribute.cs" />
     <Compile Include="Attributes\UserInputAttribute.cs" />
