@@ -153,8 +153,8 @@ namespace SIM.CodeEngine.Assembly
         private CodeMemberProperty GeneratePrperty(DynamicProperty dynamicProp)
         {
             CodeMemberProperty property = new CodeMemberProperty();
-            property.Name = dynamicProp.PropertyName;
-            property.Type = new CodeTypeReference(dynamicProp.PropertyType);
+            property.Name = dynamicProp.Name;
+            property.Type = new CodeTypeReference(dynamicProp.DerivedFrom);
             property.Attributes = MemberAttributes.Public;
 
             // Generate getter
@@ -192,8 +192,8 @@ namespace SIM.CodeEngine.Assembly
         private CodeMemberField GeenerateField(DynamicProperty dynamicProperty)
         {
             CodeMemberField field = new CodeMemberField();
-            field.Name = '_' + dynamicProperty.PropertyName;
-            field.Type = new CodeTypeReference(dynamicProperty.PropertyType);
+            field.Name = '_' + dynamicProperty.Name;
+            field.Type = new CodeTypeReference(dynamicProperty.DerivedFrom);
             field.Attributes = MemberAttributes.Private;
 
             return field;
