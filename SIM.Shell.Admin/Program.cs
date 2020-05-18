@@ -69,7 +69,7 @@ namespace SIM.Shell.Admin
                 Responder.Respond(response);
                 var listener = new Listener();
                 if (paramType.GetInterface(typeof(IEnumerable).Name) == null || paramType == typeof(string))
-                    listener.Listened += a => result.Add(a);
+                    listener.Listened += a => result.Add(Convert.ChangeType(a, paramType));
                 else
                     listener.Listened += a => result.Add((a as string).Split(' '));
 

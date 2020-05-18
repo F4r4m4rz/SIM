@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace SIM.Core.Commands
 {
     [CommandString("new prop")]
-    public class NewPropertyNodeCommand<T> : ISimCommand where T : ProperyNode, new()
+    public class NewPropertyNodeCommand<T> : ISimCommand where T : PropertyNode, new()
     {
         private readonly ISimRepository repository;
         private readonly Node owner;

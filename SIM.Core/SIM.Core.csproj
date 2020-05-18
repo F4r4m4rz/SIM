@@ -65,7 +65,7 @@
     <Compile Include="Objects\Node.cs" />
     <Compile Include="Objects\GenericPropertyNode.cs" />
     <Compile Include="Objects\PropertyRelation.cs" />
-    <Compile Include="Objects\ProperyNode.cs" />
+    <Compile Include="Objects\PropertyNode.cs" />
     <Compile Include="Objects\Relation.cs" />
     <Compile Include="Attributes\StringPatternAttribute.cs" />
     <Compile Include="Attributes\UserInputAttribute.cs" />

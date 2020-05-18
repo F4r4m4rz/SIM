@@ -13,12 +13,12 @@ namespace SIM.Core.Commands
     [CommandString("propset")]
     public class PropertySetCommand : ISimCommand
     {
-        protected readonly ProperyNode node;
+        protected readonly PropertyNode node;
         protected readonly object value;
 
         public object Result { get; private set; }
 
-        public PropertySetCommand(ProperyNode node, object value)
+        public PropertySetCommand(PropertyNode node, object value)
         {
             this.node = node ?? throw new ArgumentNullException(nameof(node));
             this.value = value ?? throw new ArgumentNullException(nameof(value));

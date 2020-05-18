@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Objects
 {
-    public abstract class GenericPropertyNode<T> : ProperyNode
+    public abstract class GenericPropertyNode<T> : PropertyNode
     {
         public T Value => (T)_value;
     }

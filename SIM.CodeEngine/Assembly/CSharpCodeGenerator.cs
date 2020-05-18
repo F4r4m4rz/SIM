@@ -1,9 +1,11 @@
 ﻿using Microsoft.CSharp;
 using SIM.CodeEngine.Dynamic;
+using SIM.Core.Attributes;
 using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Security.Permissions;
@@ -146,8 +148,36 @@ namespace SIM.CodeEngine.Assembly
                 @class.Members.Add(field);
 
                 var property = GeneratePrperty(dynamicProp);
+                GenerateProperyAttributes(dynamicProp, property);
                 @class.Members.Add(property);
             }
+        }
+
+        private void GenerateProperyAttributes(DynamicProperty dynamicProp, CodeMemberProperty property)
+        {
+            // Data type attribute
+            GenerateProperyDataTypeAttribute(dynamicProp, property);
+
+            // Reuired attribute
+            if (dynamicProp.IsRequired)
+                GenerateNoArgumentAttribute(dynamicProp, property, typeof(RequiredAttribute));
+
+            // UserInput attribute
+            if (dynamicProp.IsUserInput)
+                GenerateNoArgumentAttribute(dynamicProp, property, typeof(UserInputAttribute));
+        }
+
+        private void GenerateNoArgumentAttribute(DynamicProperty dynamicProp, CodeMemberProperty property, Type attributeType)
+        {
+            var attribute = new CodeAttributeDeclaration(new CodeTypeReference(attributeType));
+            property.CustomAttributes.Add(attribute);
+        }
+
+        private void GenerateProperyDataTypeAttribute(DynamicProperty dynamicProp, CodeMemberProperty property)
+        {
+            var attribute = new CodeAttributeDeclaration(new CodeTypeReference(typeof(PropertyNodeTypeAttribute)));
+            attribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeOfExpression(dynamicProp.ValueType)));
+            property.CustomAttributes.Add(attribute);
         }
 
         private CodeMemberProperty GeneratePrperty(DynamicProperty dynamicProp)

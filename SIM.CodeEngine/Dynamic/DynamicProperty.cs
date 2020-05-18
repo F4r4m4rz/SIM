@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace SIM.CodeEngine.Dynamic
 {
@@ -16,52 +17,55 @@ namespace SIM.CodeEngine.Dynamic
 
         }
 
-        public DynamicProperty(string nameSpace, string propertyName)
+        public DynamicProperty(string nameSpace, string propertyName, string valueType, bool isRequired, bool isUserInput)
         {
             try
             {
+                Namespace = nameSpace.ValidateNullOrWhitespace(nameof(nameSpace));
                 Name = propertyName.ValidateNullOrWhitespace(nameof(propertyName));
+                ValueType = DynamicPropertyType.GetPropertyType(valueType);
             }
             catch (ArgumentException ex)
             {
                 throw ex;
             }
+
+            IsRequired = isRequired;
+            IsUserInput = isUserInput;
         }
 
         public override Type DerivedFrom { get => typeof(PropertyRelation); }
 
+        [JsonProperty(Order = 5)]
+        public Type ValueType { get; set; }
+
         /// <summary>
         /// If the propery can be null
         /// </summary>
-        public bool IsNullable { get; set; }
+        [JsonProperty(Order = 6)]
+        public bool IsRequired { get; set; }
 
         /// <summary>
         /// Indicates whether the user should define the valu
         /// </summary>
+        [JsonProperty(Order = 7)]
         public bool IsUserInput { get; set; }
-
-        /// <summary>
-        /// The state on which the status shall be set
-        /// </summary>
-        public string RequiredOnState { get; set; }
 
         /// <summary>
         /// The command to be executed upon assignment
         /// </summary>
+        [JsonProperty(Order = 8)]
         public string AssignmentCommand { get; set; }
 
         /// <summary>
         /// Default value of the property upon intialization
         /// </summary>
+        [JsonProperty(Order = 9)]
         public object DefaultValue { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            // Propery cannot have RequiredOnState not null and IsNullable true
-            if (IsNullable && !RequiredOnState.Equals("CREATE", StringComparison.OrdinalIgnoreCase))
-                return new[] { new ValidationResult("Propery cannot be nullable and have requiredOnState Value other than 'CREATE' ") };
-
-            return new[] { ValidationResult.Success };
+            throw new NotImplementedException();
         }
     }
 }

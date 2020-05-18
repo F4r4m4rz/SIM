@@ -41,7 +41,7 @@ namespace SIM.CodeEngine.Commands
 
             JsonSerializer serializer = new JsonSerializer();
             StreamReader reader = new StreamReader($@"C:\Users\ofsfabo1\AppData\Roaming\SIM\Json\{nameSpace}.json");
-            Result = serializer.Deserialize(reader, typeof(IEnumerable<DynamicObject>));
+            Result = serializer.Deserialize(reader, typeof(IEnumerable<DynamicNode>));
             reader.Close();
         }
     }

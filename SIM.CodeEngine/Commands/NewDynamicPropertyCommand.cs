@@ -17,16 +17,22 @@ namespace SIM.CodeEngine.Commands
         private readonly ISimRepository repository;
         private readonly string nameSpace;
         private readonly string name;
+        private readonly string dataType;
+        private readonly bool isRequired;
+        private readonly bool isUserInput;
         private readonly string ownerObject;
 
         public object Result { get; private set; }
 
         public NewDynamicPropertyCommand(ISimRepository repository, string nameSpace, string name,
-                                         string dataType, string ownerObject)
+                                         string ownerObject, string dataType, bool isRequired, bool isUserInput)
         {
             this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
             this.nameSpace = nameSpace;
             this.name = name;
+            this.dataType = dataType;
+            this.isRequired = isRequired;
+            this.isUserInput = isUserInput;
             this.ownerObject = ownerObject;
         }
 
@@ -48,7 +54,7 @@ namespace SIM.CodeEngine.Commands
             if (!CanExecute())
                 throw new OperationCanceledException($"{GetType().Name} cannot be excuted");
 
-            (Result as DynamicNode).Properties.Add(new DynamicProperty(nameSpace, name)); 
+            (Result as DynamicNode).Properties.Add(new DynamicProperty(nameSpace, name, dataType, isRequired, isUserInput)); 
         }
     }
 }

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace SIM.Core.Objects
 {
     [SoloRelation(IsTargetSolo = true)]
-    public abstract class PropertyRelation : IGenericRelation<Node, ProperyNode>
+    public abstract class PropertyRelation : IGenericRelation<Node, PropertyNode>
     {
         public Node Origin { get; set; }
 
-        public ProperyNode Target { get; set; }
+        public PropertyNode Target { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

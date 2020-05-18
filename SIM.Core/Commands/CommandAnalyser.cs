@@ -24,7 +24,7 @@ namespace SIM.Core.Commands
         public bool GetRequiredArguments(out IDictionary<string, Type> arguments)
         {
             arguments = new Dictionary<string, Type>();
-            var com = commandManager.GetCommand(userInput);
+            var com = commandManager.GetCommand(userInput.Trim());
             var constructor = com.GetConstructors()
                 .Where(a=>a.IsPublic)
                 .FirstOrDefault();
@@ -47,7 +47,7 @@ namespace SIM.Core.Commands
 
         public object Execute(params object[] parameters)
         {
-            var comType = commandManager.GetCommand(userInput);
+            var comType = commandManager.GetCommand(userInput.Trim());
             var com = Activator.CreateInstance(comType, parameters) as ISimCommand;
             com.Execute();
             return com.Result;

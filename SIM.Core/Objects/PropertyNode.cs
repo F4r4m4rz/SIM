@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Objects
 {
-    public abstract class ProperyNode : ISimObject
+    public abstract class PropertyNode : ISimObject
     {
         protected object _value;
 
