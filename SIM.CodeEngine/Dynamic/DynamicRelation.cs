@@ -12,6 +12,11 @@ namespace SIM.CodeEngine.Dynamic
 {
     public class DynamicRelation : DynamicObject
     {
+        internal DynamicRelation()
+        {
+
+        }
+
         public DynamicRelation(string nameSpace, string name, string[] originTypes, string[] targetTypes)
             : base(nameSpace, name)
         {

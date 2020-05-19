@@ -10,7 +10,8 @@ using Newtonsoft.Json;
 
 namespace SIM.CodeEngine.Dynamic
 {
-    public class DynamicObject : ISimObject
+    [JsonConverter(typeof(DynamicObjectJsonConverter))]
+    public abstract class DynamicObject : ISimObject
     {
         protected DynamicObject()
         {

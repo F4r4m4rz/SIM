@@ -38,7 +38,9 @@ namespace SIM.CodeEngine.Commands
 
             JsonSerializer serializer = new JsonSerializer();
             TextWriter writer = new StreamWriter($@"C:\Users\ofsfabo1\AppData\Roaming\SIM\Json\{nameSpace}.json");
-            serializer.Serialize(writer, repository.GetAll());
+            JsonSerializerSettings settings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All };
+            var text = JsonConvert.SerializeObject(repository.GetAll(), settings);
+            writer.Write(text);
             writer.Close();
         }
     }

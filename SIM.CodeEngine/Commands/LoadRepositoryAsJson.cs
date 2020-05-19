@@ -11,6 +11,7 @@ using SIM.Core.Attributes;
 using SIM.Core.Objects;
 using System.Collections;
 using SIM.DataBase;
+using Newtonsoft.Json.Linq;
 
 namespace SIM.CodeEngine.Commands
 {
@@ -41,7 +42,8 @@ namespace SIM.CodeEngine.Commands
 
             JsonSerializer serializer = new JsonSerializer();
             StreamReader reader = new StreamReader($@"C:\Users\ofsfabo1\AppData\Roaming\SIM\Json\{nameSpace}.json");
-            Result = serializer.Deserialize(reader, typeof(IEnumerable<DynamicNode>));
+            JsonSerializerSettings settings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Objects };
+            Result = JsonConvert.DeserializeObject<IEnumerable<DynamicObject>>(reader.ReadToEnd());
             reader.Close();
         }
     }

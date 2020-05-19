@@ -10,6 +10,11 @@ namespace SIM.CodeEngine.Dynamic
 {
     public class DynamicNode : DynamicObject
     {
+        internal DynamicNode()
+        {
+
+        }
+
         public DynamicNode(string nameSpace, string name) : base(nameSpace, name)
         {
             Properties = new List<DynamicProperty>();
