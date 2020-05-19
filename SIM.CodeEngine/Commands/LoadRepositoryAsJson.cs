@@ -41,7 +41,9 @@ namespace SIM.CodeEngine.Commands
                 throw new OperationCanceledException($"{GetType().Name} cannot be excuted");
 
             JsonSerializer serializer = new JsonSerializer();
-            StreamReader reader = new StreamReader($@"C:\Users\ofsfabo1\AppData\Roaming\SIM\Json\{nameSpace}.json");
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                $@"SIM\Json\{nameSpace}.json");
+            StreamReader reader = new StreamReader(path);
             JsonSerializerSettings settings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Objects };
             Result = JsonConvert.DeserializeObject<IEnumerable<DynamicObject>>(reader.ReadToEnd());
             reader.Close();

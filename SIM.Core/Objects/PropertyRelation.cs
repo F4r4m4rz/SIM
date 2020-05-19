@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace SIM.Core.Objects
 {
     [SoloRelation(IsTargetSolo = true)]
-    public abstract class PropertyRelation : IGenericRelation<Node, PropertyNode>
+    public class PropertyRelation : IGenericRelation<Node, PropertyNode>
     {
         public Node Origin { get; set; }
 

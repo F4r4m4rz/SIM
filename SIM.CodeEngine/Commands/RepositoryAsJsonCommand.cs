@@ -37,7 +37,9 @@ namespace SIM.CodeEngine.Commands
                 throw new OperationCanceledException($"{GetType().Name} cannot be excuted");
 
             JsonSerializer serializer = new JsonSerializer();
-            TextWriter writer = new StreamWriter($@"C:\Users\ofsfabo1\AppData\Roaming\SIM\Json\{nameSpace}.json");
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), 
+                $@"SIM\Json\{nameSpace}.json");
+            TextWriter writer = new StreamWriter(path);
             JsonSerializerSettings settings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All };
             var text = JsonConvert.SerializeObject(repository.GetAll(), settings);
             writer.Write(text);
