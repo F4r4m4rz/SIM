@@ -12,14 +12,17 @@ namespace SIM.Shell
     {
         static void Main(string[] args)
         {
-            SIM.Aibel.JSB.ControlObject x = new Aibel.JSB.ControlObject();
-            x.PlannedReleaseDatee = new PropertyRelation()
-            {
-                Origin = x,
-                Target = new DateTimePropertyNode()
-            };
-            x.PlannedReleaseDatee.Target.SetValue(DateTime.Now);
+            var factory = new SimNodeFactory();
+            Test(factory);
+        }
 
+        static void Test(SimNodeFactory factory)
+        {
+            var x = factory.GetConstructionArguments<SIM.Aibel.JSB.SDI>();
+            var y = x.GetExpectedTypes();
+            x.AssignArgumentValues(new StringPropertyNode("Hello"));
+            var sdi = factory.New(x);
+            //var co = factory.New<SIM.Aibel.JSB.CO>();
         }
     }
 }

@@ -102,7 +102,11 @@ namespace SIM.CodeEngine.Assembly
             // For each parameter generate a CodeAttributeArgument and add to attribute
             for (int i = 0; i < parameters.Length; i++)
             {
-                attribute.Arguments.Add(new CodeAttributeArgument(new CodePrimitiveExpression(dynamicAtt.Value[i])));
+                if (parameters[i].ParameterType == typeof(string))
+                    attribute.Arguments.Add(new CodeAttributeArgument(new CodePrimitiveExpression(dynamicAtt.Value[i])));
+
+                if (parameters[i].ParameterType == typeof(Type))
+                    attribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeReferenceExpression(dynamicAtt.Value[i].ToString())));
             }
 
             return attribute;
@@ -156,7 +160,10 @@ namespace SIM.CodeEngine.Assembly
         private void GenerateProperyAttributes(DynamicProperty dynamicProp, CodeMemberProperty property)
         {
             // Data type attribute
-            GenerateProperyDataTypeAttribute(dynamicProp, property);
+            if (dynamicProp is DynamicIdentityProperty)
+                GenerateProperyDataTypeAttribute(dynamicProp, property, typeof(PropertyNodeTypeAttribute));
+            else
+                GenerateProperyDataTypeAttribute(dynamicProp, property, typeof(PropertyNodeTypeAttribute));
 
             // Reuired attribute
             if (dynamicProp.IsRequired)
@@ -173,10 +180,13 @@ namespace SIM.CodeEngine.Assembly
             property.CustomAttributes.Add(attribute);
         }
 
-        private void GenerateProperyDataTypeAttribute(DynamicProperty dynamicProp, CodeMemberProperty property)
+        private void GenerateProperyDataTypeAttribute(DynamicProperty dynamicProp, CodeMemberProperty property, Type attributeType)
         {
-            var attribute = new CodeAttributeDeclaration(new CodeTypeReference(typeof(PropertyNodeTypeAttribute)));
-            attribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeOfExpression(dynamicProp.ValueType)));
+            var attribute = new CodeAttributeDeclaration(new CodeTypeReference(attributeType));
+            if (dynamicProp is DynamicIdentityProperty)
+                attribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeOfExpression((dynamicProp as DynamicIdentityProperty).TargetNodeType)));
+            else
+                attribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeOfExpression(dynamicProp.ValueType)));
             property.CustomAttributes.Add(attribute);
         }
 

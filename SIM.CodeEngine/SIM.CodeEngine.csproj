@@ -52,6 +52,7 @@
     <Compile Include="Commands\NewDynamicPropertyCommand.cs" />
     <Compile Include="Commands\NewDynamicRelationCommand.cs" />
     <Compile Include="Commands\RepositoryAsJsonCommand.cs" />
+    <Compile Include="Dynamic\DynamicIdentityProperty.cs" />
     <Compile Include="Dynamic\DynamicNode.cs" />
     <Compile Include="Dynamic\DynamicObject.cs" />
     <Compile Include="Dynamic\DynamicObjectJsonConverter.cs" />

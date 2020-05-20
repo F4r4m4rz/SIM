@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Attributes\AdminCommandAttribute.cs" />
     <Compile Include="Attributes\CommandStringAttribute.cs" />
+    <Compile Include="Attributes\IdentityRelationTargetTypeAttribute.cs" />
     <Compile Include="Attributes\PropertyNodeTypeAttribute.cs" />
     <Compile Include="Attributes\RelationEndTypeAttribute.cs" />
     <Compile Include="Attributes\SoloRelationAttribute.cs" />
@@ -59,6 +60,8 @@
     <Compile Include="Objects\BooleanPropertyNode.cs" />
     <Compile Include="Objects\DateTimePropertyNode.cs" />
     <Compile Include="Objects\DoublePropertyNode.cs" />
+    <Compile Include="Objects\SimNodeConstructionArgument.cs" />
+    <Compile Include="Objects\SimNodeFactory.cs" />
     <Compile Include="Objects\IGenericRelation.cs" />
     <Compile Include="Objects\IntegerPropertyNode.cs" />
     <Compile Include="Objects\ISimObject.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Commands\CurrentTimeCommand.cs" />
     <Compile Include="Commands\PropertySetCommand.cs" />
     <Compile Include="Exceptions.cs" />
+    <Compile Include="Objects\NodeState.cs" />
     <Compile Include="Objects\StringPropertyNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

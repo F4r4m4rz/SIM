@@ -20,12 +20,14 @@ namespace SIM.CodeEngine.Commands
         private readonly string dataType;
         private readonly bool isRequired;
         private readonly bool isUserInput;
+        private readonly bool isIdentity;
         private readonly string ownerObject;
 
         public object Result { get; private set; }
 
         public NewDynamicPropertyCommand(ISimRepository repository, string nameSpace, string name,
-                                         string ownerObject, string dataType, bool isRequired, bool isUserInput)
+                                         string ownerObject, string dataType, bool isRequired,
+                                         bool isUserInput, bool isIdentity)
         {
             this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
             this.nameSpace = nameSpace;
@@ -33,18 +35,28 @@ namespace SIM.CodeEngine.Commands
             this.dataType = dataType;
             this.isRequired = isRequired;
             this.isUserInput = isUserInput;
+            this.isIdentity = isIdentity;
             this.ownerObject = ownerObject;
         }
 
         public bool CanExecute()
         {
             // Check if ownerObject exists in repository and put it in result
-            Result = repository.Get(a => (a as DynamicNode).Name == ownerObject) as DynamicNode;
+            Result = repository.Get(a => (a as DynamicNode)?.Name == ownerObject) as DynamicNode;
             if (Result == null) return false;
 
             // Check if ownerObject already has a property with this name
             if ((Result as DynamicNode).Properties.FirstOrDefault(a => a.Name == name) != null)
                 return false;
+
+            // Check if it is identity
+            if (isIdentity)
+            {
+                // valueType should be valid in current repos
+                var isValid = repository.Get(a => (a as DynamicNode)?.Name == dataType) != null;
+                if (!isValid)
+                    return false;
+            }
 
             return true;
         }
@@ -54,7 +66,12 @@ namespace SIM.CodeEngine.Commands
             if (!CanExecute())
                 throw new OperationCanceledException($"{GetType().Name} cannot be excuted");
 
-            (Result as DynamicNode).Properties.Add(new DynamicProperty(nameSpace, name, dataType, isRequired, isUserInput)); 
+            if (isIdentity)
+                (Result as DynamicNode).Properties
+                    .Add(new DynamicIdentityProperty(nameSpace, name, dataType));
+            else
+                (Result as DynamicNode).Properties
+                    .Add(new DynamicProperty(nameSpace, name, dataType, isRequired, isUserInput));
         }
     }
 }

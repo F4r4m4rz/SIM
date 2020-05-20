@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Objects
 {
-    public interface IGenericRelation<TOrigin, TTarget> : ISimObject where TOrigin : ISimObject where TTarget : ISimObject
+    public interface IGenericRelation<TOrigin, TTarget> : ISimObject where TOrigin : ISimObject 
+                                                                     where TTarget : ISimObject
     {
         TOrigin Origin { get; }
         TTarget Target { get; }
