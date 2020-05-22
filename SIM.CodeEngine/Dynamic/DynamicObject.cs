@@ -32,7 +32,6 @@ namespace SIM.CodeEngine.Dynamic
         }
 
         
-
         /// <summary>
         /// Namespace for the class which will be generated
         /// </summary>

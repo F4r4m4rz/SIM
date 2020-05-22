@@ -47,6 +47,10 @@ namespace SIM.CodeEngine.Commands
             JsonSerializerSettings settings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Objects };
             Result = JsonConvert.DeserializeObject<IEnumerable<DynamicObject>>(reader.ReadToEnd());
             reader.Close();
+            foreach (var item in Result as IEnumerable<DynamicObject>)
+            {
+                repository.Add(item);
+            }
         }
     }
 }

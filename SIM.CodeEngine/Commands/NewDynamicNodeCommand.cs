@@ -1,6 +1,7 @@
 ﻿using SIM.CodeEngine.Dynamic;
 using SIM.Core.Attributes;
 using SIM.Core.Commands;
+using SIM.Core.Objects;
 using SIM.DataBase;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,7 @@ namespace SIM.CodeEngine.Commands
                 throw new OperationCanceledException();
 
             Result = new DynamicNode(nameSpace, name);
+            repository.Add(Result as ISimObject);
         }
     }
 }

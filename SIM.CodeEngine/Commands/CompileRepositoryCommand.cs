@@ -12,7 +12,7 @@ namespace SIM.CodeEngine.Commands
 {
     [AdminCommand]
     [CommandString("compile current repos")]
-    class CompileRepositoryCommand : ISimCommand
+    public class CompileRepositoryCommand : ISimCommand
     {
         private readonly ISimRepository repository;
 

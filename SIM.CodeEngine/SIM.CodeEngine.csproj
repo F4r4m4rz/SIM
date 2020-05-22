@@ -59,6 +59,7 @@
     <Compile Include="Dynamic\DynamicProperty.cs" />
     <Compile Include="Dynamic\DynamicPropertyType.cs" />
     <Compile Include="Dynamic\DynamicRelation.cs" />
+    <Compile Include="Factory\SimDynamicFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

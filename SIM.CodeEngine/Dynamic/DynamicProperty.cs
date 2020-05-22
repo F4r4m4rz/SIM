@@ -12,7 +12,7 @@ namespace SIM.CodeEngine.Dynamic
 {
     public class DynamicProperty : DynamicObject
     {
-        public DynamicProperty()
+        internal DynamicProperty()
         {
 
         }

@@ -30,8 +30,7 @@ namespace SIM.Core.Objects
         {
             return ObjectType.GetProperties()
                 .Where(a => a.PropertyType == typeof(Relation) || 
-                           (a.CustomAttributes.Where(b => b.AttributeType == typeof(RequiredAttribute)).Count() != 0 &&
-                            a.CustomAttributes.Where(b => b.AttributeType == typeof(UserInputAttribute)).Count() != 0))
+                           (a.CustomAttributes.Where(b => b.AttributeType == typeof(RequiredAttribute)).Count() != 0 ))
                 .Select(a => a).ToArray();
         }
 

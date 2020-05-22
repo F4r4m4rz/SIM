@@ -20,7 +20,7 @@ namespace SIM.Shell
         {
             var x = factory.GetConstructionArguments<SIM.Aibel.JSB.SDI>();
             var y = x.GetExpectedTypes();
-            x.AssignArgumentValues(new StringPropertyNode("Hello"));
+            x.AssignArgumentValues(new StringPropertyNode("Hello"), new StringPropertyNode("Bye"), new SIM.Aibel.JSB.HasSection());
             var sdi = factory.New(x);
             //var co = factory.New<SIM.Aibel.JSB.CO>();
         }

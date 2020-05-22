@@ -23,7 +23,8 @@ namespace SIM.Core.Objects
 
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            throw new NotImplementedException();
+            // Check all required properites are in place
+            return new[] { new ValidationResult("Error") };
         }
     }
 }

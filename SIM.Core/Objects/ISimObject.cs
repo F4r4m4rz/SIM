@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Objects
 {
-    public interface ISimObject : IValidatableObject
+    public interface ISimObject : IValidatableObject/*, INotifyPropertyChanged, INotifyCollectionChanged, IDataErrorInfo, INotifyDataErrorInfo*/
     {
     }
 }
