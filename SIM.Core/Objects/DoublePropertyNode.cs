@@ -8,5 +8,9 @@ namespace SIM.Core.Objects
 {
     public class DoublePropertyNode : GenericPropertyNode<double>
     {
+        public DoublePropertyNode(double value) : base(value)
+        {
+
+        }
     }
 }

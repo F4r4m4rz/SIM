@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Objects
 {
-    public class DateTimePropertyNode : GenericPropertyNode<DateTime>
+    public interface INode : ISimObject
     {
-        public DateTimePropertyNode(DateTime dateTime) : base(dateTime)
-        {
-
-        }
     }
 }

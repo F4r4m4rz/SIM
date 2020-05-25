@@ -11,13 +11,13 @@ namespace SIM.Core.Attributes
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public class RelationEndTypeAttribute : Attribute
     {
-        public RelationEndTypeAttribute(string type, string node)
+        public RelationEndTypeAttribute(Type type, string node)
         {
             Type = type;
             Node = node;
         }
 
-        public string Type { get; }
+        public Type Type { get; }
         public string Node { get; }
     }
 }

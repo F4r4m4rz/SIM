@@ -8,9 +8,9 @@ namespace SIM.Core.Objects
 {
     public class StringPropertyNode : GenericPropertyNode<string>
     {
-        public StringPropertyNode(string value)
+        public StringPropertyNode(string value) : base(value)
         {
-            SetValue(value);
+
         }
     }
 }

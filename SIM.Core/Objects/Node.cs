@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Objects
 {
-    public abstract class Node : ISimObject
+    public abstract class Node : INode
     {
         protected Node()
         {
@@ -24,7 +24,7 @@ namespace SIM.Core.Objects
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             // Check all required properites are in place
-            return new[] { new ValidationResult("Error") };
+            return new[] { ValidationResult.Success };
         }
     }
 }

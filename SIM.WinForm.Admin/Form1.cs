@@ -3,6 +3,7 @@ using SIM.CodeEngine.Dynamic;
 using SIM.CodeEngine.Factory;
 using SIM.Core.Commands;
 using SIM.Core.Objects;
+using SIM.DataBase;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,14 +29,14 @@ namespace SIM.WinForm.Admin
             var paramaters = factory.GetConstructionArguments(typeof(DynamicNode));
             for (int i = 1; i < paramaters.Length + 1; i++)
             {
-                groupBox1.Controls.Add(new Label()
+                grbDetails.Controls.Add(new Label()
                 {
                     Location = new Point(5, 30 * i),
                     Text = paramaters[i - 1].Name,
-                    Size = new Size(paramaters[i - 1].Name.Length * 8, 15)
+                    Size = new Size(70, 15)
                 });
 
-                groupBox1.Controls.Add(new TextBox()
+                grbDetails.Controls.Add(new TextBox()
                 {
                     Location = new Point(80, 30 * i),
                     Name = paramaters[i - 1].Name
@@ -48,17 +49,17 @@ namespace SIM.WinForm.Admin
                 Location = new Point(5, (paramaters.Length + 1) * 30)
             };
             
-            groupBox1.Controls.Add(applyBtn);
+            grbDetails.Controls.Add(applyBtn);
             applyBtn.Click += ApplyBtn_Click;
         }
 
         private void ApplyBtn_Click(object sender, EventArgs e)
         {
-            var arguments = groupBox1.Controls.OfType<TextBox>().Select(c => c.Text);
+            var arguments = grbDetails.Controls.OfType<TextBox>().Select(c => c.Text);
             var com = new NewDynamicNodeCommand(new AdminRepository(), arguments.ElementAt(0), arguments.ElementAt(1));
             com.Execute();
             UpdateNodes();
-            groupBox1.Controls.Clear();
+            grbDetails.Controls.Clear();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -69,33 +70,48 @@ namespace SIM.WinForm.Admin
 
         private void UpdateNodes()
         {
+            lstNodes.DataSource = null;
             lstNodes.DataSource = (new AdminRepository()).Nodes;
             lstNodes.DisplayMember = "Name";
         }
 
         private void UpdateRelations()
         {
+            lstRelations.DataSource = null;
             lstRelations.DataSource = (new AdminRepository()).Relations;
             lstRelations.DisplayMember = "Name";
         }
 
         private void UpdateProperties(DynamicNode dynamicNode)
         {
+            lstProperties.DataSource = null;
             lstProperties.DataSource = dynamicNode.Properties;
             lstProperties.DisplayMember = "Name";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var com = new LoadRepositoryAsJson(new AdminRepository(), "SIM.Aibel.JSB");
+            if ((new AdminRepository()).GetAll() != null)
+                ClearAll();
+
+            var ns = lblNamespace.Text.Trim();
+            var com = new LoadRepositoryAsJson(new AdminRepository(), ns);
             com.Execute();
             UpdateNodes();
             UpdateRelations();
         }
 
+        private void ClearAll()
+        {
+            lstNodes.DataSource = null;
+            lstRelations.DataSource = null;
+            lstProperties.DataSource = null;
+        }
+
         private void btnSaveAsJson_Click(object sender, EventArgs e)
         {
-            var com = new RepositoryAsJsonCommand(new AdminRepository(), "SIM.Aibel.JSB");
+            var ns = lblNamespace.Text.Trim();
+            var com = new RepositoryAsJsonCommand(new AdminRepository(), ns);
             com.Execute();
         }
 
@@ -105,17 +121,19 @@ namespace SIM.WinForm.Admin
             var paramaters = factory.GetConstructionArguments(typeof(DynamicRelation));
             for (int i = 1; i < paramaters.Length + 1; i++)
             {
-                groupBox1.Controls.Add(new Label()
+                grbDetails.Controls.Add(new Label()
                 {
                     Location = new Point(5, 30 * i),
                     Text = paramaters[i - 1].Name,
-                    Size = new Size(paramaters[i - 1].Name.Length * 8, 15)
+                    Size = new Size(70 , 15),
+                    BackColor = Color.Aqua
                 });
 
-                groupBox1.Controls.Add(new TextBox()
+                grbDetails.Controls.Add(new TextBox()
                 {
                     Location = new Point(80, 30 * i),
-                    Name = paramaters[i - 1].Name
+                    Name = paramaters[i - 1].Name,
+                    Text = paramaters[i - 1].Name == "nameSpace" ? lblNamespace.Text : string.Empty
                 });
             }
 
@@ -125,18 +143,18 @@ namespace SIM.WinForm.Admin
                 Location = new Point(5, (paramaters.Length + 1) * 30)
             };
 
-            groupBox1.Controls.Add(applyBtn);
+            grbDetails.Controls.Add(applyBtn);
             applyBtn.Click += ApplyBtn2_Click;
         }
 
         private void ApplyBtn2_Click(object sender, EventArgs e)
         {
-            var arguments = groupBox1.Controls.OfType<TextBox>().Select(c => c.Text);
+            var arguments = grbDetails.Controls.OfType<TextBox>().Select(c => c.Text);
             var com = new NewDynamicRelationCommand(new AdminRepository(), 
                 arguments.ElementAt(0), arguments.ElementAt(1), arguments.ElementAt(2).Split(' '), arguments.ElementAt(3).Split(' '));
             com.Execute();
             UpdateRelations();
-            groupBox1.Controls.Clear();
+            grbDetails.Controls.Clear();
         }
 
         private void lstNodes_SelectedIndexChanged(object sender, EventArgs e)
@@ -148,22 +166,39 @@ namespace SIM.WinForm.Admin
 
         private void btnAddProperty_Click(object sender, EventArgs e)
         {
-            var factory = new SimDynamicFactory();
-            var paramaters = factory.GetConstructionArguments(typeof(DynamicProperty));
+            //var factory = new SimDynamicFactory();
+            //var paramaters = factory.GetConstructionArguments(typeof(DynamicProperty));
+            var paramaters = typeof(NewDynamicPropertyCommand).GetConstructors().FirstOrDefault().GetParameters();
             for (int i = 1; i < paramaters.Length + 1; i++)
             {
-                groupBox1.Controls.Add(new Label()
+                if (paramaters[i - 1].ParameterType == typeof(ISimRepository) || 
+                    paramaters[i - 1].ParameterType.GetInterfaces().Contains(typeof(ISimRepository))) continue; 
+
+                grbDetails.Controls.Add(new Label()
                 {
                     Location = new Point(5, 30 * i),
                     Text = paramaters[i - 1].Name,
-                    Size = new Size(paramaters[i - 1].Name.Length * 8, 15)
+                    Size = new Size(70, 15)
                 });
 
-                groupBox1.Controls.Add(new TextBox()
+                if (paramaters[i - 1].ParameterType == typeof(string))
                 {
-                    Location = new Point(80, 30 * i),
-                    Name = paramaters[i - 1].Name
-                });
+                    grbDetails.Controls.Add(new TextBox()
+                    {
+                        Location = new Point(80, 30 * i),
+                        Name = paramaters[i - 1].Name,
+                        Text = paramaters[i - 1].Name == "nameSpace" ? lblNamespace.Text :
+                               paramaters[i - 1].Name == "ownerObject"? (lstNodes.SelectedItem as DynamicNode).Name : string.Empty
+                    });
+                }
+                else if (paramaters[i - 1].ParameterType == typeof(bool))
+                {
+                    grbDetails.Controls.Add(new CheckBox()
+                    {
+                        Location = new Point(80, 30 * i),
+                        Name = paramaters[i - 1].Name
+                    });
+                }
             }
 
             var applyBtn = new Button()
@@ -172,8 +207,19 @@ namespace SIM.WinForm.Admin
                 Location = new Point(5, (paramaters.Length + 1) * 30)
             };
 
-            groupBox1.Controls.Add(applyBtn);
-            applyBtn.Click += ApplyBtn2_Click;
+            grbDetails.Controls.Add(applyBtn);
+            applyBtn.Click += ApplyBtn3_Click;
+        }
+
+        private void ApplyBtn3_Click(object sender, EventArgs e)
+        {
+            var arguments = grbDetails.Controls.OfType<TextBox>().Select(c => c.Text);
+            var boolArgs = grbDetails.Controls.OfType<CheckBox>().Select(c => c.Checked);
+            var com = new NewDynamicPropertyCommand(new AdminRepository(),
+                arguments.ElementAt(0), arguments.ElementAt(1), arguments.ElementAt(2), arguments.ElementAt(3), boolArgs.ElementAt(0), boolArgs.ElementAt(1), boolArgs.ElementAt(2));
+            com.Execute();
+            UpdateProperties(lstNodes.SelectedItem as DynamicNode);
+            grbDetails.Controls.Clear();
         }
 
         private void btnCsCode_Click(object sender, EventArgs e)
@@ -186,6 +232,33 @@ namespace SIM.WinForm.Admin
         {
             var com = new CompileRepositoryCommand(new AdminRepository());
             com.Execute();
+        }
+
+        private void btnRemoveNode_Click(object sender, EventArgs e)
+        {
+            RemoveSelected(lstNodes);
+            UpdateNodes();
+        }
+
+        private void RemoveSelected(ListBox listBox)
+        {
+            var item = listBox.SelectedItem;
+            var repos = new AdminRepository();
+            repos.Remove(item as ISimObject);
+        }
+
+        private void btnRemoveRelation_Click(object sender, EventArgs e)
+        {
+            RemoveSelected(lstRelations);
+            UpdateRelations();
+        }
+
+        private void btnRemoveProperty_Click(object sender, EventArgs e)
+        {
+            var repos = new AdminRepository();
+            var node = repos.Get(c => c is DynamicNode && (c as DynamicNode).Name == (lstNodes.SelectedItem as DynamicNode).Name) as DynamicNode;
+            node.Properties.Remove(lstProperties.SelectedItem as DynamicProperty);
+            UpdateProperties(lstNodes.SelectedItem as DynamicNode);
         }
     }
 }

@@ -106,7 +106,7 @@ namespace SIM.CodeEngine.Assembly
                     attribute.Arguments.Add(new CodeAttributeArgument(new CodePrimitiveExpression(dynamicAtt.Value[i])));
 
                 if (parameters[i].ParameterType == typeof(Type))
-                    attribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeReferenceExpression(dynamicAtt.Value[i].ToString())));
+                    attribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeOfExpression(dynamicAtt.Value[i].ToString())));
             }
 
             return attribute;

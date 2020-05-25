@@ -21,7 +21,7 @@ namespace SIM.Core.Objects
         {
             for (int i = 0; i < Arguments.Length; i++)
             {
-                ArgumentValues[i].Origin = obj;
+                ArgumentValues[i].GetType().GetProperty("Origin").SetValue(ArgumentValues[i], obj);
                 Arguments[i].SetValue(obj, ArgumentValues[i]);
             }
         }
@@ -34,14 +34,14 @@ namespace SIM.Core.Objects
                 .Select(a => a).ToArray();
         }
 
-        public void AssignArgumentValues(params PropertyNode[] values)
+        public void AssignArgumentValues(params INode[] values)
         {
             // Check if size of passed in values are the same as excpected
             if (Arguments.Length != values.Length)
                 throw new ArgumentException($"Not enough data provided to construct an instance of {ObjectType}");
 
             // Loop through and assign
-            ArgumentValues = new PropertyRelation[Arguments.Length];
+            ArgumentValues = new IRelation[Arguments.Length];
             for (int i = 0; i < ArgumentValues.Length; i++)
             {
                 ValidateAndAssignValue(i, values[i]);
@@ -53,20 +53,63 @@ namespace SIM.Core.Objects
             return Arguments.Select(c => c.GetCustomAttribute<PropertyNodeTypeAttribute>().AllowedType);
         }
 
-        private void ValidateAndAssignValue(int i, PropertyNode v)
+        private void ValidateAndAssignValue(int i, INode v)
+        {
+            ValidateValue(i, v);
+
+            if (v is PropertyNode)
+                AssignValue(i, v as PropertyNode);
+
+            else
+                AssignValue(i, v as Node);
+        }
+
+        private void AssignValue(int i, Node node)
+        {
+            // Find proper relation
+            Type relationType = GetProperRelation(node);
+
+            var relation = (Activator.CreateInstance(relationType) as Relation);
+            relation.Origin = Object;
+            relation.Target = node;
+            ArgumentValues[i] = relation;
+        }
+
+        private Type GetProperRelation(Node node)
+        {
+            // Get Assemblies
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(a => a.FullName.Contains("SIM."))
+                .Except(new Assembly[] { Assembly.GetAssembly(GetType()) });
+
+            // Get context assembly
+            var contextAssembly = assemblies
+                .Where(a => a.GetTypes().Where(b => b.GetInterface(nameof(ISimObject)) != null).Count() != 0)
+                .FirstOrDefault();
+
+            // Get Relation types
+            return contextAssembly.GetTypes()
+                .Where(a => a.GetCustomAttributes<RelationEndTypeAttribute>().Where(b => b.Node == "Target" && b.Type == node.GetType()).Count() != 0)
+                .FirstOrDefault();
+        }
+
+        private void AssignValue(int i, PropertyNode propertyNode)
+        {
+            ArgumentValues[i] = new PropertyRelation() { Target = propertyNode };
+        }
+
+        private void ValidateValue(int i, INode v)
         {
             // Check the type
             var expextedType = Arguments[i].GetCustomAttribute<PropertyNodeTypeAttribute>().AllowedType;
             if (v.GetType() != expextedType)
                 throw new ArgumentException($"Provided value of type {v.GetType()} " +
                     $"not expected.\nExpected {expextedType}");
-
-            ArgumentValues[i] = new PropertyRelation() { Target = v };
         }
 
         public Node Object { get; }
         public Type ObjectType { get; }
         public PropertyInfo[] Arguments { get; }
-        public PropertyRelation[] ArgumentValues { get; private set; }
+        public IRelation[] ArgumentValues { get; private set; }
     }
 }

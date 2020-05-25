@@ -35,7 +35,7 @@ namespace SIM.Core.Commands
                 throw new OperationCanceledException($"Cannot set value on {node}\nRequested value is {value}",
                                                  new CancellationToken(true));
 
-            node.SetValue(value);
+            //node.SetValue(value);
             Result = "Success";
         }
     }

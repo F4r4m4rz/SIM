@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Objects
 {
-    public abstract class PropertyNode : ISimObject
+    public abstract class PropertyNode : INode
     {
         protected object _value;
 
-        public virtual void SetValue(object value)
+        protected internal PropertyNode(object value)
         {
             _value = value;
         }

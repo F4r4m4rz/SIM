@@ -8,5 +8,9 @@ namespace SIM.Core.Objects
 {
     public class IntegerPropertyNode : GenericPropertyNode<int>
     {
+        public IntegerPropertyNode(int value) : base(value)
+        {
+
+        }
     }
 }

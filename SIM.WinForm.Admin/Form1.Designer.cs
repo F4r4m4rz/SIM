@@ -36,12 +36,17 @@
             this.lstRelations = new System.Windows.Forms.ListBox();
             this.btnAddRelation = new System.Windows.Forms.Button();
             this.lblRelations = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grbDetails = new System.Windows.Forms.GroupBox();
             this.lstProperties = new System.Windows.Forms.ListBox();
             this.btnAddProperty = new System.Windows.Forms.Button();
             this.lblProperties = new System.Windows.Forms.Label();
             this.btnCsCode = new System.Windows.Forms.Button();
             this.btnCompile = new System.Windows.Forms.Button();
+            this.btnRemoveNode = new System.Windows.Forms.Button();
+            this.btnRemoveRelation = new System.Windows.Forms.Button();
+            this.btnRemoveProperty = new System.Windows.Forms.Button();
+            this.lblNamespace = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Nodes
@@ -76,9 +81,9 @@
             // btnLoadFromJson
             // 
             this.btnLoadFromJson.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLoadFromJson.Location = new System.Drawing.Point(12, 0);
+            this.btnLoadFromJson.Location = new System.Drawing.Point(270, 0);
             this.btnLoadFromJson.Name = "btnLoadFromJson";
-            this.btnLoadFromJson.Size = new System.Drawing.Size(727, 23);
+            this.btnLoadFromJson.Size = new System.Drawing.Size(469, 23);
             this.btnLoadFromJson.TabIndex = 4;
             this.btnLoadFromJson.Text = "Load from JSON";
             this.btnLoadFromJson.UseVisualStyleBackColor = true;
@@ -123,26 +128,26 @@
             this.lblRelations.TabIndex = 6;
             this.lblRelations.Text = "Relations";
             // 
-            // groupBox1
+            // grbDetails
             // 
-            this.groupBox1.Location = new System.Drawing.Point(526, 87);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(212, 223);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.grbDetails.Location = new System.Drawing.Point(526, 205);
+            this.grbDetails.Name = "grbDetails";
+            this.grbDetails.Size = new System.Drawing.Size(212, 344);
+            this.grbDetails.TabIndex = 9;
+            this.grbDetails.TabStop = false;
+            this.grbDetails.Text = "Details";
             // 
             // lstProperties
             // 
             this.lstProperties.FormattingEnabled = true;
-            this.lstProperties.Location = new System.Drawing.Point(526, 368);
+            this.lstProperties.Location = new System.Drawing.Point(526, 78);
             this.lstProperties.Name = "lstProperties";
-            this.lstProperties.Size = new System.Drawing.Size(212, 186);
+            this.lstProperties.Size = new System.Drawing.Size(212, 121);
             this.lstProperties.TabIndex = 10;
             // 
             // btnAddProperty
             // 
-            this.btnAddProperty.Location = new System.Drawing.Point(526, 336);
+            this.btnAddProperty.Location = new System.Drawing.Point(526, 49);
             this.btnAddProperty.Name = "btnAddProperty";
             this.btnAddProperty.Size = new System.Drawing.Size(75, 23);
             this.btnAddProperty.TabIndex = 12;
@@ -154,7 +159,7 @@
             // 
             this.lblProperties.AutoSize = true;
             this.lblProperties.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProperties.Location = new System.Drawing.Point(522, 313);
+            this.lblProperties.Location = new System.Drawing.Point(522, 26);
             this.lblProperties.Name = "lblProperties";
             this.lblProperties.Size = new System.Drawing.Size(91, 20);
             this.lblProperties.TabIndex = 11;
@@ -182,17 +187,68 @@
             this.btnCompile.UseVisualStyleBackColor = true;
             this.btnCompile.Click += new System.EventHandler(this.btnCompile_Click);
             // 
+            // btnRemoveNode
+            // 
+            this.btnRemoveNode.Location = new System.Drawing.Point(104, 49);
+            this.btnRemoveNode.Name = "btnRemoveNode";
+            this.btnRemoveNode.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveNode.TabIndex = 15;
+            this.btnRemoveNode.Text = "Remove";
+            this.btnRemoveNode.UseVisualStyleBackColor = true;
+            this.btnRemoveNode.Click += new System.EventHandler(this.btnRemoveNode_Click);
+            // 
+            // btnRemoveRelation
+            // 
+            this.btnRemoveRelation.Location = new System.Drawing.Point(361, 49);
+            this.btnRemoveRelation.Name = "btnRemoveRelation";
+            this.btnRemoveRelation.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveRelation.TabIndex = 16;
+            this.btnRemoveRelation.Text = "Remove";
+            this.btnRemoveRelation.UseVisualStyleBackColor = true;
+            this.btnRemoveRelation.Click += new System.EventHandler(this.btnRemoveRelation_Click);
+            // 
+            // btnRemoveProperty
+            // 
+            this.btnRemoveProperty.Location = new System.Drawing.Point(619, 49);
+            this.btnRemoveProperty.Name = "btnRemoveProperty";
+            this.btnRemoveProperty.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveProperty.TabIndex = 17;
+            this.btnRemoveProperty.Text = "Remove";
+            this.btnRemoveProperty.UseVisualStyleBackColor = true;
+            this.btnRemoveProperty.Click += new System.EventHandler(this.btnRemoveProperty_Click);
+            // 
+            // lblNamespace
+            // 
+            this.lblNamespace.Location = new System.Drawing.Point(110, 2);
+            this.lblNamespace.Name = "lblNamespace";
+            this.lblNamespace.Size = new System.Drawing.Size(140, 20);
+            this.lblNamespace.TabIndex = 18;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 13);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Default Namespace";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(750, 652);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblNamespace);
+            this.Controls.Add(this.btnRemoveProperty);
+            this.Controls.Add(this.btnRemoveRelation);
+            this.Controls.Add(this.btnRemoveNode);
             this.Controls.Add(this.btnCompile);
             this.Controls.Add(this.btnCsCode);
             this.Controls.Add(this.btnAddProperty);
             this.Controls.Add(this.lblProperties);
             this.Controls.Add(this.lstProperties);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grbDetails);
             this.Controls.Add(this.lstRelations);
             this.Controls.Add(this.btnAddRelation);
             this.Controls.Add(this.lblRelations);
@@ -218,12 +274,17 @@
         private System.Windows.Forms.ListBox lstRelations;
         private System.Windows.Forms.Button btnAddRelation;
         private System.Windows.Forms.Label lblRelations;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grbDetails;
         private System.Windows.Forms.ListBox lstProperties;
         private System.Windows.Forms.Button btnAddProperty;
         private System.Windows.Forms.Label lblProperties;
         private System.Windows.Forms.Button btnCsCode;
         private System.Windows.Forms.Button btnCompile;
+        private System.Windows.Forms.Button btnRemoveNode;
+        private System.Windows.Forms.Button btnRemoveRelation;
+        private System.Windows.Forms.Button btnRemoveProperty;
+        private System.Windows.Forms.TextBox lblNamespace;
+        private System.Windows.Forms.Label label1;
     }
 }
 

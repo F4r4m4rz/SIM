@@ -8,9 +8,9 @@ namespace SIM.Core.Objects
 {
     public class BooleanPropertyNode : GenericPropertyNode<bool>
     {
-        public BooleanPropertyNode(bool value)
+        public BooleanPropertyNode(bool value) : base(value)
         {
-            SetValue(value);
+
         }
     }
 }

@@ -60,6 +60,8 @@
     <Compile Include="Objects\BooleanPropertyNode.cs" />
     <Compile Include="Objects\DateTimePropertyNode.cs" />
     <Compile Include="Objects\DoublePropertyNode.cs" />
+    <Compile Include="Objects\INode.cs" />
+    <Compile Include="Objects\IRelation.cs" />
     <Compile Include="Objects\SimNodeConstructionArgument.cs" />
     <Compile Include="Objects\SimNodeFactory.cs" />
     <Compile Include="Objects\IGenericRelation.cs" />

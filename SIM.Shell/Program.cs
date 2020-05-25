@@ -3,6 +3,7 @@ using SIM.Core.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,8 +21,9 @@ namespace SIM.Shell
         {
             var x = factory.GetConstructionArguments<SIM.Aibel.JSB.SDI>();
             var y = x.GetExpectedTypes();
-            x.AssignArgumentValues(new StringPropertyNode("Hello"), new StringPropertyNode("Bye"), new SIM.Aibel.JSB.HasSection());
+            x.AssignArgumentValues(new StringPropertyNode("Hello"), new StringPropertyNode("Bye"), new SIM.Aibel.JSB.Section());
             var sdi = factory.New(x);
+            sdi.
             //var co = factory.New<SIM.Aibel.JSB.CO>();
         }
     }

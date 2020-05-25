@@ -9,6 +9,11 @@ namespace SIM.Core.Objects
 {
     public abstract class GenericPropertyNode<T> : PropertyNode
     {
+        protected GenericPropertyNode(T value) : base(value)
+        {
+
+        }
+
         public T Value => (T)_value;
     }
 }
