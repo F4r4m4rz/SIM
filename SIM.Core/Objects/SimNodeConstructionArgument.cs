@@ -29,8 +29,7 @@ namespace SIM.Core.Objects
         private PropertyInfo[] GetConstructionArguments()
         {
             return ObjectType.GetProperties()
-                .Where(a => a.PropertyType == typeof(Relation) || 
-                           (a.CustomAttributes.Where(b => b.AttributeType == typeof(RequiredAttribute)).Count() != 0 ))
+                .Where(a => a.CustomAttributes.Where(b => b.AttributeType == typeof(RequiredAttribute)).Count() != 0 )
                 .Select(a => a).ToArray();
         }
 

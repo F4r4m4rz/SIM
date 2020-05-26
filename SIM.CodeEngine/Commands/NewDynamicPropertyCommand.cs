@@ -20,14 +20,14 @@ namespace SIM.CodeEngine.Commands
         private readonly string dataType;
         private readonly bool isRequired;
         private readonly bool isUserInput;
-        private readonly bool isIdentity;
+        private readonly bool isNodeProperty;
         private readonly string ownerObject;
 
         public object Result { get; private set; }
 
         public NewDynamicPropertyCommand(ISimRepository repository, string nameSpace, string name,
                                          string ownerObject, string dataType, bool isRequired,
-                                         bool isUserInput, bool isIdentity)
+                                         bool isUserInput, bool isNodeProperty)
         {
             this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
             this.nameSpace = nameSpace;
@@ -35,7 +35,7 @@ namespace SIM.CodeEngine.Commands
             this.dataType = dataType;
             this.isRequired = isRequired;
             this.isUserInput = isUserInput;
-            this.isIdentity = isIdentity;
+            this.isNodeProperty = isNodeProperty;
             this.ownerObject = ownerObject;
         }
 
@@ -50,7 +50,7 @@ namespace SIM.CodeEngine.Commands
                 return false;
 
             // Check if it is identity
-            if (isIdentity)
+            if (isNodeProperty)
             {
                 // valueType should be valid in current repos
                 var isValid = repository.Get(a => (a as DynamicNode)?.Name == dataType) != null;
@@ -66,9 +66,9 @@ namespace SIM.CodeEngine.Commands
             if (!CanExecute())
                 throw new OperationCanceledException($"{GetType().Name} cannot be excuted");
 
-            if (isIdentity)
+            if (isNodeProperty)
                 (Result as DynamicNode).Properties
-                    .Add(new DynamicIdentityProperty(nameSpace, name, dataType));
+                    .Add(new DynamicRelationProperty(nameSpace, name, dataType, isRequired, isUserInput));
             else
                 (Result as DynamicNode).Properties
                     .Add(new DynamicProperty(nameSpace, name, dataType, isRequired, isUserInput));

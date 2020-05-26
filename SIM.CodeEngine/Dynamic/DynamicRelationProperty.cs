@@ -9,27 +9,30 @@ using System.Threading.Tasks;
 
 namespace SIM.CodeEngine.Dynamic
 {
-    public class DynamicIdentityProperty : DynamicProperty
+    public class DynamicRelationProperty : DynamicProperty
     {
-        public DynamicIdentityProperty()
+        public DynamicRelationProperty()
         {
 
         }
 
-        public DynamicIdentityProperty(string nameSpace, string propertyName, string targetNodeType)
+        public DynamicRelationProperty(string nameSpace, string propertyName, string targetNodeType, bool isRequired, bool isUserInput)
         {
             try
             {
                 Namespace = nameSpace.ValidateNullOrWhitespace(nameof(nameSpace));
                 Name = propertyName.ValidateNullOrWhitespace(nameof(propertyName));
                 TargetNodeType = targetNodeType.ValidateNullOrWhitespace(nameof(targetNodeType));
-                Attributes.Add(new KeyValuePair<Type, object[]>(typeof(IdentityRelationTargetTypeAttribute),
+                Attributes.Add(new KeyValuePair<Type, object[]>(typeof(PropertyRelationTargetTypeAttribute),
                     new object[] { targetNodeType }));
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+
+            IsRequired = isRequired;
+            IsUserInput = isUserInput;
         }
 
         public override Type DerivedFrom => typeof(Relation);

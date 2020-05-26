@@ -23,7 +23,10 @@ namespace SIM.Shell
             var y = x.GetExpectedTypes();
             x.AssignArgumentValues(new StringPropertyNode("Hello"), new StringPropertyNode("Bye"), new SIM.Aibel.JSB.Section());
             var sdi = factory.New(x);
-            sdi.
+
+            // Making a relation
+            var rel = factory.GetConstructionArguments<SIM.Aibel.JSB.HasCO>();
+
             //var co = factory.New<SIM.Aibel.JSB.CO>();
         }
     }

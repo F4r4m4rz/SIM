@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="Attributes\AdminCommandAttribute.cs" />
     <Compile Include="Attributes\CommandStringAttribute.cs" />
-    <Compile Include="Attributes\IdentityRelationTargetTypeAttribute.cs" />
+    <Compile Include="Attributes\PropertyRelationTargetTypeAttribute.cs" />
     <Compile Include="Attributes\PropertyNodeTypeAttribute.cs" />
     <Compile Include="Attributes\RelationEndTypeAttribute.cs" />
     <Compile Include="Attributes\SoloRelationAttribute.cs" />

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace SIM.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class IdentityRelationTargetTypeAttribute : Attribute
+    public class PropertyRelationTargetTypeAttribute : Attribute
     {
-        public IdentityRelationTargetTypeAttribute(Type targetType)
+        public PropertyRelationTargetTypeAttribute(Type targetType)
         {
             TargetType = targetType ?? throw new ArgumentNullException(nameof(targetType));
         }

@@ -152,16 +152,16 @@ namespace SIM.CodeEngine.Assembly
                 @class.Members.Add(field);
 
                 var property = GeneratePrperty(dynamicProp);
-                GenerateProperyAttributes(dynamicProp, property);
+                GeneratePropertyAttributes(dynamicProp, property);
                 @class.Members.Add(property);
             }
         }
 
-        private void GenerateProperyAttributes(DynamicProperty dynamicProp, CodeMemberProperty property)
+        private void GeneratePropertyAttributes(DynamicProperty dynamicProp, CodeMemberProperty property)
         {
             // Data type attribute
-            if (dynamicProp is DynamicIdentityProperty)
-                GenerateProperyDataTypeAttribute(dynamicProp, property, typeof(PropertyNodeTypeAttribute));
+            if (dynamicProp is DynamicRelationProperty)
+                GenerateProperyDataTypeAttribute(dynamicProp, property, typeof(PropertyRelationTargetTypeAttribute));
             else
                 GenerateProperyDataTypeAttribute(dynamicProp, property, typeof(PropertyNodeTypeAttribute));
 
@@ -183,8 +183,8 @@ namespace SIM.CodeEngine.Assembly
         private void GenerateProperyDataTypeAttribute(DynamicProperty dynamicProp, CodeMemberProperty property, Type attributeType)
         {
             var attribute = new CodeAttributeDeclaration(new CodeTypeReference(attributeType));
-            if (dynamicProp is DynamicIdentityProperty)
-                attribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeOfExpression((dynamicProp as DynamicIdentityProperty).TargetNodeType)));
+            if (dynamicProp is DynamicRelationProperty)
+                attribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeOfExpression((dynamicProp as DynamicRelationProperty).TargetNodeType)));
             else
                 attribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeOfExpression(dynamicProp.ValueType)));
             property.CustomAttributes.Add(attribute);
