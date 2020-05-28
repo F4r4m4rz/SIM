@@ -1,4 +1,5 @@
 ﻿using SIM.Core.Attributes;
+using SIM.Core.Objects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SIM.Core.Objects
+namespace SIM.Core.Factory
 {
     public class SimNodeConstructionArgument<T> : ISimNodeConstructionArgument where T : Node, new()
     {

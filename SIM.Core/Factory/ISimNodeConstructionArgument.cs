@@ -1,8 +1,9 @@
-﻿using System;
+﻿using SIM.Core.Objects;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace SIM.Core.Objects
+namespace SIM.Core.Factory
 {
     public interface ISimNodeConstructionArgument
     {
