@@ -26,7 +26,7 @@ namespace SIM.Core.Objects
 
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            throw new NotImplementedException();
+            return new ValidationResult[] { ValidationResult.Success };
         }
     }
 }

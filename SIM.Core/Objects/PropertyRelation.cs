@@ -17,7 +17,12 @@ namespace SIM.Core.Objects
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            throw new NotImplementedException();
+            // Check PropertyNodeTypeAttribute
+            var attribute = validationContext.ObjectInstance as PropertyNodeTypeAttribute;
+            if (attribute != null && Target.GetType() != attribute.AllowedType)
+                return new ValidationResult[] { new ValidationResult("Type mismatch") };
+
+            return new ValidationResult[] { ValidationResult.Success };
         }
     }
 }

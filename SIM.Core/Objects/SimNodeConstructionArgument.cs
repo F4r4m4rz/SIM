@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Objects
 {
-    public class SimNodeConstructionArgument<T> where T : Node, new()
+    public class SimNodeConstructionArgument<T> : ISimNodeConstructionArgument where T : Node, new()
     {
         public SimNodeConstructionArgument()
         {
@@ -17,7 +17,7 @@ namespace SIM.Core.Objects
             Arguments = GetConstructionArguments();
         }
 
-        internal void Populate(T obj)
+        public void Populate(T obj)
         {
             for (int i = 0; i < Arguments.Length; i++)
             {
@@ -26,7 +26,7 @@ namespace SIM.Core.Objects
             }
         }
 
-        private PropertyInfo[] GetConstructionArguments()
+        public PropertyInfo[] GetConstructionArguments()
         {
             return ObjectType.GetProperties()
                 .Where(a => a.CustomAttributes.Where(b => b.AttributeType == typeof(RequiredAttribute)).Count() != 0 )
@@ -100,7 +100,8 @@ namespace SIM.Core.Objects
         private void ValidateValue(int i, INode v)
         {
             // Check the type
-            var expextedType = Arguments[i].GetCustomAttribute<PropertyNodeTypeAttribute>().AllowedType;
+            var expextedType = v is PropertyNode ? Arguments[i].GetCustomAttribute<PropertyNodeTypeAttribute>().AllowedType :
+                Arguments[i].GetCustomAttribute<PropertyRelationTargetTypeAttribute>().TargetType;
             if (v.GetType() != expextedType)
                 throw new ArgumentException($"Provided value of type {v.GetType()} " +
                     $"not expected.\nExpected {expextedType}");

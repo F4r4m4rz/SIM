@@ -17,9 +17,23 @@ namespace SIM.Core.Objects
             return obj;
         }
 
+        public virtual Node New(ISimNodeConstructionArgument constructionArgument)
+        {
+            var method = GetType().GetMethods().Where(a => a.Name == nameof(New) && a.IsGenericMethod).FirstOrDefault();
+            var genericMethod = method.MakeGenericMethod(constructionArgument.GetType().GetGenericArguments());
+            return genericMethod.Invoke(this, new[] { constructionArgument }) as Node;
+        }
+
         public virtual SimNodeConstructionArgument<T> GetConstructionArguments<T>() where T : Node, new()
         {
             return new SimNodeConstructionArgument<T>();
+        }
+
+        public virtual ISimNodeConstructionArgument GetConstructionArguments(Type type)
+        {
+            var method = GetType().GetMethod(nameof(GetConstructionArguments), new Type[] { });
+            var genericMethod = method.MakeGenericMethod(type);
+            return genericMethod.Invoke(this, new object[0]) as ISimNodeConstructionArgument;
         }
     }
 }
