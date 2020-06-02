@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SIM.Core.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -26,7 +27,31 @@ namespace SIM.Core.Objects
 
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            return new ValidationResult[] { ValidationResult.Success };
+            var result = new List<ValidationResult>();
+
+            // Check if the Origin and Target are of the correct type
+            // Attribute indicating Origin types
+            var isOriginValid = GetType().GetCustomAttributes(typeof(RelationEndTypeAttribute), true)
+                .Where(a => (a as RelationEndTypeAttribute).End == "Origin" && (a as RelationEndTypeAttribute).Type == Origin.GetType())
+                .FirstOrDefault() != null;
+
+            if (!isOriginValid)
+                result.Add(new ValidationResult($"Origin type not valid: {Origin.GetType()}"));
+
+            // Attribute indicating Target types
+            var isTargetValid = GetType().GetCustomAttributes(typeof(RelationEndTypeAttribute), true)
+                .Where(a => (a as RelationEndTypeAttribute).End == "Target" && (a as RelationEndTypeAttribute).Type == Target.GetType())
+                .FirstOrDefault() != null;
+
+            if (!isTargetValid)
+                result.Add(new ValidationResult($"Target type not valid: {Target.GetType()}"));
+
+            // TODO: Check if relation is OriginSolo or TargetSolo and rule is respected
+
+            if (result.Count == 0)
+                return new ValidationResult[] { ValidationResult.Success };
+
+            return result;
         }
     }
 }

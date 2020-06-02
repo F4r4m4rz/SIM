@@ -89,7 +89,7 @@ namespace SIM.Core.Factory
 
             // Get Relation types
             return contextAssembly.GetTypes()
-                .Where(a => a.GetCustomAttributes<RelationEndTypeAttribute>().Where(b => b.Node == "Target" && b.Type == node.GetType()).Count() != 0)
+                .Where(a => a.GetCustomAttributes<RelationEndTypeAttribute>().Where(b => b.End == "Target" && b.Type == node.GetType()).Count() != 0)
                 .FirstOrDefault();
         }
 
