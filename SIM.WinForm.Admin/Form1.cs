@@ -36,11 +36,22 @@ namespace SIM.WinForm.Admin
                     Size = new Size(70, 15)
                 });
 
-                grbDetails.Controls.Add(new TextBox()
+                if (paramaters[i - 1].ParameterType == typeof(string))
                 {
-                    Location = new Point(80, 30 * i),
-                    Name = paramaters[i - 1].Name
-                });
+                    grbDetails.Controls.Add(new TextBox()
+                    {
+                        Location = new Point(80, 30 * i),
+                        Name = paramaters[i - 1].Name
+                    });
+                }
+                else if (paramaters[i - 1].ParameterType == typeof(bool))
+                {
+                    grbDetails.Controls.Add(new CheckBox()
+                    {
+                        Location = new Point(80, 30 * i),
+                        Name = paramaters[i - 1].Name
+                    });
+                }
             }
 
             var applyBtn = new Button()
@@ -56,7 +67,8 @@ namespace SIM.WinForm.Admin
         private void ApplyBtn_Click(object sender, EventArgs e)
         {
             var arguments = grbDetails.Controls.OfType<TextBox>().Select(c => c.Text);
-            var com = new NewDynamicNodeCommand(new AdminRepository(), arguments.ElementAt(0), arguments.ElementAt(1));
+            var visible = grbDetails.Controls.OfType<CheckBox>().Select(c => c.Checked);
+            var com = new NewDynamicNodeCommand(new AdminRepository(), arguments.ElementAt(0), arguments.ElementAt(1), visible.ElementAt(0));
             com.Execute();
             UpdateNodes();
             grbDetails.Controls.Clear();

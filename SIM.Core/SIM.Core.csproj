@@ -48,6 +48,7 @@
     <Compile Include="Attributes\PropertyNodeTypeAttribute.cs" />
     <Compile Include="Attributes\RelationEndTypeAttribute.cs" />
     <Compile Include="Attributes\SoloRelationAttribute.cs" />
+    <Compile Include="Attributes\VisibleNodeAttribute.cs" />
     <Compile Include="Commands\CommandAnalyser.cs" />
     <Compile Include="Commands\EventHandlers.cs" />
     <Compile Include="Commands\NewNodeCommand.cs" />
