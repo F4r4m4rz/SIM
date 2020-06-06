@@ -4,27 +4,25 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BCA97519-EF3D-428C-8141-4B30F2FD1BCF}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>SIM.Shell</RootNamespace>
-    <AssemblyName>SIM.Shell</AssemblyName>
+    <ProjectGuid>{F854EEB4-7133-4A10-BDB0-26D92C1A243E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SIM.Neo4j</RootNamespace>
+    <AssemblyName>SIM.Neo4j</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\..\AibelProgs\SIM.Shell\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -44,27 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="CypherBuilder.cs" />
+    <Compile Include="Neo4jClient.cs" />
+    <Compile Include="Neo4jRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
-    <Compile Include="TestExplicitly.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SIM.Core\SIM.Core.csproj">
-      <Project>{b2d5f104-0d7b-4e15-b819-843fde082fdd}</Project>
+      <Project>{B2D5F104-0D7B-4E15-B819-843FDE082FDD}</Project>
       <Name>SIM.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SIM.Neo4j\SIM.Neo4j.csproj">
-      <Project>{f854eeb4-7133-4a10-bdb0-26d92c1a243e}</Project>
-      <Name>SIM.Neo4j</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SIM.Shell.Core\SIM.Shell.Core.csproj">
-      <Project>{7681428c-a2b0-494e-863a-07a6ac9ec6a5}</Project>
-      <Name>SIM.Shell.Core</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Neo4j.Driver">
+      <Version>4.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -55,6 +55,7 @@
     <Compile Include="Commands\NewPropertyNodeCommand.cs" />
     <Compile Include="Commands\NewRelationCommand.cs" />
     <Compile Include="DataBase\ISimRepository.cs" />
+    <Compile Include="DataBase\SimDbContext.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Commands\ICommandManager.cs" />
     <Compile Include="Commands\ISimCommand.cs" />
