@@ -35,6 +35,47 @@ namespace SIM.Shell
 
             // Get user input for making an instance
             //userInput = Console.ReadLine();
+            Graph g = new Graph();
+
+            Type type = GetUserType("Move");
+            var moveArgs = GetArgs(type);
+            moveArgs.AssignArgumentValues(new IntegerPropertyNode(3));
+            var move = Create(type, moveArgs);
+            g.Nodes.Add(move);
+
+            type = GetUserType("Move");
+            var moveArgs2 = GetArgs(type);
+            moveArgs2.AssignArgumentValues(new IntegerPropertyNode(3));
+            var move2 = Create(type, moveArgs2);
+            g.Nodes.Add(move2);
+
+            type = GetUserType("Session");
+            var sessionArgs = GetArgs(type);
+            sessionArgs.AssignArgumentValues(new DateTimePropertyNode(DateTime.Now));
+            var session = Create(type, sessionArgs);
+            g.Nodes.Add(session);
+
+            type = GetUserType("HasSession");
+            var hasSession = move.RelateTo(type, session, true);
+            g.Relations.Add(hasSession);
+
+            type = GetUserType("HasSession");
+            var hasSession2 = move2.RelateTo(type, session, true);
+            g.Relations.Add(hasSession2);
+
+            type = GetUserType("HasMove");
+            var hasMove = move.RelateTo(type, session, false);
+            g.Relations.Add(hasMove);
+
+            type = GetUserType("HasMove");
+            var hasMove2 = move2.RelateTo(type, session, false);
+            g.Relations.Add(hasMove2);
+
+            repository.Add(g);
+        }
+
+        private static void Aibel()
+        {
 
             Type type = GetUserType("Section");
             var section = Create(type, GetArgs(type));
@@ -47,32 +88,32 @@ namespace SIM.Shell
             //var sdi = Create(type, arg);
             repository.Add(sdi);
 
-            //type = GetUserType("CO");
-            //arg = GetArgs(type);
-            //var res = new List<INode>();
-            //for (int i = 0; i < arg.Arguments.Length; i++)
-            //{
-            //    Console.Write(arg.Arguments[i].Name + ": ");
-            //    var s = Console.ReadLine();
-            //    if (arg.Arguments[i].PropertyType == typeof(Relation))
-            //    {
-            //        res.Add(section);
-            //    }
-            //    else
-            //    {
-            //        res.Add(new StringPropertyNode(s));
-            //    }
-            //}
-            //arg.AssignArgumentValues(res.ToArray());
-            //var co = Create(type, arg);
-            //repository.Add(co);
+            type = GetUserType("CO");
+            arg = GetArgs(type);
+            var res = new List<INode>();
+            for (int i = 0; i < arg.Arguments.Length; i++)
+            {
+                Console.Write(arg.Arguments[i].Name + ": ");
+                var s = Console.ReadLine();
+                if (arg.Arguments[i].PropertyType == typeof(Relation))
+                {
+                    res.Add(section);
+                }
+                else
+                {
+                    res.Add(new StringPropertyNode(s));
+                }
+            }
+            arg.AssignArgumentValues(res.ToArray());
+            var co = Create(type, arg);
+            repository.Add(co);
 
-            //type = GetUserType("HasCO");
-            //var rel = sdi.RelateTo(type, co, true);
-            //repository.Add(rel);
+            type = GetUserType("HasCO");
+            var rel = sdi.RelateTo(type, co, true);
+            repository.Add(rel);
 
-            //var x = sdi.Relations(repository);
-            //var y = co.Relations(repository);
+            var x = sdi.Relations(repository);
+            var y = co.Relations(repository);
         }
 
         private static ISimNodeConstructionArgument GetArgs(Type type)

@@ -16,6 +16,11 @@ namespace SIM.Core.Objects
             _value = value;
         }
 
+        public object GetValue()
+        {
+            return _value;
+        }
+
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             return new ValidationResult[] { ValidationResult.Success };

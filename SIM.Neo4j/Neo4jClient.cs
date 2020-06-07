@@ -22,7 +22,7 @@ namespace SIM.Neo4j
 
         public void Create(ISimObject simObject)
         {
-            string cypher = $"create (a:{simObject.GetType().Name})";
+            string cypher = CypherBuilder.Build(simObject, CypherCommandType.Create);
             CypherExecuter(cypher);
         }
 
