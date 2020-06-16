@@ -14,7 +14,7 @@ namespace SIM.Neo4j
 
         public Neo4jRepository()
         {
-            _client = new Neo4jClient("bolt://localhost:7687", "neo4j", "1234");
+            _client = new Neo4jClient("bolt://localhost:11010", "neo4j", "1234");
         }
 
         public void Add(ISimObject simObject)

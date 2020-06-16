@@ -14,9 +14,11 @@ namespace SIM.Core.Objects
     {
         protected Node()
         {
-
+            Properties = new Dictionary<string, object>();
         }
-        
+
+        public IDictionary<string, object> Properties { get; set; }
+
         /// <summary>
         /// Collection of applicable outwards/inwards relations on the Node
         /// </summary>

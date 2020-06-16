@@ -55,13 +55,13 @@ namespace SIM.Neo4j
                 sb.Append(s);
                 sb.Append(",");
             }
-
+            sb = sb.Remove(sb.Length - 1, 1);
             // Go through nodes
             for (int i = 0; i < graph.Nodes.Count; i++)
             {
                 string s = AnalyseNodeProperties(graph.Nodes.ElementAt(i));
                 sb.Append(s);
-                sb.Append(",");
+                //sb.Append(",");
             }
             
             return sb.ToString().Trim(',');
@@ -74,14 +74,22 @@ namespace SIM.Neo4j
             StringBuilder cmd = new StringBuilder();
             foreach (var prop in properties)
             {
+                if (prop.PropertyType.IsInterface) continue;
                 var value = prop.GetValue(node);
                 if (value == null) continue;
-                string s = AnalyseRelation(value as PropertyRelation, prop.Name);
+                //string s = AnalyseRelation(value, prop.Name);
+                string s = AddProperty(node, value, prop.Name);
                 cmd.Append(s);
-                cmd.Append(",");
+                //cmd.Append(",");
             }
 
             return cmd.ToString().Trim(',');
+        }
+
+        private static string AddProperty(Node node, object value, string name)
+        {
+            string nodeTag = TagHistory[node];
+            return $"set {nodeTag}.{name} = \"{value}\"";
         }
 
         private static string AnalyseRelation(PropertyRelation relation, string name)

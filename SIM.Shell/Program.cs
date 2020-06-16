@@ -39,19 +39,22 @@ namespace SIM.Shell
 
             Type type = GetUserType("Move");
             var moveArgs = GetArgs(type);
-            moveArgs.AssignArgumentValues(new IntegerPropertyNode(3));
+            //moveArgs.AssignArgumentValues(new IntegerPropertyNode(3));
+            moveArgs.AssignArgumentValues(30);
             var move = Create(type, moveArgs);
             g.Nodes.Add(move);
 
             type = GetUserType("Move");
             var moveArgs2 = GetArgs(type);
-            moveArgs2.AssignArgumentValues(new IntegerPropertyNode(3));
+            //moveArgs2.AssignArgumentValues(new IntegerPropertyNode(3));
+            moveArgs2.AssignArgumentValues(30);
             var move2 = Create(type, moveArgs2);
             g.Nodes.Add(move2);
 
             type = GetUserType("Session");
             var sessionArgs = GetArgs(type);
-            sessionArgs.AssignArgumentValues(new DateTimePropertyNode(DateTime.Now));
+            //sessionArgs.AssignArgumentValues(new DateTimePropertyNode(DateTime.Now));
+            sessionArgs.AssignArgumentValues(DateTime.Now);
             var session = Create(type, sessionArgs);
             g.Nodes.Add(session);
 

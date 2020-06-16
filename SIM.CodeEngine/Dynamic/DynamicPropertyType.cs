@@ -12,11 +12,11 @@ namespace SIM.CodeEngine.Dynamic
     {
         static DynamicPropertyType()
         {
-            String = typeof(StringPropertyNode);
-            Integer = typeof(IntegerPropertyNode);
-            Real = typeof(DoublePropertyNode);
-            Boolean = typeof(BooleanPropertyNode);
-            DateTime = typeof(DateTimePropertyNode);
+            String = typeof(string);
+            Integer = typeof(int);
+            Real = typeof(double);
+            Boolean = typeof(bool);
+            DateTime = typeof(DateTime);
         }
 
         public static Type String { get; }

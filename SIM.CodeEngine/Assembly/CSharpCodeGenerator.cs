@@ -148,8 +148,8 @@ namespace SIM.CodeEngine.Assembly
             for (int i = 0; i < (dynamicObject as DynamicNode).Properties.Count; i++)
             {
                 var dynamicProp = (dynamicObject as DynamicNode).Properties.ElementAt(i);
-                var field = GeenerateField(dynamicProp);
-                @class.Members.Add(field);
+                //var field = GeenerateField(dynamicProp);
+                //@class.Members.Add(field);
 
                 var property = GeneratePrperty(dynamicProp);
                 GeneratePropertyAttributes(dynamicProp, property);
@@ -162,8 +162,8 @@ namespace SIM.CodeEngine.Assembly
             // Data type attribute
             if (dynamicProp is DynamicRelationProperty)
                 GenerateProperyDataTypeAttribute(dynamicProp, property, typeof(PropertyRelationTargetTypeAttribute));
-            else
-                GenerateProperyDataTypeAttribute(dynamicProp, property, typeof(PropertyNodeTypeAttribute));
+            //else
+            //    GenerateProperyDataTypeAttribute(dynamicProp, property, typeof(PropertyNodeTypeAttribute));
 
             // Reuired attribute
             if (dynamicProp.IsRequired)
@@ -183,10 +183,10 @@ namespace SIM.CodeEngine.Assembly
         private void GenerateProperyDataTypeAttribute(DynamicProperty dynamicProp, CodeMemberProperty property, Type attributeType)
         {
             var attribute = new CodeAttributeDeclaration(new CodeTypeReference(attributeType));
-            if (dynamicProp is DynamicRelationProperty)
-                attribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeOfExpression((dynamicProp as DynamicRelationProperty).TargetNodeType)));
-            else
-                attribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeOfExpression(dynamicProp.ValueType)));
+            //if (dynamicProp is DynamicRelationProperty)
+            //    attribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeOfExpression((dynamicProp as DynamicRelationProperty).TargetNodeType)));
+            //else
+            attribute.Arguments.Add(new CodeAttributeArgument(new CodeTypeOfExpression(dynamicProp.ValueType)));
             property.CustomAttributes.Add(attribute);
         }
 
@@ -213,7 +213,7 @@ namespace SIM.CodeEngine.Assembly
             CodeAssignStatement setter =
                 new CodeAssignStatement(
                     new CodeFieldReferenceExpression(
-                        new CodeThisReferenceExpression(), '_' + property.Name)
+                        new CodeThisReferenceExpression(), $"Properties[\"{property.Name}\"]")
                     , new CodePropertySetValueReferenceExpression());
 
             return setter;
@@ -223,8 +223,9 @@ namespace SIM.CodeEngine.Assembly
         {
             CodeMethodReturnStatement getter =
                 new CodeMethodReturnStatement(
-                    new CodeFieldReferenceExpression(
-                        new CodeThisReferenceExpression(), '_' + property.Name));
+                    new CodeCastExpression(property.Type,
+                        new CodeFieldReferenceExpression(
+                            new CodeThisReferenceExpression(), $"Properties[\"{property.Name}\"]")));
             
             return getter;
         }

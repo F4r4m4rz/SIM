@@ -10,9 +10,9 @@ namespace SIM.Core.Factory
         Node Object { get; }
         Type ObjectType { get; }
         PropertyInfo[] Arguments { get; }
-        IRelation[] ArgumentValues { get; }
+        object[] ArgumentValues { get; }
         PropertyInfo[] GetConstructionArguments();
         IEnumerable<Type> GetExpectedTypes();
-        void AssignArgumentValues(params INode[] values);
+        void AssignArgumentValues(params object[] values);
     }
 }

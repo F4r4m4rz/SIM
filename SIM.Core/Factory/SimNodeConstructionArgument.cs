@@ -22,7 +22,7 @@ namespace SIM.Core.Factory
         {
             for (int i = 0; i < Arguments.Length; i++)
             {
-                ArgumentValues[i].GetType().GetProperty("Origin").SetValue(ArgumentValues[i], obj);
+                //ArgumentValues[i].GetType().GetProperty("Origin").SetValue(ArgumentValues[i], obj);
                 Arguments[i].SetValue(obj, ArgumentValues[i]);
             }
         }
@@ -34,17 +34,19 @@ namespace SIM.Core.Factory
                 .Select(a => a).ToArray();
         }
 
-        public void AssignArgumentValues(params INode[] values)
+        public void AssignArgumentValues(params object[] values)
         {
             // Check if size of passed in values are the same as excpected
             if (Arguments.Length != values.Length)
                 throw new ArgumentException($"Not enough data provided to construct an instance of {ObjectType}");
 
             // Loop through and assign
-            ArgumentValues = new IRelation[Arguments.Length];
+            //ArgumentValues = new IRelation[Arguments.Length];
+            ArgumentValues = new object[Arguments.Length];
             for (int i = 0; i < ArgumentValues.Length; i++)
             {
-                ValidateAndAssignValue(i, values[i]);
+                //ValidateAndAssignValue(i, values[i]);
+                ArgumentValues[i] = values[i];
             }
         }
 
@@ -111,6 +113,7 @@ namespace SIM.Core.Factory
         public Node Object { get; }
         public Type ObjectType { get; }
         public PropertyInfo[] Arguments { get; }
-        public IRelation[] ArgumentValues { get; private set; }
+        //public IRelation[] ArgumentValues { get; private set; }
+        public object[] ArgumentValues { get; private set; }
     }
 }

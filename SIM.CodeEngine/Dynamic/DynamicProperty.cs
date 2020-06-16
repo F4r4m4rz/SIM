@@ -34,7 +34,7 @@ namespace SIM.CodeEngine.Dynamic
             IsUserInput = isUserInput;
         }
 
-        public override Type DerivedFrom { get => typeof(PropertyRelation); }
+        public override Type DerivedFrom { get => ValueType; }
 
         [JsonProperty(Order = 5)]
         public Type ValueType { get; set; }
