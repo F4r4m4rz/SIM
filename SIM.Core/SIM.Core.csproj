@@ -52,16 +52,18 @@
     <Compile Include="Commands\CommandAnalyser.cs" />
     <Compile Include="Commands\EventHandlers.cs" />
     <Compile Include="Commands\NewNodeCommand.cs" />
-    <Compile Include="Commands\NewPropertyNodeCommand.cs" />
     <Compile Include="Commands\NewRelationCommand.cs" />
     <Compile Include="DataBase\ISimRepository.cs" />
     <Compile Include="DataBase\SimDbContext.cs" />
+    <Compile Include="EventArguments\NewNodeEventArgs.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Commands\ICommandManager.cs" />
     <Compile Include="Commands\ISimCommand.cs" />
-    <Compile Include="Objects\BooleanPropertyNode.cs" />
-    <Compile Include="Objects\DateTimePropertyNode.cs" />
-    <Compile Include="Objects\DoublePropertyNode.cs" />
+    <Compile Include="Objects\Attachment.cs" />
+    <Compile Include="Objects\Comment.cs" />
+    <Compile Include="Objects\Has_Attachment.cs" />
+    <Compile Include="Objects\Has_Authur.cs" />
+    <Compile Include="Objects\Location.cs" />
     <Compile Include="Objects\Graph.cs" />
     <Compile Include="Objects\INode.cs" />
     <Compile Include="Objects\IRelation.cs" />
@@ -69,20 +71,15 @@
     <Compile Include="Factory\SimNodeConstructionArgument.cs" />
     <Compile Include="Factory\SimNodeFactory.cs" />
     <Compile Include="Objects\IGenericRelation.cs" />
-    <Compile Include="Objects\IntegerPropertyNode.cs" />
     <Compile Include="Objects\ISimObject.cs" />
+    <Compile Include="Objects\Lives_At.cs" />
     <Compile Include="Objects\Node.cs" />
-    <Compile Include="Objects\GenericPropertyNode.cs" />
-    <Compile Include="Objects\PropertyRelation.cs" />
-    <Compile Include="Objects\PropertyNode.cs" />
     <Compile Include="Objects\Relation.cs" />
     <Compile Include="Attributes\StringPatternAttribute.cs" />
     <Compile Include="Attributes\UserInputAttribute.cs" />
-    <Compile Include="Commands\CurrentTimeCommand.cs" />
-    <Compile Include="Commands\PropertySetCommand.cs" />
     <Compile Include="Exceptions.cs" />
-    <Compile Include="Objects\NodeState.cs" />
-    <Compile Include="Objects\StringPropertyNode.cs" />
+    <Compile Include="Objects\RelationEndEnum.cs" />
+    <Compile Include="Objects\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

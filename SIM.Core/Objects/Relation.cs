@@ -12,7 +12,7 @@ namespace SIM.Core.Objects
     {
         protected Relation()
         {
-
+            Properties = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -25,6 +25,8 @@ namespace SIM.Core.Objects
         /// </summary>
         public Node Target { get; set; }
 
+        public IDictionary<string, object> Properties { get; set; }
+
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var result = new List<ValidationResult>();
@@ -32,7 +34,7 @@ namespace SIM.Core.Objects
             // Check if the Origin and Target are of the correct type
             // Attribute indicating Origin types
             var isOriginValid = GetType().GetCustomAttributes(typeof(RelationEndTypeAttribute), true)
-                .Where(a => (a as RelationEndTypeAttribute).End == "Origin" && (a as RelationEndTypeAttribute).Type == Origin.GetType())
+                .Where(a => (a as RelationEndTypeAttribute).End == RelationEndEnum.Origin && (a as RelationEndTypeAttribute).Type == Origin.GetType())
                 .FirstOrDefault() != null;
 
             if (!isOriginValid)
@@ -40,7 +42,7 @@ namespace SIM.Core.Objects
 
             // Attribute indicating Target types
             var isTargetValid = GetType().GetCustomAttributes(typeof(RelationEndTypeAttribute), true)
-                .Where(a => (a as RelationEndTypeAttribute).End == "Target" && (a as RelationEndTypeAttribute).Type == Target.GetType())
+                .Where(a => (a as RelationEndTypeAttribute).End == RelationEndEnum.Target && (a as RelationEndTypeAttribute).Type == Target.GetType())
                 .FirstOrDefault() != null;
 
             if (!isTargetValid)
@@ -52,6 +54,21 @@ namespace SIM.Core.Objects
                 return new ValidationResult[] { ValidationResult.Success };
 
             return result;
+        }
+
+        protected virtual object GetProperty(string key)
+        {
+            if (Properties.ContainsKey(nameof(key)))
+            {
+                return Properties[nameof(key)] as string;
+            }
+            else
+                return null;
+        }
+
+        protected virtual void SetProperty(string key, object value)
+        {
+            Properties[key] = value;
         }
     }
 }

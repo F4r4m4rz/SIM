@@ -18,6 +18,7 @@ namespace SIM.Core.Objects
         }
 
         public IDictionary<string, object> Properties { get; set; }
+        public string Status { get; protected set; }
 
         /// <summary>
         /// Collection of applicable outwards/inwards relations on the Node
@@ -87,6 +88,47 @@ namespace SIM.Core.Objects
                 return new ValidationResult[] { ValidationResult.Success };
 
             return new ValidationResult[] { new ValidationResult("Required properties not set", requiredProperties.Select(a => a.Name)) };
+        }
+
+        protected virtual void SetState(string state = null)
+        {
+            Status = state;
+            OnStateChanged();
+        }
+
+        protected virtual void OnInitialize()
+        {
+            // Custom implementation from the derived types
+        }
+
+        protected virtual void OnStateChanged()
+        {
+            // Custom implementation from the derived types
+        }
+
+        protected virtual void OnDelete()
+        {
+            // Custom implementation from the derived types
+        }
+
+        protected virtual void OnPropertyChanged()
+        {
+            // Custom implementation from the derived types
+        }
+
+        protected virtual object GetProperty(string key)
+        {
+            if (Properties.ContainsKey(nameof(key)))
+            {
+                return Properties[nameof(key)] as string;
+            }
+            else
+                return null;
+        }
+
+        protected virtual void SetProperty(string key, object value)
+        {
+            Properties[key] = value;
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using SIM.DataBase;
 
 namespace SIM.CodeEngine.Dynamic
 {
@@ -17,13 +18,13 @@ namespace SIM.CodeEngine.Dynamic
 
         }
 
-        public DynamicProperty(string nameSpace, string propertyName, string valueType, bool isRequired, bool isUserInput)
+        public DynamicProperty(string nameSpace, string propertyName, string valueType, bool isRequired, bool isUserInput, ISimRepository simRepository)
         {
             try
             {
                 Namespace = nameSpace.ValidateNullOrWhitespace(nameof(nameSpace));
                 Name = propertyName.ValidateNullOrWhitespace(nameof(propertyName));
-                ValueType = DynamicPropertyType.GetPropertyType(valueType);
+                ValueType = DynamicPropertyType.GetPropertyType(valueType, simRepository);
             }
             catch (ArgumentException ex)
             {

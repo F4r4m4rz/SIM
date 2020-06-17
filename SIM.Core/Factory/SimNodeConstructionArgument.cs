@@ -55,17 +55,6 @@ namespace SIM.Core.Factory
             return Arguments.Select(c => c.GetCustomAttribute<PropertyNodeTypeAttribute>().AllowedType);
         }
 
-        private void ValidateAndAssignValue(int i, INode v)
-        {
-            ValidateValue(i, v);
-
-            if (v is PropertyNode)
-                AssignValue(i, v as PropertyNode);
-
-            else
-                AssignValue(i, v as Node);
-        }
-
         private void AssignValue(int i, Node node)
         {
             // Find proper relation
@@ -91,29 +80,43 @@ namespace SIM.Core.Factory
 
             // Get Relation types
             return contextAssembly.GetTypes()
-                .Where(a => a.GetCustomAttributes<RelationEndTypeAttribute>().Where(b => b.End == "Target" && b.Type == node.GetType()).Count() != 0)
+                .Where(a => a.GetCustomAttributes<RelationEndTypeAttribute>().Where(b => b.End == RelationEndEnum.Target && b.Type == node.GetType()).Count() != 0)
                 .FirstOrDefault();
         }
 
-        private void AssignValue(int i, PropertyNode propertyNode)
-        {
-            ArgumentValues[i] = new PropertyRelation() { Target = propertyNode };
-        }
+        #region Related to property node (TO BE DELETED)
+        //private void ValidateAndAssignValue(int i, INode v)
+        //{
+        //    ValidateValue(i, v);
 
-        private void ValidateValue(int i, INode v)
-        {
-            // Check the type
-            var expextedType = v is PropertyNode ? Arguments[i].GetCustomAttribute<PropertyNodeTypeAttribute>().AllowedType :
-                Arguments[i].GetCustomAttribute<PropertyRelationTargetTypeAttribute>().TargetType;
-            if (v.GetType() != expextedType)
-                throw new ArgumentException($"Provided value of type {v.GetType()} " +
-                    $"not expected.\nExpected {expextedType}");
-        }
+        //    if (v is PropertyNode)
+        //        AssignValue(i, v as PropertyNode);
+
+        //    else
+        //        AssignValue(i, v as Node);
+        //}
+
+        //private void AssignValue(int i, PropertyNode propertyNode)
+        //{
+        //    ArgumentValues[i] = new PropertyRelation() { Target = propertyNode };
+        //}
+
+        //private void ValidateValue(int i, INode v)
+        //{
+        //    // Check the type
+        //    var expextedType = v is PropertyNode ? Arguments[i].GetCustomAttribute<PropertyNodeTypeAttribute>().AllowedType :
+        //        Arguments[i].GetCustomAttribute<PropertyRelationTargetTypeAttribute>().TargetType;
+        //    if (v.GetType() != expextedType)
+        //        throw new ArgumentException($"Provided value of type {v.GetType()} " +
+        //            $"not expected.\nExpected {expextedType}");
+        //}
+
+        //public IRelation[] ArgumentValues { get; private set; }
+        #endregion
 
         public Node Object { get; }
         public Type ObjectType { get; }
         public PropertyInfo[] Arguments { get; }
-        //public IRelation[] ArgumentValues { get; private set; }
         public object[] ArgumentValues { get; private set; }
     }
 }

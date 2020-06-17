@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Objects
 {
-    public class DateTimePropertyNode : GenericPropertyNode<DateTime>
+    public enum RelationEndEnum
     {
-        public DateTimePropertyNode(DateTime dateTime) : base(dateTime)
-        {
-
-        }
+        Origin, Target
     }
 }
