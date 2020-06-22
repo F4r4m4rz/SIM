@@ -1,0 +1,36 @@
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+app {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    height: 4rem;
+}
+
+.navbar-brand {
+    font-size:24px;
+    color:#d7cc09;
+    font-weight: bolder;
+}
+
+nav a {
+    color: white;
+}
+
+content.mainScreen {
+    height: 100vh;
+    padding: 100px;
+    background-color: lightslategray;
+}
+
+.sim-btn-add {
+    height: 60px;
+    width: 60px;
+}

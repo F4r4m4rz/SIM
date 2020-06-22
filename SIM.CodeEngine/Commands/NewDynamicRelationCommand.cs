@@ -18,13 +18,13 @@ namespace SIM.CodeEngine.Commands
         private readonly ISimRepository repository;
         private readonly string nameSpace;
         private readonly string name;
-        private readonly string[] originTypes;
-        private readonly string[] targetTypes;
+        private readonly IEnumerable<string> originTypes;
+        private readonly IEnumerable<string> targetTypes;
 
         public object Result { get; set; }
 
         public NewDynamicRelationCommand(ISimRepository repository, string nameSpace, string name,
-                                         string[] originTypes, string[] targetTypes)
+                                         IEnumerable<string> originTypes, IEnumerable<string> targetTypes)
         {
             this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
             this.nameSpace = nameSpace;

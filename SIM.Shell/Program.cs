@@ -104,7 +104,7 @@ namespace SIM.Shell
                 }
                 else
                 {
-                    res.Add(new StringPropertyNode(s));
+                    //res.Add(new StringPropertyNode(s));
                 }
             }
             arg.AssignArgumentValues(res.ToArray());

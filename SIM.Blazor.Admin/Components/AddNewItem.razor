@@ -1,0 +1,38 @@
+﻿@inherits AddNewItemBase
+@using System.Collections
+
+@if (!isSaved)
+{
+    <EditForm Model="@Arguments" OnValidSubmit="Submit">
+        @foreach (var arg in Arguments)
+        {
+            if (arg.Key.ParameterType == typeof(string))
+            {
+                <div class="form-group">
+                    <label for="@arg.Key.Name">@arg.Key.Name</label>
+                    <input type="text" class="form-control" id="@arg.Key.Name" @bind-value="@Arguments[arg.Key].StringValue" placeholder="Enter @Type.ToString()'s @arg.Key.Name" />
+                </div>
+            }
+            else if (arg.Key.ParameterType == typeof(bool))
+            {
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="@arg.Key.Name" @bind-value="@Arguments[arg.Key].BooleanValue" />
+                    <label class="form-check-label" for="@arg.Key.Name">@arg.Key.Name</label>
+                </div>
+            }
+            else if (arg.Key.ParameterType.GetInterfaces().Contains(typeof(IEnumerable)))
+            {
+                <div class="form-group">
+                    <label for="@arg.Key.Name">@arg.Key.Name</label>
+                    <input type="text" class="form-control" id="@arg.Key.Name" @bind-value="@Arguments[arg.Key]._stringArrayValue" placeholder="Enter @Type.ToString()'s @arg.Key.Name" />
+                    <small class="form-text text-muted">Values should space separated (i.e. "ValueOne ValueTwo")</small>
+                </div>
+            }
+        }
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </EditForm>
+}
+else
+{
+    <div class="alert alert-success">New Node type saved successfully</div>
+}

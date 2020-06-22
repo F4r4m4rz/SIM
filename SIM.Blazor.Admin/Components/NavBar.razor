@@ -1,0 +1,32 @@
+﻿@inherits NavBarBase
+
+<nav class="navbar fixed-top navbar-expand-lg bg-dark">
+    <a class="navbar-brand" href="#">SIM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active"> <a class="nav-link" href="#">Overview <span class="sr-only">(current)</span></a> </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="ContextLabel" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @if (!string.IsNullOrWhiteSpace(Mediator.Context))
+                    {
+                        @Mediator.Context
+                    }
+                    else
+                    {
+                     <div class="d-inline">Context</div>
+                    }
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                    <a class="dropdown-item" @onclick='() => NewContext()'> New Context</a>
+                    <div class="dropdown-divider"></div>
+                    @foreach (var context in ContextRepository.GetAll())
+                    {
+                        <a class="dropdown-item" @onclick='() => SetContext(context)'>@context.ToUpper()</a>
+                    }
+                </div>
+            </li>
+        </ul>
+        <div><a href="#">Sign out</a></div>
+    </div>
+</nav>

@@ -17,7 +17,7 @@ namespace SIM.CodeEngine.Dynamic
 
         }
 
-        public DynamicRelation(string nameSpace, string name, string[] originTypes, string[] targetTypes)
+        public DynamicRelation(string nameSpace, string name, IEnumerable<string> originTypes, IEnumerable<string> targetTypes)
             : base(nameSpace, name)
         {
             try
@@ -31,12 +31,12 @@ namespace SIM.CodeEngine.Dynamic
             }
         }
 
-        private void AssignApplicableTypes(string[] types, string end)
+        private void AssignApplicableTypes(IEnumerable<string> types, string end)
         {
-            for (int i = 0; i < types.Length; i++)
+            for (int i = 0; i < types.Count(); i++)
             {
                 Attributes.Add(new KeyValuePair<Type, object[]>(typeof(RelationEndTypeAttribute),
-                    new object[] { types[i], end }));
+                    new object[] { types.ElementAt(i), end }));
             }
         }
 

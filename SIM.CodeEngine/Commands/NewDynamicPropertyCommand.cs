@@ -71,7 +71,7 @@ namespace SIM.CodeEngine.Commands
                     .Add(new DynamicRelationProperty(nameSpace, name, dataType, isRequired, isUserInput));
             else
                 (Result as DynamicNode).Properties
-                    .Add(new DynamicProperty(nameSpace, name, dataType, isRequired, isUserInput));
+                    .Add(new DynamicProperty(nameSpace, name, dataType, isRequired, isUserInput, null));
         }
     }
 }
