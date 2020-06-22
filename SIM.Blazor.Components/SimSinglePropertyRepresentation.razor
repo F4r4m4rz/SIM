@@ -1,0 +1,14 @@
+﻿@inherits SimSinglePropertyRepresentationBase
+
+@if (BackingProprty.PropertyType == typeof(Type))
+{
+    <SimTypePropRepr BackingProprty="@BackingProprty" Owner="@Owner" Editable="@Editable"></SimTypePropRepr>
+}
+else if (BackingProprty.PropertyType == typeof(string))
+{
+    <SimStringPropRepr BackingProprty="@BackingProprty" Owner="@Owner" Editable="@Editable"></SimStringPropRepr>
+}
+else if (BackingProprty.PropertyType == typeof(bool))
+{
+    <SimBooleanPropRepr BackingProprty="@BackingProprty" Owner="@Owner" Editable="@Editable"></SimBooleanPropRepr>
+}

@@ -1,0 +1,6 @@
+﻿@inherits SimStringPropReprBase
+
+    <div class="form-group">
+        <label for="@BackingProprty.Name">@BackingProprty.Name</label>
+        <input disabled="@(!Editable)" type="text" class="form-control" id="@BackingProprty.Name" @bind-value="@Value" />
+    </div>

@@ -1,0 +1,6 @@
+﻿@inherits SimBooleanPropReprBase
+
+    <div class="form-check">
+        <input disabled="@(!Editable)" type="checkbox" class="form-check-input" id="@BackingProprty.Name" @bind-value="@Value" />
+        <label class="form-check-label" for="@BackingProprty.Name">@BackingProprty.Name</label>
+    </div>

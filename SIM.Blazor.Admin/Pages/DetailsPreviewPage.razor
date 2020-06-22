@@ -1,0 +1,22 @@
+﻿@page "/{ObjectName}"
+@using SIM.Blazor.Admin.Components
+@using SIM.CodeEngine.Dynamic
+@using SIM.DataBase
+
+<DetailsPreview Object=_object></DetailsPreview>
+
+@code{
+    [Parameter]
+    public string ObjectName { get; set; }
+
+    [Inject]
+    public ISimRepository Repository { get; set; }
+
+    public DynamicObject _object { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        _object = Repository.Get(a => (a as DynamicObject).Name == ObjectName) as DynamicObject;
+        return base.OnInitializedAsync();
+    }
+}

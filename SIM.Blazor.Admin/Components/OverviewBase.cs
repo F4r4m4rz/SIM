@@ -65,5 +65,15 @@ namespace SIM.Blazor.Admin.Components
         {
             NavigationManager.NavigateTo("/newitem/2");
         }
+
+        protected void NavigateToNode(string name)
+        {
+            NavigationManager.NavigateTo($"/{name}");
+        }
+
+        protected void NavigateToRelation(string name)
+        {
+            NavigationManager.NavigateTo($"/{name}");
+        }
     }
 }

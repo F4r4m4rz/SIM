@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIM.Neo4j", "SIM.Neo4j\SIM.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SIM.Blazor.Admin", "SIM.Blazor.Admin\SIM.Blazor.Admin.csproj", "{8DE5F495-1C03-4BBB-B161-14EE49ABA6FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIM.Blazor.Components", "SIM.Blazor.Components\SIM.Blazor.Components.csproj", "{C1EE39E5-5987-40A7-AC49-8ED068561946}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{8DE5F495-1C03-4BBB-B161-14EE49ABA6FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DE5F495-1C03-4BBB-B161-14EE49ABA6FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DE5F495-1C03-4BBB-B161-14EE49ABA6FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1EE39E5-5987-40A7-AC49-8ED068561946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1EE39E5-5987-40A7-AC49-8ED068561946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1EE39E5-5987-40A7-AC49-8ED068561946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1EE39E5-5987-40A7-AC49-8ED068561946}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +105,7 @@ Global
 		{C7D63B9F-4C56-4F30-993A-607F0E45CD7F} = {A1E35344-B029-4797-A854-D74B2F8A94C3}
 		{F854EEB4-7133-4A10-BDB0-26D92C1A243E} = {2BF99EAF-49F5-4721-A3BC-4546C6351D82}
 		{8DE5F495-1C03-4BBB-B161-14EE49ABA6FE} = {A1E35344-B029-4797-A854-D74B2F8A94C3}
+		{C1EE39E5-5987-40A7-AC49-8ED068561946} = {A1E35344-B029-4797-A854-D74B2F8A94C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ACB14877-990C-4C58-893D-7491DFB37D76}

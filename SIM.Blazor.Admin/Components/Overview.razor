@@ -29,7 +29,7 @@ else
                     {
                         @foreach (var item in Nodes)
                         {
-                            <div style="padding: 0 5px 0 0;"><p> <a class="btn btn-primary btn-lg" href="#" role="button">@item.Name</a> </p></div>
+                            <div style="padding: 0 5px 0 0;"><p> <a class="btn btn-primary btn-lg" @onclick="() => NavigateToNode(item.Name)" role="button">@item.Name</a> </p></div>
                         }
                     }
                 </div>
@@ -55,7 +55,7 @@ else
                     {
                         @foreach (var item in Relations)
                         {
-                            <div style="padding: 0 5px 0 0;"><p> <a class="btn btn-success btn-lg" href="#" role="button">@item.Name</a> </p></div>
+                            <div style="padding: 0 5px 0 0;"><p> <a class="btn btn-success btn-lg" @onclick="() => NavigateToRelation(item.Name)" role="button">@item.Name</a> </p></div>
                         }
                     }
                 </div>
