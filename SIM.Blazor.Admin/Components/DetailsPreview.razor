@@ -15,71 +15,7 @@
             }
             else if (prop.PropertyType.GetInterface("IEnumerable") != null)
             {
-                var value = prop.GetValue(Object) as IEnumerable;
-                if (value == null) continue;
-
-                <label for="@prop.Name">@prop.Name</label>
-                <table class="table table-bordered bg-light" id="@prop.Name">
-                    @{
-                        if (value is ICollection<KeyValuePair<Type, object[]>>)
-                        {
-                            <thead>
-                                <tr>
-                                    <td>Type</td>
-                                    <td>Value</td>
-                                </tr>
-                            </thead>
-                        }
-                        else if (value is ICollection<DynamicProperty>)
-                        {
-                            <thead>
-                                <tr>
-                                    <td>Namespace</td>
-                                    <td>Name</td>
-                                    <td>Derived from</td>
-                                    <td>Attributes</td>
-                                    <td>ValueType</td>
-                                    <td>IsRequired</td>
-                                    <td>IsUserInput</td>
-                                </tr>
-                            </thead>
-                        }
-                        var enumerator = value.GetEnumerator();
-                        <tbody>
-                            @{
-                                while (enumerator.MoveNext())
-                                {
-                                    var cur = enumerator.Current;
-                                    <tr>
-                                        @{
-                                            if (cur is KeyValuePair<Type, object[]>)
-                                            {
-                                                <td>@cur.GetType().GetProperty("Key").GetValue(cur)</td>
-                                                var keyValuePairValue = cur.GetType().GetProperty("Value").GetValue(cur) as object[];
-                                                foreach (var v in keyValuePairValue)
-                                                {
-                                                    <td>@v.ToString()</td>
-                                                }
-                                            }
-                                            else if (cur is DynamicProperty)
-                                            {
-                                                var dp = cur as DynamicProperty;
-                                                <td>@dp.Name</td>
-                                                foreach (var p in dp.GetType().GetProperties())
-                                                {
-                                                    <td>@p.GetValue(dp)</td>
-                                                }
-                                            }
-                                        }
-                                    </tr>
-                                }
-                            }
-                        </tbody>
-                    }
-                </table>
-                <div>
-                    <button type="button" class="btn btn-info" @onclick="()=>AddNew(prop.Name)">Add</button>
-                </div>
+                <SimListPropertyRepresantation Owner="@Object" BackingProprty="@prop" Editable="true"></SimListPropertyRepresantation>
             }
         }
     }

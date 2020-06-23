@@ -53,6 +53,7 @@
     <Compile Include="Commands\EventHandlers.cs" />
     <Compile Include="Commands\NewNodeCommand.cs" />
     <Compile Include="Commands\NewRelationCommand.cs" />
+    <Compile Include="DataBase\IMediator.cs" />
     <Compile Include="DataBase\ISimRepository.cs" />
     <Compile Include="DataBase\SimDbContext.cs" />
     <Compile Include="EventArguments\NewNodeEventArgs.cs" />

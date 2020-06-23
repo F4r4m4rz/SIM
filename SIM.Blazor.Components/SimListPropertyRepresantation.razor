@@ -1,0 +1,43 @@
+﻿@inherits SimListPropertyRepresantationBase
+@using System.Data
+
+<div class="form-group">
+    <label for="@Table.TableName">@Table.TableName</label>
+    <table class="table table-bordered bg-light thead-dark table-hover" id="@Table.TableName">
+        @*----Header----*@
+        <thead>
+            <tr>
+                @for (int i = 1; i < Table.Columns.Count; i++)
+                {
+                    <td>
+                        @Table.Columns[i].ColumnName
+                    </td>
+                }
+            </tr>
+        </thead>
+
+
+        @*----Body----*@
+        <tbody>
+            @foreach (DataRow row in Table.Rows)
+            {
+                <tr @onclick="@OnAddPromptCallback">
+                    @for (int i = 1; i < row.ItemArray.Length; i++)
+                    {
+                        <td>@row[i]</td>
+                    }
+                    @if (Editable)
+                    {
+                        <td><button class="border-0 fas fa-trash-alt" @onclick="() => DeleteRow(row)"></button></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (Editable)
+    {
+        <div>
+            <button type="button" class="btn btn-info">Add</button>
+        </div>
+    }
+</div>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SIM.Blazor.Admin.Data
+namespace SIM.Core.DataBase
 {
     public interface IMediator
     {

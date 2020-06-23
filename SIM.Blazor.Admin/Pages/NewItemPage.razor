@@ -1,14 +1,14 @@
 ﻿@page "/NewItem/{type}"
 @using SIM.Blazor.Admin.Components
-@using SIM.Blazor.Admin.Data
+@using SIM.CodeEngine.Dynamic
 
-<AddNewItem Type=ItemType></AddNewItem>
+<AddNewItem TargetType=ItemType></AddNewItem>
 
 @code{
     [Parameter]
     public string type { get; set; }
 
-    public NewItemTypeEnum ItemType { get; set; }
+    public Type ItemType { get; set; }
 
     protected override Task OnInitializedAsync()
     {
@@ -16,22 +16,16 @@
         return base.OnInitializedAsync();
     }
 
-    private NewItemTypeEnum GetProperItemType()
+    private Type GetProperItemType()
     {
-        int t = 0;
-        int.TryParse(type, out t);
-        switch (t)
+        switch (type)
         {
-            case 1:
-                return NewItemTypeEnum.Node;
-                case 2:
-                return NewItemTypeEnum.Relation;
-                case 3:
-                return NewItemTypeEnum.NodeProperty;
-                case 4:
-                return NewItemTypeEnum.RelationProperty;
+            case "Node":
+                return typeof(DynamicNode);
+            case "Relation":
+                return typeof(DynamicRelation);
             default:
-                throw new ArgumentException("Not proper type parameter is entered");
+                return null;
         }
     }
 }

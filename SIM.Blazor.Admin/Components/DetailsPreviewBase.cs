@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using SIM.CodeEngine.Dynamic;
 using SIM.DataBase;
 using System;
@@ -19,16 +20,7 @@ namespace SIM.Blazor.Admin.Components
         [Parameter]
         public DynamicObject Object { get; set; }
 
-        protected void AddNew(string type)
-        {
-            switch (type)
-            {
-                case "Properties":
-                    NavigationManager.NavigateTo("/newitem/3");
-                    break;
-                default:
-                    break;
-            }
-        }
+        [Inject]
+        public IJSRuntime JSRuntime { get; set; }
     }
 }

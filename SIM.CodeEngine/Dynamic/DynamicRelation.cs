@@ -1,4 +1,5 @@
-﻿using SIM.Core.Attributes;
+﻿using Newtonsoft.Json;
+using SIM.Core.Attributes;
 using SIM.Core.Extensions;
 using SIM.Core.Objects;
 using System;
@@ -39,6 +40,9 @@ namespace SIM.CodeEngine.Dynamic
                     new object[] { types.ElementAt(i), end }));
             }
         }
+
+        [JsonProperty(Order = 5)]
+        public ICollection<DynamicProperty> Properties { get; set; }
 
         public override Type DerivedFrom => typeof(Relation);
     }

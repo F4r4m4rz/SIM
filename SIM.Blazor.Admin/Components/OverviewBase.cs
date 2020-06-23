@@ -3,6 +3,7 @@ using Microsoft.JSInterop;
 using SIM.Blazor.Admin.Data;
 using SIM.CodeEngine.Commands;
 using SIM.CodeEngine.Dynamic;
+using SIM.Core.DataBase;
 using SIM.Core.Objects;
 using SIM.DataBase;
 using System;
@@ -58,12 +59,12 @@ namespace SIM.Blazor.Admin.Components
 
         protected void NewNode()
         {
-            NavigationManager.NavigateTo("/newitem/1");
+            NavigationManager.NavigateTo("/newitem/Node");
         }
 
         protected void NewRelation()
         {
-            NavigationManager.NavigateTo("/newitem/2");
+            NavigationManager.NavigateTo("/newitem/Relation");
         }
 
         protected void NavigateToNode(string name)

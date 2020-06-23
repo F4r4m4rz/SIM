@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
+using SIM.Core.DataBase;
 
 namespace SIM.Blazor.Admin.Components
 {

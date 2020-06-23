@@ -11,7 +11,7 @@ namespace SIM.CodeEngine.Dynamic
 {
     public class DynamicNode : DynamicObject
     {
-        internal DynamicNode()
+        public DynamicNode()
         {
 
         }

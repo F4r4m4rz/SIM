@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SIM.Blazor.Admin.Data;
 using SIM.CodeEngine.Factory;
+using SIM.Core.DataBase;
 using SIM.DataBase;
 
 namespace SIM.Blazor.Admin
