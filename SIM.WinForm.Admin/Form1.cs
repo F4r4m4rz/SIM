@@ -227,9 +227,9 @@ namespace SIM.WinForm.Admin
         {
             var arguments = grbDetails.Controls.OfType<TextBox>().Select(c => c.Text);
             var boolArgs = grbDetails.Controls.OfType<CheckBox>().Select(c => c.Checked);
-            var com = new NewDynamicPropertyCommand(new AdminRepository(),
-                arguments.ElementAt(0), arguments.ElementAt(1), arguments.ElementAt(2), arguments.ElementAt(3), boolArgs.ElementAt(0), boolArgs.ElementAt(1), boolArgs.ElementAt(2));
-            com.Execute();
+            //var com = new NewDynamicPropertyCommand(new AdminRepository(),
+            //    arguments.ElementAt(0), arguments.ElementAt(1), arguments.ElementAt(2), arguments.ElementAt(3), boolArgs.ElementAt(0), boolArgs.ElementAt(1), boolArgs.ElementAt(2));
+            //com.Execute();
             UpdateProperties(lstNodes.SelectedItem as DynamicNode);
             grbDetails.Controls.Clear();
         }

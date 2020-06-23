@@ -10,7 +10,7 @@ namespace SIM.Blazor.Components
     public class SimTypePropReprBase : ComponentBase
     {
         [Parameter]
-        public ISimObject Owner { get; set; }
+        public object Owner { get; set; }
 
         [Parameter]
         public PropertyInfo BackingProprty { get; set; }
@@ -22,7 +22,7 @@ namespace SIM.Blazor.Components
         {
             get
             {
-                return BackingProprty.GetValue(Owner).ToString();
+                return BackingProprty.GetValue(Owner)?.ToString();
             }
 
             set

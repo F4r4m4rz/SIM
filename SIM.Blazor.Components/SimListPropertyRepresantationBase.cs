@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using SIM.CodeEngine.Dynamic;
 
 namespace SIM.Blazor.Components
 {
@@ -35,6 +36,7 @@ namespace SIM.Blazor.Components
         [Inject]
         public IMediator Mediator { get; set; }
 
+        public SimNewItemDialog SimNewItemDialog { get; set; }
         public DataTable Table { get; private set; }
 
         private DataTable GetPropertyValueAsTable()
@@ -61,6 +63,13 @@ namespace SIM.Blazor.Components
 
         protected override Task OnInitializedAsync()
         {
+            UpdateTable();
+
+            return base.OnInitializedAsync();
+        }
+
+        private void UpdateTable()
+        {
             // Create table
             Table = GetPropertyValueAsTable();
 
@@ -69,8 +78,6 @@ namespace SIM.Blazor.Components
 
             // Populate table
             PopulateTable();
-
-            return base.OnInitializedAsync();
         }
 
         private void PopulateTable()
@@ -89,7 +96,7 @@ namespace SIM.Blazor.Components
                 {
                     var value = current.GetType().GetProperty(Table.Columns[i].ColumnName).GetValue(current);
                     string valueStr = string.Empty;
-                    if (value.GetType().GetInterface("IEnumerable") != null && !value.GetType().Equals(typeof(string)))
+                    if (value != null && value.GetType().GetInterface("IEnumerable") != null && !value.GetType().Equals(typeof(string)))
                     {
                         var enumerator = (value as IEnumerable).GetEnumerator();
                         while (enumerator.MoveNext())
@@ -100,7 +107,7 @@ namespace SIM.Blazor.Components
                     }
                     else
                     {
-                        valueStr = value.ToString();
+                        valueStr = value?.ToString();
                     }
                     row[Table.Columns[i]] = valueStr;
                 }
@@ -118,6 +125,17 @@ namespace SIM.Blazor.Components
             // Save json
             var cmd = new RepositoryAsJsonCommand(Repository, $"SIM.Aibel.{Mediator.Context}");
             cmd.Execute();
+        }
+
+        protected void Open()
+        {
+            SimNewItemDialog.Show();
+        }
+
+        protected void Update()
+        {
+            UpdateTable();
+            StateHasChanged();
         }
     }
 }

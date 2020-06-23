@@ -10,7 +10,7 @@ namespace SIM.Blazor.Components
     public class SimBooleanPropReprBase : ComponentBase
     {
         [Parameter]
-        public ISimObject Owner { get; set; }
+        public object Owner { get; set; }
 
         [Parameter]
         public PropertyInfo BackingProprty { get; set; }

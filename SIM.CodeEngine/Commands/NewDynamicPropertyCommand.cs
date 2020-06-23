@@ -14,49 +14,42 @@ namespace SIM.CodeEngine.Commands
     [CommandString("dprop")]
     public class NewDynamicPropertyCommand : ISimCommand
     {
-        private readonly ISimRepository repository;
-        private readonly string nameSpace;
-        private readonly string name;
-        private readonly string dataType;
-        private readonly bool isRequired;
-        private readonly bool isUserInput;
-        private readonly bool isNodeProperty;
-        private readonly string ownerObject;
-
         public object Result { get; private set; }
 
-        public NewDynamicPropertyCommand(ISimRepository repository, string nameSpace, string name,
-                                         string ownerObject, string dataType, bool isRequired,
-                                         bool isUserInput, bool isNodeProperty)
+        public ISimRepository Repository { get; set; }
+
+        public DynamicNode Owner { get; set; }
+
+        public string Name { get; set; }
+
+        public string DataType { get; set; }
+
+        public bool IsRequired { get; set; }
+
+        public bool IsUserInput { get; set; }
+
+        public NewDynamicPropertyCommand()
         {
-            this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
-            this.nameSpace = nameSpace;
-            this.name = name;
-            this.dataType = dataType;
-            this.isRequired = isRequired;
-            this.isUserInput = isUserInput;
-            this.isNodeProperty = isNodeProperty;
-            this.ownerObject = ownerObject;
+
+        }
+
+        public NewDynamicPropertyCommand(ISimRepository repository, DynamicNode owner, string name,
+                                         string dataType, bool isRequired,
+                                         bool isUserInput)
+        {
+            this.Repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            this.Owner = owner ?? throw new ArgumentNullException(nameof(owner));
+            this.Name = name;
+            this.DataType = dataType;
+            this.IsRequired = isRequired;
+            this.IsUserInput = isUserInput;
         }
 
         public bool CanExecute()
         {
-            // Check if ownerObject exists in repository and put it in result
-            Result = repository.Get(a => (a as DynamicNode)?.Name == ownerObject) as DynamicNode;
-            if (Result == null) return false;
-
             // Check if ownerObject already has a property with this name
-            if ((Result as DynamicNode).Properties.FirstOrDefault(a => a.Name == name) != null)
+            if (Owner.Properties.FirstOrDefault(a => a.Name == Name) != null)
                 return false;
-
-            // Check if it is identity
-            if (isNodeProperty)
-            {
-                // valueType should be valid in current repos
-                var isValid = repository.Get(a => (a as DynamicNode)?.Name == dataType) != null;
-                if (!isValid)
-                    return false;
-            }
 
             return true;
         }
@@ -66,12 +59,8 @@ namespace SIM.CodeEngine.Commands
             if (!CanExecute())
                 throw new OperationCanceledException($"{GetType().Name} cannot be excuted");
 
-            if (isNodeProperty)
-                (Result as DynamicNode).Properties
-                    .Add(new DynamicRelationProperty(nameSpace, name, dataType, isRequired, isUserInput));
-            else
-                (Result as DynamicNode).Properties
-                    .Add(new DynamicProperty(nameSpace, name, dataType, isRequired, isUserInput, null));
+            Result = new DynamicProperty(Owner.Namespace, Name, DataType, IsRequired, IsUserInput, Repository);
+            Owner.Properties.Add(Result as DynamicProperty);
         }
     }
 }

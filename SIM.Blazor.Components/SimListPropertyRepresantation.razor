@@ -1,5 +1,6 @@
 ﻿@inherits SimListPropertyRepresantationBase
 @using System.Data
+@using SIM.CodeEngine.Commands
 
 <div class="form-group">
     <label for="@Table.TableName">@Table.TableName</label>
@@ -37,7 +38,8 @@
     @if (Editable)
     {
         <div>
-            <button type="button" class="btn btn-info">Add</button>
+            <button type="button" class="btn btn-info" @onclick="Open">Add</button>
         </div>
     }
 </div>
+<SimNewItemDialog @ref="SimNewItemDialog" CreateCommand="@(new NewDynamicPropertyCommand())" Owner="@(Owner)" CloseEventCallback="Update"></SimNewItemDialog>

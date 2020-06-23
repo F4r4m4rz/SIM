@@ -13,7 +13,7 @@ namespace SIM.CodeEngine.Dynamic
     {
         public DynamicNode()
         {
-
+            Properties = new List<DynamicProperty>();
         }
 
         public DynamicNode(string nameSpace, string name, bool isVisible) : base(nameSpace, name)
