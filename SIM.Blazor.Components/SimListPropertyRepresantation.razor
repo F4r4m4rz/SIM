@@ -1,4 +1,4 @@
-﻿@inherits SimListPropertyRepresantationBase
+﻿@inherits SimListPropertyRepresentation
 @using System.Data
 @using SIM.CodeEngine.Commands
 
@@ -42,4 +42,4 @@
         </div>
     }
 </div>
-<SimNewItemDialog @ref="SimNewItemDialog" CreateCommand="@(new NewDynamicPropertyCommand())" Owner="@(Owner)" CloseEventCallback="Update"></SimNewItemDialog>
+<SimNewItemDialog @ref="SimNewPropertyDialog" Scope="@Table.TableName" CreateCommand="@(new NewDynamicPropertyCommand())" Owner="@(Owner)" CloseEventCallback="Update"></SimNewItemDialog>

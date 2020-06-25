@@ -40,14 +40,14 @@ namespace SIM.Shell.Admin
                 arguments = PrintArguments(parameters);
 
             var x = analyser.Execute(arguments);
-            if (x is IEnumerable<DynamicObject>)
-            {
-                var jsonRepos = new AdminRepository(x as IEnumerable<DynamicObject>);
-                return;
-            }
-            var repository = new AdminRepository();
-            if (x != null && repository.Get(a => (a as DynamicObject).Name == (x as DynamicObject).Name) == null)
-                repository.Add(x as ISimObject);
+            //if (x is IEnumerable<DynamicObject>)
+            //{
+            //    var jsonRepos = new AdminRepository(x as IEnumerable<DynamicObject>);
+            //    return;
+            //}
+            //var repository = new AdminRepository();
+            //if (x != null && repository.Get(a => (a as DynamicObject).Name == (x as DynamicObject).Name) == null)
+            //    repository.Add(x as ISimObject);
             //else
             //    repository.Update(x as ISimObject);
         }

@@ -16,7 +16,7 @@ using SIM.CodeEngine.Dynamic;
 
 namespace SIM.Blazor.Components
 {
-    public class SimListPropertyRepresantationBase : ComponentBase
+    public class SimListPropertyRepresentation : ComponentBase
     {
         [Parameter]
         public ISimObject Owner { get; set; }
@@ -36,7 +36,7 @@ namespace SIM.Blazor.Components
         [Inject]
         public IMediator Mediator { get; set; }
 
-        public SimNewItemDialog SimNewItemDialog { get; set; }
+        public SimNewItemDialog SimNewPropertyDialog { get; set; }
         public DataTable Table { get; private set; }
 
         private DataTable GetPropertyValueAsTable()
@@ -129,7 +129,7 @@ namespace SIM.Blazor.Components
 
         protected void Open()
         {
-            SimNewItemDialog.Show();
+            SimNewPropertyDialog.Show();
         }
 
         protected void Update()

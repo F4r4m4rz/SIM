@@ -35,7 +35,7 @@ namespace SIM.CodeEngine.Dynamic
             IsUserInput = isUserInput;
         }
 
-        public override Type DerivedFrom => typeof(Relation);
+        public override string DerivedFrom => typeof(Relation).FullName;
 
         public string TargetNodeType { get; set; }
     }

@@ -73,7 +73,7 @@ namespace SIM.CodeEngine.Assembly
             var @class = GenerateClass(@namespace);
             GenerateClassAttributes(@class);
 
-            if (dynamicObject is DynamicNode)
+            if (dynamicObject is DynamicGraphObject)
                 GenerateProperties(@class);
 
             // Build C# code
@@ -95,13 +95,18 @@ namespace SIM.CodeEngine.Assembly
         private CodeAttributeDeclaration GenerateAttribute(KeyValuePair<Type, object[]> dynamicAtt)
         {
             var attribute = new CodeAttributeDeclaration(new CodeTypeReference(dynamicAtt.Key));
-
+            
             // Collect parameters of constructor
             var parameters = dynamicAtt.Key.GetConstructors()[0].GetParameters();
 
             // For each parameter generate a CodeAttributeArgument and add to attribute
             for (int i = 0; i < parameters.Length; i++)
             {
+                if (parameters[i].ParameterType.BaseType == typeof(Enum))
+                    attribute.Arguments.Add(new CodeAttributeArgument(
+                        new CodePropertyReferenceExpression(
+                            new CodeVariableReferenceExpression(parameters[i].ParameterType.Name), dynamicAtt.Value[i].ToString())));
+
                 if (parameters[i].ParameterType == typeof(string))
                     attribute.Arguments.Add(new CodeAttributeArgument(new CodePrimitiveExpression(dynamicAtt.Value[i])));
 
@@ -145,9 +150,9 @@ namespace SIM.CodeEngine.Assembly
 
         private void GenerateProperties(CodeTypeDeclaration @class)
         {
-            for (int i = 0; i < (dynamicObject as DynamicNode).Properties.Count; i++)
+            for (int i = 0; i < (dynamicObject as DynamicGraphObject).Properties.Count; i++)
             {
-                var dynamicProp = (dynamicObject as DynamicNode).Properties.ElementAt(i);
+                var dynamicProp = (dynamicObject as DynamicGraphObject).Properties.ElementAt(i);
                 //var field = GeenerateField(dynamicProp);
                 //@class.Members.Add(field);
 

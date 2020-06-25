@@ -22,7 +22,7 @@ namespace SIM.Blazor.Components
         {
             get
             {
-                return BackingProprty.GetValue(Owner) as string;
+                return BackingProprty.GetValue(Owner)?.ToString();
             }
 
             set

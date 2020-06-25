@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace SIM.CodeEngine.Dynamic
 {
-    public class DynamicRelation : DynamicObject
+    public class DynamicRelation : DynamicGraphObject
     {
-        internal DynamicRelation()
+        public DynamicRelation()
         {
 
         }
@@ -41,9 +41,6 @@ namespace SIM.CodeEngine.Dynamic
             }
         }
 
-        [JsonProperty(Order = 5)]
-        public ICollection<DynamicProperty> Properties { get; set; }
-
-        public override Type DerivedFrom => typeof(Relation);
+        public override string DerivedFrom => typeof(Relation).FullName;
     }
 }

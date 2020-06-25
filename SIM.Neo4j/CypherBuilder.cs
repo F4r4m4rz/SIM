@@ -92,48 +92,48 @@ namespace SIM.Neo4j
             return $"set {nodeTag}.{name} = \"{value}\"";
         }
 
-        private static string AnalyseRelation(PropertyRelation relation, string name)
-        {
-            var id = IDGenerator.GetId(relation, out bool isFirstTime);
-            string tag = string.Empty;
-            if (TagHistory.ContainsKey(relation))
-                tag = TagHistory[relation];
-            else
-            {
-                tag = $"r{id}";
-                TagHistory.Add(relation, tag);
-            }
-            string relationCmd = $"[{tag}:{relation.GetType().Name}]";
+        //private static string AnalyseRelation(PropertyRelation relation, string name)
+        //{
+        //    var id = IDGenerator.GetId(relation, out bool isFirstTime);
+        //    string tag = string.Empty;
+        //    if (TagHistory.ContainsKey(relation))
+        //        tag = TagHistory[relation];
+        //    else
+        //    {
+        //        tag = $"r{id}";
+        //        TagHistory.Add(relation, tag);
+        //    }
+        //    string relationCmd = $"[{tag}:{relation.GetType().Name}]";
 
-            // Origin
-            string origin = AnalyseNode(relation.Origin);
+        //    // Origin
+        //    string origin = AnalyseNode(relation.Origin);
 
-            // Target
-            string target = AnalyseNode(relation.Target, name);
+        //    // Target
+        //    string target = AnalyseNode(relation.Target, name);
 
-            return string.Format("{0}-{1}->{2}", origin, relationCmd, target);
-        }
+        //    return string.Format("{0}-{1}->{2}", origin, relationCmd, target);
+        //}
 
-        private static string AnalyseNode(PropertyNode node, string name)
-        {
-            var id = IDGenerator.GetId(node, out bool isFirstTime);
-            Type nodeType = node.GetType();
-            string tag = string.Empty;
-            string nodeCmd = string.Empty;
-            if (TagHistory.ContainsKey(node))
-            {
-                tag = TagHistory[node];
-                nodeCmd = string.Format("({0})", tag);
-            }
-            else
-            {
-                tag = $"n{id}";
-                TagHistory.Add(node, tag);
-                nodeCmd = string.Format("({0}:{1}{{Value:'{2}'}})", tag, name, node.GetValue());
-            }
+        //private static string AnalyseNode(PropertyNode node, string name)
+        //{
+        //    var id = IDGenerator.GetId(node, out bool isFirstTime);
+        //    Type nodeType = node.GetType();
+        //    string tag = string.Empty;
+        //    string nodeCmd = string.Empty;
+        //    if (TagHistory.ContainsKey(node))
+        //    {
+        //        tag = TagHistory[node];
+        //        nodeCmd = string.Format("({0})", tag);
+        //    }
+        //    else
+        //    {
+        //        tag = $"n{id}";
+        //        TagHistory.Add(node, tag);
+        //        nodeCmd = string.Format("({0}:{1}{{Value:'{2}'}})", tag, name, node.GetValue());
+        //    }
 
-            return nodeCmd;
-        }
+        //    return nodeCmd;
+        //}
 
         private static string AnalyseRelation(Relation relation)
         {

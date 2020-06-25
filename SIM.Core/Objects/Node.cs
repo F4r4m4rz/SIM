@@ -15,6 +15,16 @@ namespace SIM.Core.Objects
         protected Node()
         {
             Properties = new Dictionary<string, object>();
+            ProvidePropertyKeys();
+        }
+
+        private void ProvidePropertyKeys()
+        {
+            var allProperties = GetType().GetProperties();
+            foreach (var prop in allProperties)
+            {
+                Properties.Add(prop.Name, null);
+            }
         }
 
         public IDictionary<string, object> Properties { get; set; }

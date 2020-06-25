@@ -45,7 +45,7 @@ namespace SIM.CodeEngine.Dynamic
         public string Name { get; set; }
 
         [JsonProperty(Order = 3)]
-        public virtual Type DerivedFrom { get; set; }
+        public virtual string DerivedFrom { get; set; }
 
         [JsonProperty(Order = 4)]
         public ICollection<KeyValuePair<Type, object[]>> Attributes { get; set; }

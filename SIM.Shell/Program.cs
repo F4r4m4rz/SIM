@@ -30,6 +30,14 @@ namespace SIM.Shell
             //repository = new Repository();
             repository = new Neo4jRepository();
 
+            SIM.Aibel.CAR.SDI sdi = new Aibel.CAR.SDI();
+            sdi.DataCode = "SDI-01";
+            sdi.Revision = 1;
+            sdi.Subject = "First SDI for CAR";
+            sdi.StatusDate = DateTime.Now;
+            var x = sdi.Validate(new ValidationContext(sdi));
+            var y = Validator.TryValidateObject(sdi, new ValidationContext(sdi), null);
+
             // Load dll
             assembly = AppDomain.CurrentDomain.Load(args[0]);
 
@@ -37,28 +45,28 @@ namespace SIM.Shell
             //userInput = Console.ReadLine();
             Graph g = new Graph();
 
-            Type type = GetUserType("Move");
+            Type type = GetUserType("SDI");
             var moveArgs = GetArgs(type);
-            //moveArgs.AssignArgumentValues(new IntegerPropertyNode(3));
+            moveArgs.AssignArgumentValues();
             moveArgs.AssignArgumentValues(30);
             var move = Create(type, moveArgs);
             g.Nodes.Add(move);
 
-            type = GetUserType("Move");
+            type = GetUserType("Section");
             var moveArgs2 = GetArgs(type);
             //moveArgs2.AssignArgumentValues(new IntegerPropertyNode(3));
             moveArgs2.AssignArgumentValues(30);
             var move2 = Create(type, moveArgs2);
             g.Nodes.Add(move2);
 
-            type = GetUserType("Session");
+            type = GetUserType("HasSection");
             var sessionArgs = GetArgs(type);
             //sessionArgs.AssignArgumentValues(new DateTimePropertyNode(DateTime.Now));
             sessionArgs.AssignArgumentValues(DateTime.Now);
             var session = Create(type, sessionArgs);
             g.Nodes.Add(session);
 
-            type = GetUserType("HasSession");
+            type = GetUserType("Issued_By");
             var hasSession = move.RelateTo(type, session, true);
             g.Relations.Add(hasSession);
 

@@ -76,5 +76,17 @@ namespace SIM.Blazor.Admin.Components
         {
             NavigationManager.NavigateTo($"/{name}");
         }
+
+        protected void GenerateCSfiles()
+        {
+            var cmd = new GenerateCSharpCodeCommand(repository);
+            cmd.Execute();
+        }
+
+        protected void Compile()
+        {
+            var cmd = new CompileRepositoryCommand(repository);
+            cmd.Execute();
+        }
     }
 }

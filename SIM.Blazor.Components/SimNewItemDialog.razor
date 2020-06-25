@@ -12,11 +12,40 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    @foreach (var prop in CreateCommand.GetType().GetProperties())
+                    @if (Scope == "Properties")
                     {
-                        if (prop.PropertyType == typeof(string) || prop.PropertyType.GetInterface("IEnumerable") == null)
+                        foreach (var prop in CreateCommand.GetType().GetProperties())
                         {
-                            <SimSinglePropertyRepresentation BackingProprty="@prop" Owner="@CreateCommand" Editable="true"></SimSinglePropertyRepresentation>
+                            if (prop.PropertyType == typeof(string) || prop.PropertyType.GetInterface("IEnumerable") == null)
+                            {
+                                <SimSinglePropertyRepresentation BackingProprty="@prop" Owner="@CreateCommand" Editable="true"></SimSinglePropertyRepresentation>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label for="AttributeName">Name</label>
+                            <input type="text" class="form-control" id="Name" @onchange="AttributeNameAdded" />
+                        </div>
+                        if (!string.IsNullOrWhiteSpace(AttributeName) && AttributeType != null)
+                        {
+                            foreach (var prop in AttributeType.GetProperties())
+                            {
+                                if (prop.PropertyType == typeof(string) || prop.PropertyType.GetInterface("IEnumerable") == null)
+                                {
+                                    <div class="form-group">
+                                        <label for="@prop.Name">@prop.Name</label>
+                                        <input  type="text" class="form-control" id="@prop.Name" @onchange="ValueEntered" />
+                                    </div>
+                                }
+                            }
+                        }
+                        else if (!string.IsNullOrWhiteSpace(AttributeName))
+                        {
+                            <div>
+                                Attribute name is not valid
+                            </div>
                         }
                     }
                 </div>
@@ -28,4 +57,3 @@
         </div>
     </div>
 }
-    

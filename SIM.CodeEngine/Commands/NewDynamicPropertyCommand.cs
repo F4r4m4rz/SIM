@@ -18,7 +18,7 @@ namespace SIM.CodeEngine.Commands
 
         public ISimRepository Repository { get; set; }
 
-        public DynamicNode Owner { get; set; }
+        public DynamicGraphObject Owner { get; set; }
 
         public string Name { get; set; }
 
@@ -33,7 +33,7 @@ namespace SIM.CodeEngine.Commands
 
         }
 
-        public NewDynamicPropertyCommand(ISimRepository repository, DynamicNode owner, string name,
+        public NewDynamicPropertyCommand(ISimRepository repository, DynamicGraphObject owner, string name,
                                          string dataType, bool isRequired,
                                          bool isUserInput)
         {
