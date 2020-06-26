@@ -38,6 +38,9 @@ namespace SIM.Shell
             var x = sdi.Validate(new ValidationContext(sdi));
             var y = Validator.TryValidateObject(sdi, new ValidationContext(sdi), null);
 
+            SIM.Aibel.CAR.Release release = new Aibel.CAR.Release();
+            y = Validator.TryValidateObject(release, new ValidationContext(release), null);
+
             // Load dll
             assembly = AppDomain.CurrentDomain.Load(args[0]);
 

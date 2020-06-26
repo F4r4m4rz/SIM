@@ -47,12 +47,13 @@ namespace SIM.CodeEngine.Assembly
 
         public CompilerResults Complie()
         {
-            CSharpCodeProvider provider = new CSharpCodeProvider();
+            //CSharpCodeProvider provider = new CSharpCodeProvider();
+            CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
             CompilerParameters cp = BuildCompilerParameters();
             return Compile(provider, cp);
         }
 
-        private CompilerResults Compile(CSharpCodeProvider provider, CompilerParameters cp)
+        private CompilerResults Compile(CodeDomProvider provider, CompilerParameters cp)
         {
             if (sourceFiles != null)
                 return provider.CompileAssemblyFromFile(cp, sourceFiles.ToArray());

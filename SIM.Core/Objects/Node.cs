@@ -23,6 +23,7 @@ namespace SIM.Core.Objects
             var allProperties = GetType().GetProperties();
             foreach (var prop in allProperties)
             {
+                if (prop.Name == nameof(Properties)) continue;
                 Properties.Add(prop.Name, null);
             }
         }

@@ -200,7 +200,7 @@ namespace SIM.CodeEngine.Assembly
             CodeMemberProperty property = new CodeMemberProperty();
             property.Name = dynamicProp.Name;
             property.Type = new CodeTypeReference(dynamicProp.DerivedFrom);
-            property.Attributes = MemberAttributes.Public;
+            property.Attributes = MemberAttributes.Public | MemberAttributes.Final;
 
             // Generate getter
             CodeMethodReturnStatement getter = GenerateGetter(property);
@@ -251,6 +251,8 @@ namespace SIM.CodeEngine.Assembly
 
             // Define base class
             cs.BaseTypes.Add(new CodeTypeReference(dynamicObject.DerivedFrom));
+            cs.IsPartial = true;
+            cs.TypeAttributes = System.Reflection.TypeAttributes.Public | System.Reflection.TypeAttributes.Sealed;
             
             // Add type to namespace
             ns.Types.Add(cs);
