@@ -1,0 +1,16 @@
+﻿@inherits ContextListBase
+
+<div class="form-group">
+    <table class="table table-bordered table-hover">
+        <tbody>
+            @foreach (var context in AvailableContexts)
+            {
+                <tr @onclick=@(()=>Context_OnClick(context))>
+                    <td>
+                        @context
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

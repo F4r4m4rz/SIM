@@ -1,0 +1,27 @@
+﻿@page "/"
+@using SIM.Blazor.Components
+
+@if (ShowContextList)
+{
+    <ContextList Callback="Refresh" />
+}
+else
+{
+    <EntitiesList />
+}
+
+
+@code{
+    public bool ShowContextList
+    {
+        get
+        {
+            return string.IsNullOrWhiteSpace(SIM.Blazor.Data.Mediator.Context);
+        }
+    }
+
+    protected void Refresh()
+    {
+        StateHasChanged();
+    }
+}
