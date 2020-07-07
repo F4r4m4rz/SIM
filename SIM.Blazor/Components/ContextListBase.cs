@@ -22,13 +22,12 @@ namespace SIM.Blazor.Components
         [Inject]
         public Mediator Mediator { get; set; }
 
-        [Parameter]
-        public EventCallback Callback { get; set; }
-
         protected void Context_OnClick(string context)
         {
             Mediator.Context = context;
-            Callback.InvokeAsync(null);
+            Mediator.LoadAssembly();
+            Mediator.RefreshIndexPage(this);
+            Mediator.RefreshNavbar(this);
         }
     }
 }

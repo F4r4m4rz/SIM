@@ -177,6 +177,10 @@ namespace SIM.CodeEngine.Assembly
             // UserInput attribute
             if (dynamicProp.IsUserInput)
                 GenerateNoArgumentAttribute(dynamicProp, property, typeof(UserInputAttribute));
+
+            // First level attribute
+            if (dynamicProp.IsFirstLevelProperty)
+                GenerateNoArgumentAttribute(dynamicProp, property, typeof(FirstLevelPropertyAttribute));
         }
 
         private void GenerateNoArgumentAttribute(DynamicProperty dynamicProp, CodeMemberProperty property, Type attributeType)

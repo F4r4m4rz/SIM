@@ -18,7 +18,8 @@ namespace SIM.CodeEngine.Dynamic
 
         }
 
-        public DynamicProperty(string nameSpace, string propertyName, string valueType, bool isRequired, bool isUserInput, ISimRepository simRepository)
+        public DynamicProperty(string nameSpace, string propertyName, string valueType,
+            bool isRequired, bool isUserInput, bool isFirstLevelProperty, ISimRepository simRepository)
         {
             try
             {
@@ -33,6 +34,7 @@ namespace SIM.CodeEngine.Dynamic
 
             IsRequired = isRequired;
             IsUserInput = isUserInput;
+            IsFirstLevelProperty = isFirstLevelProperty;
         }
 
         public override string DerivedFrom { get => ValueType; }
@@ -53,10 +55,10 @@ namespace SIM.CodeEngine.Dynamic
         public bool IsUserInput { get; set; }
 
         /// <summary>
-        /// The command to be executed upon assignment
+        /// Indicates if the property should be shown on the introduction list
         /// </summary>
         [JsonProperty(Order = 8)]
-        public string AssignmentCommand { get; set; }
+        public bool IsFirstLevelProperty { get; set; }
 
         /// <summary>
         /// Default value of the property upon intialization

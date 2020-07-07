@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SIM.Blazor.Admin", "SIM.Bla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SIM.Blazor.Components", "SIM.Blazor.Components\SIM.Blazor.Components.csproj", "{C1EE39E5-5987-40A7-AC49-8ED068561946}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIM.Blazor", "SIM.Blazor\SIM.Blazor.csproj", "{308E702C-2D71-41CA-9900-57BBCE6FE350}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SIM.Blazor", "SIM.Blazor\SIM.Blazor.csproj", "{308E702C-2D71-41CA-9900-57BBCE6FE350}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,27 +1,12 @@
 ﻿@page "/"
+@inherits IndexBase
 @using SIM.Blazor.Components
 
 @if (ShowContextList)
 {
-    <ContextList Callback="Refresh" />
+    <ContextList />
 }
 else
 {
-    <EntitiesList />
-}
-
-
-@code{
-    public bool ShowContextList
-    {
-        get
-        {
-            return string.IsNullOrWhiteSpace(SIM.Blazor.Data.Mediator.Context);
-        }
-    }
-
-    protected void Refresh()
-    {
-        StateHasChanged();
-    }
+    <h2>Choose an entity to work with</h2>
 }
