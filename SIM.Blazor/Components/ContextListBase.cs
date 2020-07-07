@@ -14,7 +14,9 @@ namespace SIM.Blazor.Components
         {
             get
             {
-                return Directory.GetFiles(@"C:\Users\ofsfabo1\AppData\Roaming\SIM\Auto generated assemblies", "SIM.Aibel.*.dll")
+                var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                    @"SIM\Auto generated assemblies");
+                return Directory.GetFiles(path, "SIM.Aibel.*.dll")
                     .Select(a => a.Split('.')[2]);
             }
         }

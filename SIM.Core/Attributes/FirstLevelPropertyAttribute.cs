@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SIM.Core.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public class FirstLevelPropertyAttribute : Attribute
     {
     }

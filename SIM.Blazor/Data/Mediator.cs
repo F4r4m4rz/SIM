@@ -21,9 +21,16 @@ namespace SIM.Blazor.Data
 
         internal Assembly LoadAssembly()
         {
-            var assemblyBytes = File.ReadAllBytes($@"C:\Users\ofsfabo1\AppData\Roaming\SIM\Auto generated assemblies\SIM.Aibel.{Context}.dll");
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                $@"SIM\Auto generated assemblies\SIM.Aibel.{Context}.dll");
+            var assemblyBytes = File.ReadAllBytes(path);
             assembly = AppDomain.CurrentDomain.Load(assemblyBytes);
             return assembly;
+        }
+
+        internal Type GetTypeByName(string name)
+        {
+            return assembly.GetTypes().Where(a=>a.Name==name).FirstOrDefault();
         }
 
         private IEnumerable<Type> ReadNodeEntities()

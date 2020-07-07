@@ -15,7 +15,9 @@ namespace SIM.Blazor.Admin.Data
 
         public IEnumerable<string> GetAll()
         {
-            return Directory.GetFiles(@"C:\Users\ofsfabo1\AppData\Roaming\SIM\Json")
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                @"SIM\Json");
+            return Directory.GetFiles(path)
                .Select(a => Path.GetFileNameWithoutExtension(a).Split('.')[2]);
         }
     }

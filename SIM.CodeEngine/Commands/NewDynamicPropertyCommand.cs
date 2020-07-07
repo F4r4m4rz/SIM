@@ -28,6 +28,8 @@ namespace SIM.CodeEngine.Commands
 
         public bool IsUserInput { get; set; }
 
+        public bool IsFirstLevelProperty { get; set; }
+
         public NewDynamicPropertyCommand()
         {
 
@@ -35,7 +37,7 @@ namespace SIM.CodeEngine.Commands
 
         public NewDynamicPropertyCommand(ISimRepository repository, DynamicGraphObject owner, string name,
                                          string dataType, bool isRequired,
-                                         bool isUserInput)
+                                         bool isUserInput, bool isFirstLevelProperty)
         {
             this.Repository = repository ?? throw new ArgumentNullException(nameof(repository));
             this.Owner = owner ?? throw new ArgumentNullException(nameof(owner));
@@ -43,6 +45,7 @@ namespace SIM.CodeEngine.Commands
             this.DataType = dataType;
             this.IsRequired = isRequired;
             this.IsUserInput = isUserInput;
+            this.IsFirstLevelProperty = isFirstLevelProperty;
         }
 
         public bool CanExecute()
@@ -59,7 +62,7 @@ namespace SIM.CodeEngine.Commands
             if (!CanExecute())
                 throw new OperationCanceledException($"{GetType().Name} cannot be excuted");
 
-            Result = new DynamicProperty(Owner.Namespace, Name, DataType, IsRequired, IsUserInput, Repository);
+            Result = new DynamicProperty(Owner.Namespace, Name, DataType, IsRequired, IsUserInput, IsFirstLevelProperty, Repository);
             Owner.Properties.Add(Result as DynamicProperty);
         }
     }

@@ -1,1 +1,15 @@
 ﻿@inherits EntityDetailsBase
+@using SIM.Core.Attributes
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            @foreach (var item in Type?.GetProperties().Where(a=>a.GetCustomAttributes(typeof(FirstLevelPropertyAttribute), false).Length != 0))
+            {
+                <td>
+                    @item.Name
+                </td>
+            }
+        </tr>
+    </thead>
+</table>

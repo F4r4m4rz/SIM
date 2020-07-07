@@ -1,9 +1,10 @@
 ﻿@page "/{entityName}"
+@using SIM.Blazor.Components
 
 <h1>@entityName</h1>
 
 <div>
-    
+    <EntityDetails TypeName="@entityName" />
 </div>
 
 @code{
