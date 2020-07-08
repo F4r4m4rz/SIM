@@ -12,4 +12,17 @@
             }
         </tr>
     </thead>
+    <tbody>
+        @foreach (var obj in DataService.GetAll(a=>a.GetType()==Type))
+        {
+            <tr>
+                @foreach (var prop in obj.GetType().GetProperties().Where(a => a.GetCustomAttributes(typeof(FirstLevelPropertyAttribute), false).Length != 0))
+                {
+                    <td>
+                        @prop.GetValue(obj)
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
 </table>
