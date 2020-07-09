@@ -36,7 +36,8 @@ namespace SIM.Blazor.Data
         private IEnumerable<Type> ReadNodeEntities()
         {
             return assembly.GetTypes()
-                .Where(a => a.BaseType == typeof(Node) && a.GetCustomAttribute(typeof(VisibleNodeAttribute)) != null);
+                //.Where(a => a.BaseType == typeof(Node) && a.GetCustomAttribute(typeof(VisibleNodeAttribute)) != null);
+                .Where(a => a.BaseType == typeof(Node));
         }
 
         public void RefreshIndexPage(object requester)

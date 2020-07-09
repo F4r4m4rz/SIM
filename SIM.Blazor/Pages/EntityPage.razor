@@ -1,7 +1,12 @@
 ﻿@page "/{entityName}"
-@using SIM.Blazor.Components
+@using SIM.Blazor.InternalComponents
 
-<h1>@entityName</h1>
+    <div class="form-group">
+        <h1>@entityName</h1>
+        <button class="btn-secondary btn-lg" @onclick="AddNew">Add</button>
+    </div>
+
+
 
 <div>
     <EntityDetails TypeName="@entityName" />
@@ -10,4 +15,12 @@
 @code{
     [Parameter]
     public string entityName { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    public void AddNew()
+    {
+        NavigationManager.NavigateTo($"/{entityName}/Add");
+    }
 }

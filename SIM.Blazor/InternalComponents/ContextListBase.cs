@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SIM.Blazor.Components
+namespace SIM.Blazor.InternalComponents
 {
     public class ContextListBase : ComponentBase
     {

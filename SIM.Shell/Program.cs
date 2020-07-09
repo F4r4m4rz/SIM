@@ -10,6 +10,7 @@ using System.ComponentModel.DataAnnotations;
 using SIM.Core.Factory;
 using SIM.Neo4j;
 using SIM.DataBase;
+using System.Xml.Serialization;
 
 namespace SIM.Shell
 {
@@ -21,71 +22,77 @@ namespace SIM.Shell
 
         static void Main(string[] args)
         {
-            string userInput = string.Empty;
-
-            // Make factory
-            factory = new SimNodeFactory();
-
-            // Make a repository
-            //repository = new Repository();
             repository = new Neo4jRepository();
+            var x = repository.GetAll(a => a is Node);
+        }
 
-            SIM.Aibel.CAR.SDI sdi = new Aibel.CAR.SDI();
-            sdi.DataCode = "SDI-01";
-            sdi.Revision = 1;
-            sdi.Subject = "First SDI for CAR";
-            sdi.StatusDate = DateTime.Now;
-            var x = sdi.Validate(new ValidationContext(sdi));
-            var y = Validator.TryValidateObject(sdi, new ValidationContext(sdi), null);
+        private static void Test()
+        {
+            //string userInput = string.Empty;
 
-            SIM.Aibel.CAR.Release release = new Aibel.CAR.Release();
-            y = Validator.TryValidateObject(release, new ValidationContext(release), null);
+            //// Make factory
+            //factory = new SimNodeFactory();
 
-            // Load dll
-            assembly = AppDomain.CurrentDomain.Load(args[0]);
+            //// Make a repository
+            ////repository = new Repository();
+            //repository = new Neo4jRepository();
 
-            // Get user input for making an instance
-            //userInput = Console.ReadLine();
-            Graph g = new Graph();
+            //SIM.Aibel.CAR.SDI sdi = new Aibel.CAR.SDI();
+            //sdi.DataCode = "SDI-01";
+            //sdi.Revision = 1;
+            //sdi.Subject = "First SDI for CAR";
+            //sdi.StatusDate = DateTime.Now;
+            //var x = sdi.Validate(new ValidationContext(sdi));
+            //var y = Validator.TryValidateObject(sdi, new ValidationContext(sdi), null);
 
-            Type type = GetUserType("SDI");
-            var moveArgs = GetArgs(type);
-            moveArgs.AssignArgumentValues();
-            moveArgs.AssignArgumentValues(30);
-            var move = Create(type, moveArgs);
-            g.Nodes.Add(move);
+            //SIM.Aibel.CAR.Release release = new Aibel.CAR.Release();
+            //y = Validator.TryValidateObject(release, new ValidationContext(release), null);
 
-            type = GetUserType("Section");
-            var moveArgs2 = GetArgs(type);
-            //moveArgs2.AssignArgumentValues(new IntegerPropertyNode(3));
-            moveArgs2.AssignArgumentValues(30);
-            var move2 = Create(type, moveArgs2);
-            g.Nodes.Add(move2);
+            //// Load dll
+            //assembly = AppDomain.CurrentDomain.Load(args[0]);
 
-            type = GetUserType("HasSection");
-            var sessionArgs = GetArgs(type);
-            //sessionArgs.AssignArgumentValues(new DateTimePropertyNode(DateTime.Now));
-            sessionArgs.AssignArgumentValues(DateTime.Now);
-            var session = Create(type, sessionArgs);
-            g.Nodes.Add(session);
+            //// Get user input for making an instance
+            ////userInput = Console.ReadLine();
+            //Graph g = new Graph();
 
-            type = GetUserType("Issued_By");
-            var hasSession = move.RelateTo(type, session, true);
-            g.Relations.Add(hasSession);
+            //Type type = GetUserType("SDI");
+            //var moveArgs = GetArgs(type);
+            //moveArgs.AssignArgumentValues();
+            //moveArgs.AssignArgumentValues(30);
+            //var move = Create(type, moveArgs);
+            //g.Nodes.Add(move);
 
-            type = GetUserType("HasSession");
-            var hasSession2 = move2.RelateTo(type, session, true);
-            g.Relations.Add(hasSession2);
+            //type = GetUserType("Section");
+            //var moveArgs2 = GetArgs(type);
+            ////moveArgs2.AssignArgumentValues(new IntegerPropertyNode(3));
+            //moveArgs2.AssignArgumentValues(30);
+            //var move2 = Create(type, moveArgs2);
+            //g.Nodes.Add(move2);
 
-            type = GetUserType("HasMove");
-            var hasMove = move.RelateTo(type, session, false);
-            g.Relations.Add(hasMove);
+            //type = GetUserType("HasSection");
+            //var sessionArgs = GetArgs(type);
+            ////sessionArgs.AssignArgumentValues(new DateTimePropertyNode(DateTime.Now));
+            //sessionArgs.AssignArgumentValues(DateTime.Now);
+            //var session = Create(type, sessionArgs);
+            //g.Nodes.Add(session);
 
-            type = GetUserType("HasMove");
-            var hasMove2 = move2.RelateTo(type, session, false);
-            g.Relations.Add(hasMove2);
+            //type = GetUserType("Issued_By");
+            //var hasSession = move.RelateTo(type, session, true);
+            //g.Relations.Add(hasSession);
 
-            repository.Add(g);
+            //type = GetUserType("HasSession");
+            //var hasSession2 = move2.RelateTo(type, session, true);
+            //g.Relations.Add(hasSession2);
+
+            //type = GetUserType("HasMove");
+            //var hasMove = move.RelateTo(type, session, false);
+            //g.Relations.Add(hasMove);
+
+            //type = GetUserType("HasMove");
+            //var hasMove2 = move2.RelateTo(type, session, false);
+            //g.Relations.Add(hasMove2);
+
+            //repository.Add(g);
         }
 
         private static void Aibel()

@@ -1,0 +1,10 @@
+﻿@inherits NewEntityBase
+@using SIM.Blazor.Components
+
+<div class="form-group">
+    @foreach (var prop in UserProperties)
+    {
+        <SimSinglePropertyRepresentation BackingProprty="prop" Editable="true" Owner="NewEntity" />
+    }
+    <buttom class="btn-lg" @onclick="Create">Submit</buttom>
+</div>

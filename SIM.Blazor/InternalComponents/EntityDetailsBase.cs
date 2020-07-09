@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SIM.Blazor.Data;
+using SIM.Core.Objects;
 using SIM.DataBase;
+using SIM.Neo4j;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SIM.Blazor.Components
+namespace SIM.Blazor.InternalComponents
 {
     public class EntityDetailsBase : ComponentBase
     {
@@ -25,6 +27,14 @@ namespace SIM.Blazor.Components
         public Mediator Mediator { get; set; }
 
         [Inject]
-        public ISimRepository DataService { get; set; }
+        public Neo4jRepository DataService { get; set; }
+
+        public IEnumerable<ISimObject> Objects { get; set; } = new List<ISimObject>();
+
+        protected override async Task OnParametersSetAsync()
+        {
+            Objects = await DataService.GetAll(TypeName);
+            await base.OnParametersSetAsync();
+        }
     }
 }

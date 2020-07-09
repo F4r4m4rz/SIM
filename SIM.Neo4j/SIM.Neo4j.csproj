@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Convertor.cs" />
     <Compile Include="CypherBuilder.cs" />
     <Compile Include="Neo4jClient.cs" />
     <Compile Include="Neo4jRepository.cs" />

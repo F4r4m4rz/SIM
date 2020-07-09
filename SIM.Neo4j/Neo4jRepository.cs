@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace SIM.Neo4j
 {
-    public class Neo4jRepository : ISimRepository
+    public class Neo4jRepository
     {
         private readonly Neo4jClient _client;
 
         public Neo4jRepository()
         {
-            _client = new Neo4jClient("bolt://localhost:11010", "neo4j", "1234");
+            _client = new Neo4jClient("bolt://localhost:7687", "neo4j", "1234");
         }
 
         public void Add(ISimObject simObject)
@@ -32,9 +32,11 @@ namespace SIM.Neo4j
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ISimObject> GetAll(Func<ISimObject, bool> predicate)
+        public async Task<IEnumerable<ISimObject>> GetAll(string type)
         {
-            throw new NotImplementedException();
+            var x = new List<ISimObject>();
+            (await _client.GetAll(type)).ToList().ForEach(a=>x.Add(Convertor.Convert(a)));
+            return x;
         }
 
         public void Remove(ISimObject simObject)

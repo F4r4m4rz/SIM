@@ -1,0 +1,20 @@
+﻿@page "/{entityName}/Add"
+@using SIM.Blazor.InternalComponents
+
+<h3>New @entityName</h3>
+
+<NewEntity EntityType ="@EntityType" />
+
+@code {
+    [Parameter]
+    public string entityName { get; set; }
+
+    public Type EntityType { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        var assembly = AppDomain.CurrentDomain.GetAssemblies().First(a => a.FullName.Contains("Aibel.CAR"));
+        EntityType = assembly.GetTypes().First(a => a.Name.Contains(entityName));
+        return base.OnInitializedAsync();
+    }
+}

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SIM.Blazor.Data;
+using SIM.Core.Factory;
 using SIM.DataBase;
 
 namespace SIM.Blazor
@@ -30,7 +31,8 @@ namespace SIM.Blazor
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<Mediator>();
-            services.AddSingleton<ISimRepository, DataService>();
+            services.AddSingleton<Neo4j.Neo4jRepository>();
+            services.AddSingleton<SimNodeFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

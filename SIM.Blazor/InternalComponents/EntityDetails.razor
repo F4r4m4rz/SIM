@@ -4,7 +4,8 @@
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
-            @foreach (var item in Type?.GetProperties().Where(a=>a.GetCustomAttributes(typeof(FirstLevelPropertyAttribute), false).Length != 0))
+            @*@foreach (var item in Type?.GetProperties().Where(a=>a.GetCustomAttributes(typeof(FirstLevelPropertyAttribute), false).Length != 0))*@
+            @foreach (var item in Type?.GetProperties())
             {
                 <td>
                     @item.Name
@@ -13,10 +14,11 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var obj in DataService.GetAll(a=>a.GetType()==Type))
+        @foreach (var obj in Objects)
         {
             <tr>
-                @foreach (var prop in obj.GetType().GetProperties().Where(a => a.GetCustomAttributes(typeof(FirstLevelPropertyAttribute), false).Length != 0))
+                @*@foreach (var prop in obj.GetType().GetProperties().Where(a => a.GetCustomAttributes(typeof(FirstLevelPropertyAttribute), false).Length != 0))*@
+                @foreach (var prop in obj.GetType().GetProperties())
                 {
                     <td>
                         @prop.GetValue(obj)
