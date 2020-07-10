@@ -15,8 +15,10 @@ namespace SIM.Neo4j
         {
             var typeStr = node.Labels[0];
             var asseembly = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => a.GetName().Name.Contains("Aibel.CAR")).FirstOrDefault();
-            var type = asseembly.GetTypes().First(a => a.Name.Contains(typeStr));
+                .Where(a => a.GetName().Name.Contains("SIM."));
+            List<Type> types = new List<Type>();
+            asseembly.ToList().ForEach(a => types.AddRange(a.GetTypes()));
+            var type = types.First(a => a.Name.Contains(typeStr));
             var obj = Activator.CreateInstance(type);
             foreach (var prop in node.Properties)
             {

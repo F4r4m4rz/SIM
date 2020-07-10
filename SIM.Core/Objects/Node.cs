@@ -84,7 +84,7 @@ namespace SIM.Core.Objects
         private Relation CreateRelation<T>(Node origin, Node target) where T : Relation, new()
         {
             var relation = new T() { Origin = origin, Target = target };
-            Validator.ValidateObject(relation, new ValidationContext(relation), true);
+            //Validator.ValidateObject(relation, new ValidationContext(relation), true);
             return relation;
         }
 

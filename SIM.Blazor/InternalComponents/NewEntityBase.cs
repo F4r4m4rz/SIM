@@ -26,6 +26,8 @@ namespace SIM.Blazor.InternalComponents
         [Inject]
         public Neo4jRepository DataService { get; set; }
 
+        public Graph NewEntityGraph { get; set; } = new Graph();
+
         public ISimObject NewEntity { get; set; }
 
         public ISimNodeConstructionArgument ConstructionArgument { get; set; }
@@ -48,32 +50,47 @@ namespace SIM.Blazor.InternalComponents
         {
             ConstructionArgument = GetConstructionArgument();
             NewEntity = NodeFactory.New(ConstructionArgument);
+            NewEntityGraph.Nodes.Add(NewEntity as Node);
             return base.OnInitializedAsync();
         }
 
-        public void Create()
+        public async Task Create()
         {
             for (int i = 0; i < ConstructionArgument.Arguments.Length; i++)
             {
                 var prop = ConstructionArgument.Arguments[i];
-                var propVal = prop.GetValue(NewEntity);
+                object propVal = null;
+                try
+                {
+                    propVal = prop.GetValue(NewEntity);
+                }
+                catch
+                {
+                }
+
                 if (propVal != null)
                 {
-                    ConstructionArgument.ArgumentValues[i] = propVal;
+                    //ConstructionArgument.ArgumentValues[i] = propVal;
                 }
                 else if (prop.Name == "Issued_By")
                 {
                     var type = Mediator.GetTypeByName(prop.Name);
+                    var relType = (await DataService.GetAll("User")).FirstOrDefault() as Node;
+                    var rel = (NewEntity as Node).RelateTo(type, relType, true);
+                    rel.Properties["On"] = DateTime.Now;
+                    NewEntityGraph.Relations.Add(rel);
                 }
                 else if (prop.Name == "DataCode")
                 {
-
+                    prop.SetValue(NewEntity, "SDI_1");
                 }
                 else if (prop.Name == "Revision")
                 {
-
+                    prop.SetValue(NewEntity, 1);
                 }
             }
+
+            DataService.Add(NewEntityGraph);
         }
     }
 }

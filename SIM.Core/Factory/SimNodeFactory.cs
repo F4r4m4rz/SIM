@@ -13,8 +13,8 @@ namespace SIM.Core.Factory
         public virtual T New<T>(SimNodeConstructionArgument<T> constructionArgument) where T: Node, new()
         {
             var obj = new T();
-            constructionArgument.Populate(obj);
-            Validator.ValidateObject(obj, new ValidationContext(obj), true);
+            //constructionArgument.Populate(obj);
+            //Validator.ValidateObject(obj, new ValidationContext(obj), true);
             return obj;
         }
 
